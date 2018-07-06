@@ -1,4 +1,6 @@
-image: node:8
+image: node:latest
+options:
+  docker: true
 pipelines:
   default:
     - step:
