@@ -1,11 +1,16 @@
 FROM node:latest
 
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+RUN apk update && apk upgrade && apk add git
 
-RUN npm install
-COPY . .
+ONBUILD COPY . /usr/src/app/
+ONBUILD RUN npm install
 
+ONBUILD RUN npm run build
+
+ENV HOST 0.0.0.0
 EXPOSE 3000
+
 CMD [ "npm", "start" ]
