@@ -6,5 +6,5 @@ pipelines:
           - npm install
           - npm run build
           - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          - docker build -t rmachnik/rebridge-frontend .
+          - docker build -t rmachnik/rebridge-front .
           - docker push rmachnik/rebridge-frontend:latest
