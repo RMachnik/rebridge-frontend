@@ -3,8 +3,6 @@ FROM node:latest
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN apk update && apk upgrade && apk add git
-
 ONBUILD COPY . /usr/src/app/
 ONBUILD RUN npm install
 
