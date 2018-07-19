@@ -1,17 +1,7 @@
 <template>
-    <div>
+    <div v-if="isLogged">
         <v-navigation-drawer v-model="drawer" fixed right app>
             <v-list dense>
-                <v-list-tile class="v-list-tile">
-                    <v-list-tile-action>
-                        <v-icon>home</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>
-                            <nuxt-link to="/">Home</nuxt-link>
-                        </v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
                 <v-list-tile class="v-list-tile">
                     <v-list-tile-action>
                         <v-icon>info</v-icon>
@@ -73,12 +63,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
     export default {
         name: 'Navigation',
         data () {
             return {
                 drawer: false
             }
+        },
+        computed: {
+            ...mapState('auth', [
+                'isLogged'
+            ])
         }
     }
 </script>

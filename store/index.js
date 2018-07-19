@@ -5,7 +5,6 @@ import modules from './modules'
 const createStore = () => {
     return new Vuex.Store({
         state: {
-
         },
         modules
     })

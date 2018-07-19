@@ -1,21 +1,28 @@
 <template>
   <section class="container">
-      <h1 class="display-1 font-weight-medium">
-        Rebridge
-      </h1>
-      <h2 class="font-weight-light">
-        Perfect collaboration tool for investor and architect
-      </h2>
+      <h2 class="headline font-weight-medium">{{ currentFormTitle }}</h2>
+      <auth-form />
   </section>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import AppLogo from '~/components/AppLogo.vue'
+import AuthForm from "../components/Auth/AuthForm";
 
 export default {
-  components: {
-    AppLogo
-  }
+    components: {
+        AuthForm,
+        AppLogo
+    },
+    computed: {
+        ...mapState('auth', [
+            'isLoginForm'
+        ]),
+        currentFormTitle () {
+            return this.isLoginForm ? 'Zaloguj się' : 'Zarejestruj się'
+        }
+    }
 }
 </script>
 

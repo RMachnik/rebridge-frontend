@@ -44,5 +44,9 @@ module.exports = {
                 })
             }
         }
+    },
+    env: {
+        baseUrl: process.env.BASE_URL || 'http://localhost:8080'
+        //baseUrl: process.env.BASE_URL || 'http://vps563480.ovh.net:8080'
     }
 }
