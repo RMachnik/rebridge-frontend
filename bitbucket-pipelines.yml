@@ -5,6 +5,7 @@ pipelines:
   default:
     - step:
         script:
-          - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          - docker build -t rmachnik/rebridge-front .
-          - docker push rmachnik/rebridge-frontend:latest
+          - npm install
+#          - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+#          - docker build -t rmachnik/rebridge-front .
+#          - docker push rmachnik/rebridge-front:latest
