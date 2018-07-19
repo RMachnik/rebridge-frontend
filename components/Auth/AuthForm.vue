@@ -18,7 +18,7 @@
                     data-vv-name="password"
                     required
             ></v-text-field>
-            <v-btn color="success" @click="submit">zatwierdź</v-btn>
+            <v-btn color="success" @click="submit">wyślij</v-btn>
             <v-btn color="error" @click="clear">wyczyść</v-btn>
             <v-btn color="info" @click="toggleLoginFormState">{{ currentButtonTitle }}</v-btn>
         </form>
