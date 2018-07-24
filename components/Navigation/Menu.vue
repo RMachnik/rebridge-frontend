@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isLogged">
+    <div v-if="token">
         <v-navigation-drawer v-model="drawer" fixed right app>
             <v-list dense>
                 <v-list-tile class="v-list-tile">
@@ -56,14 +56,14 @@
         </v-navigation-drawer>
         <v-toolbar color="cyan" dark fixed app>
             <v-spacer></v-spacer>
-            <v-toolbar-title>Application</v-toolbar-title>
+            <v-toolbar-title class="logout" @click="logout()">Wyloguj się</v-toolbar-title>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         </v-toolbar>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
     export default {
         name: 'Navigation',
@@ -74,7 +74,12 @@ import { mapState } from 'vuex'
         },
         computed: {
             ...mapState('auth', [
-                'isLogged'
+                'token'
+            ])
+        },
+        methods: {
+            ...mapActions('auth', [
+                'logout'
             ])
         }
     }
@@ -83,6 +88,9 @@ import { mapState } from 'vuex'
 <style scoped>
     .v-list-tile:hover {
         background: rgba(0,0,0,0.04);
+    }
+    .logout {
+        cursor: pointer;
     }
     a {
         color: inherit;

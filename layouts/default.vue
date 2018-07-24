@@ -15,7 +15,8 @@ import Menu from "~/components/Navigation/Menu";
 import Footer from "~/components/Footer/Footer";
 
 export default {
-    components: { Menu, Footer }
+    components: { Menu, Footer },
+    middleware: ['initAuth', 'auth']
 }
 </script>
 

@@ -4,9 +4,8 @@ import actions from './actions'
 export default {
     namespaced: true,
     state: {
-        isLogged: false,
         isLoginForm: true,
-        token: ''
+        token: null
     },
     mutations,
     actions

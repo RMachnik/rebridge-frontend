@@ -58,13 +58,22 @@ Vue.use(VeeValidate)
                 'register',
                 'login'
             ]),
+            redirectToProjects () {
+                this.$router.push('/projects')
+            },
             submit() {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
                         if (this.isLoginForm) {
                             this.login(this.formData)
+                                .then(() => {
+                                    this.redirectToProjects()
+                                })
                         } else {
                             this.register(this.formData)
+                                .then(() => {
+                                    this.redirectToProjects()
+                                })
                         }
                     }
                 })

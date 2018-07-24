@@ -30,6 +30,7 @@ module.exports = {
         /*
         ** Run ESLint on save
         */
+        cssSourceMap: false,
         extractCSS: true,
         vendor: [
             'vuetify'
