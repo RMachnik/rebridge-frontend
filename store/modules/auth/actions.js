@@ -35,6 +35,7 @@ export default {
             .catch(error => {
                 console.log(error.response.headers);
             })
+
     },
     initAuth({commit}, data) {
         if (data.cookie) {

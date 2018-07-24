@@ -56,7 +56,7 @@
         </v-navigation-drawer>
         <v-toolbar color="cyan" dark fixed app>
             <v-spacer></v-spacer>
-            <v-toolbar-title class="logout" @click="logout()">Wyloguj się</v-toolbar-title>
+            <v-toolbar-title class="logout" @click="logoutAndRedirect()">Wyloguj się</v-toolbar-title>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         </v-toolbar>
     </div>
@@ -80,7 +80,13 @@ import { mapState, mapActions } from 'vuex'
         methods: {
             ...mapActions('auth', [
                 'logout'
-            ])
+            ]),
+            logoutAndRedirect() {
+                this.logout()
+                    .then(() => {
+                        this.$router.push('/')
+                    })
+            }
         }
     }
 </script>

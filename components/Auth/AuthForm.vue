@@ -1,6 +1,6 @@
 <template>
     <v-flex xs12 lg8 offset-lg2 class="item pa-2">
-        <form>
+        <form @submit.prevent="submit" novalidate>
             <v-text-field
                     v-validate="'required|email'"
                     v-model="formData.email"
@@ -18,7 +18,7 @@
                     data-vv-name="password"
                     required
             ></v-text-field>
-            <v-btn color="success" @click="submit">wyślij</v-btn>
+            <v-btn type="submit" color="success">wyślij</v-btn>
             <v-btn color="error" @click="clear">wyczyść</v-btn>
             <v-btn color="info" @click="toggleLoginFormState">{{ currentButtonTitle }}</v-btn>
         </form>
