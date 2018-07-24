@@ -46,7 +46,8 @@ Vue.use(VeeValidate)
         },
         computed: {
             ...mapState('auth', [
-                'isLoginForm'
+                'isLoginForm',
+                'token'
             ]),
             currentButtonTitle () {
                 return this.isLoginForm ? 'Zarejestruj się' : 'Zaloguj się'
@@ -67,12 +68,16 @@ Vue.use(VeeValidate)
                         if (this.isLoginForm) {
                             this.login(this.formData)
                                 .then(() => {
-                                    this.redirectToProjects()
+                                    if (this.token) {
+                                        this.redirectToProjects()
+                                    }
                                 })
                         } else {
                             this.register(this.formData)
                                 .then(() => {
-                                    this.redirectToProjects()
+                                    if (this.token) {
+                                        this.redirectToProjects()
+                                    }
                                 })
                         }
                     }
