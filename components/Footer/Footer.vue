@@ -1,7 +1,9 @@
 <template>
-    <v-footer color="cyan" app>
+    <v-footer color="cyan" height="auto" app>
         <v-spacer></v-spacer>
-        <span class="white--text">&copy; 2018</span>
+        <v-card-actions class="cyan white--text justify-center">
+            &copy;2018 — Rebridge
+        </v-card-actions>
     </v-footer>
 </template>
 

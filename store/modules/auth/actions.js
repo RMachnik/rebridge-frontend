@@ -1,5 +1,6 @@
 import {types} from './mutations'
 import authService from '~/assets/js/api/auth'
+import util from '~/assets/js/util/util'
 import Cookie from 'js-cookie'
 
 export default {
@@ -13,7 +14,7 @@ export default {
                 Cookie.set('authToken', response.data.token)
             })
             .catch((error) => {
-                console.error(`Fetching register error: ${error}`)
+                util.prettyLog(error)
             })
     },
     login({commit}, data) {
@@ -33,12 +34,13 @@ export default {
                 Cookie.remove('authToken')
             })
             .catch(error => {
-                console.log(error.response.headers);
+                util.prettyLog(error);
             })
 
     },
     initAuth({commit}, data) {
         if (data.cookie) {
+            console.log(data.cookie)
             let authCookie = data.cookie.split(";").find(c => c.trim().startsWith("authToken="))
             if (authCookie) {
                 authCookie = authCookie.split("=")[1]
