@@ -10,21 +10,25 @@ export default {
     register({commit}, data) {
         return authService.register(data)
             .then((response) => {
+                commit(types.REMOVE_ERROR)
                 commit(types.ADD_TOKEN, response.data.token)
                 Cookie.set('authToken', response.data.token)
             })
             .catch((error) => {
+                commit(types.ADD_ERROR, error.response.data.message )
                 util.prettyLog(error)
             })
     },
     login({commit}, data) {
         return authService.login(data)
             .then((response) => {
+                commit(types.REMOVE_ERROR)
                 commit(types.ADD_TOKEN, response.data.token)
                 Cookie.set('authToken', response.data.token)
             })
             .catch((error) => {
-                console.error(`Fetching login error: ${error}`)
+                commit(types.ADD_ERROR, error.response.data.message)
+                util.prettyLog(error)
             })
     },
     logout({state, commit}) {

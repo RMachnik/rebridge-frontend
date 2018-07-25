@@ -5,7 +5,8 @@ export default {
     namespaced: true,
     state: {
         isLoginForm: true,
-        token: null
+        token: null,
+        authError: null
     },
     mutations,
     actions

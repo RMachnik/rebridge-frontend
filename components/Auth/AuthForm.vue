@@ -1,24 +1,35 @@
 <template>
     <v-flex xs12 lg8 offset-lg2 class="item pa-2">
         <form @submit.prevent="submit" novalidate>
+
             <v-text-field
-                    v-validate="'required|email'"
-                    v-model="formData.email"
-                    :error-messages="errors.collect('email')"
-                    label="E-mail"
-                    data-vv-name="email"
-                    required
+                v-validate="'required|email'"
+                v-model="formData.email"
+                :error-messages="errors.collect('email')"
+                label="E-mail"
+                data-vv-name="email"
+                required
             ></v-text-field>
             <v-text-field
-                    v-validate="'required'"
-                    v-model="formData.password"
-                    type="password"
-                    :error-messages="errors.collect('password')"
-                    label="Hasło"
-                    data-vv-name="password"
-                    required
+                v-validate="'required'"
+                v-model="formData.password"
+                type="password"
+                :error-messages="errors.collect('password')"
+                label="Hasło"
+                data-vv-name="password"
+                required
             ></v-text-field>
-            <v-btn type="submit" color="success">wyślij</v-btn>
+            <v-alert
+                :value="true"
+                color="error"
+                icon="warning"
+                outline
+            v-if="apiError">
+                {{apiError}}
+            </v-alert>
+            <v-btn type="submit" color="success">
+                wyślij
+            </v-btn>
             <v-btn color="error" @click="clear">wyczyść</v-btn>
             <v-btn color="info" @click="toggleLoginFormState">{{ currentButtonTitle }}</v-btn>
         </form>
@@ -26,30 +37,35 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VeeValidate from 'vee-validate'
-import { mapState, mapActions } from 'vuex'
-Vue.use(VeeValidate)
+    import Vue from 'vue'
+    import VeeValidate, {ErrorBag} from 'vee-validate'
+    import {mapActions, mapState} from 'vuex'
+
+    const bag = new ErrorBag();
+
+    Vue.use(VeeValidate)
 
     export default {
         name: 'AuthForm',
         $_veeValidate: {
             validator: 'new'
         },
-        data () {
+        data() {
             return {
                 formData: {
                     email: '',
-                    password: ''
-                }
+                    password: '',
+                },
+                apiError: ''
             }
         },
         computed: {
             ...mapState('auth', [
                 'isLoginForm',
-                'token'
+                'token',
+                'authError'
             ]),
-            currentButtonTitle () {
+            currentButtonTitle() {
                 return this.isLoginForm ? 'Zarejestruj się' : 'Zaloguj się'
             }
         },
@@ -59,7 +75,7 @@ Vue.use(VeeValidate)
                 'register',
                 'login'
             ]),
-            redirectToProjects () {
+            redirectToProjects() {
                 this.$router.push('/projects')
             },
             submit() {
@@ -68,6 +84,9 @@ Vue.use(VeeValidate)
                         if (this.isLoginForm) {
                             this.login(this.formData)
                                 .then(() => {
+                                    if (this.authError) {
+                                        this.apiError = this.authError
+                                    }
                                     if (this.token) {
                                         this.redirectToProjects()
                                     }
