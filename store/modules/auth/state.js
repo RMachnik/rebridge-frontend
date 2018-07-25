@@ -6,6 +6,7 @@ export default {
     state: {
         isLoginForm: true,
         token: null,
+        username: null,
         authError: null
     },
     mutations,

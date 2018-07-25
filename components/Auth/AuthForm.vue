@@ -24,8 +24,8 @@
                 color="error"
                 icon="warning"
                 outline
-            v-if="apiError">
-                {{apiError}}
+                v-if="authError">
+                {{authError}}
             </v-alert>
             <v-btn type="submit" color="success">
                 wyślij
@@ -38,10 +38,8 @@
 
 <script>
     import Vue from 'vue'
-    import VeeValidate, {ErrorBag} from 'vee-validate'
+    import VeeValidate from 'vee-validate'
     import {mapActions, mapState} from 'vuex'
-
-    const bag = new ErrorBag();
 
     Vue.use(VeeValidate)
 
@@ -56,7 +54,6 @@
                     email: '',
                     password: '',
                 },
-                apiError: ''
             }
         },
         computed: {
@@ -84,9 +81,6 @@
                         if (this.isLoginForm) {
                             this.login(this.formData)
                                 .then(() => {
-                                    if (this.authError) {
-                                        this.apiError = this.authError
-                                    }
                                     if (this.token) {
                                         this.redirectToProjects()
                                     }

@@ -3,7 +3,9 @@ export const types = {
     ADD_TOKEN: 'ADD_TOKEN',
     REMOVE_TOKEN: 'REMOVE_TOKEN',
     ADD_ERROR: 'ADD_ERROR',
-    REMOVE_ERROR: 'REMOVE_ERROR'
+    REMOVE_ERROR: 'REMOVE_ERROR',
+    ADD_USERNAME: 'ADD_USERNAME',
+    REMOVE_USERNAME: 'REMOVE_USERNAME'
 }
 
 export const mutations = {
@@ -21,6 +23,12 @@ export const mutations = {
     },
     [types.REMOVE_ERROR](state) {
         state.authError = null
+    },
+    [types.ADD_USERNAME](state, username) {
+        state.username = username
+    },
+    [types.REMOVE_USERNAME](state) {
+        state.username = null
     }
 
 }

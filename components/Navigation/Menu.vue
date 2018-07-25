@@ -56,25 +56,26 @@
         </v-navigation-drawer>
         <v-toolbar color="cyan" dark fixed app>
             <v-spacer></v-spacer>
-            <v-toolbar-title class="logout" @click="logoutAndRedirect()">Wyloguj się</v-toolbar-title>
+            <v-toolbar-title>{{username}}</v-toolbar-title>
+            <v-toolbar-title class="logout" @click="logoutAndRedirect()"> Wyloguj się</v-toolbar-title>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         </v-toolbar>
     </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+    import {mapActions, mapState} from 'vuex'
 
     export default {
         name: 'Navigation',
-        data () {
+        data() {
             return {
                 drawer: false
             }
         },
         computed: {
             ...mapState('auth', [
-                'token'
+                'token', 'username'
             ])
         },
         methods: {
@@ -93,11 +94,13 @@ import { mapState, mapActions } from 'vuex'
 
 <style scoped>
     .v-list-tile:hover {
-        background: rgba(0,0,0,0.04);
+        background: rgba(0, 0, 0, 0.04);
     }
+
     .logout {
         cursor: pointer;
     }
+
     a {
         color: inherit;
         text-decoration: none;
