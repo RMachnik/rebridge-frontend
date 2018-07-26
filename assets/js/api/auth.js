@@ -3,10 +3,10 @@ import axios from '~/plugins/axios'
 
 export default {
     register (userData) {
-        return axios.post(`${BASE_URL}auth/register`, userData)
+        return axios.post(`${BASE_URL}/auth/register`, userData)
     },
     login (userData) {
-        return axios.post(`${BASE_URL}auth/login`, userData)
+        return axios.post(`${BASE_URL}/auth/login`, userData)
     },
     logout(token) {
         let config = {
@@ -16,6 +16,6 @@ export default {
                 'Authorization': 'Bearer ' + token
             }
         }
-        return axios.delete(`${BASE_URL}users/logout`, config)
+        return axios.delete(`${BASE_URL}/users/logout`, config)
     }
 }

@@ -1,5 +1,7 @@
 import {types} from './mutations'
+import {user} from '~/store/modules/user/mutations'
 import authService from '~/assets/js/api/auth'
+import userService from '~/assets/js/api/user'
 import util from '~/assets/js/util/util'
 import Cookie from 'js-cookie'
 

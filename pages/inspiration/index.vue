@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import PageTitle from '~/components/Common/PageTitle';
-import Item from '~/components/Inspiration/Item';
-import axios from 'axios'
-import { mapState } from 'vuex'
+    import PageTitle from '~/components/Common/PageTitle';
+    import Item from '~/components/Inspiration/Item';
+    import axios from 'axios'
+    import {mapState} from 'vuex'
 
-export default {
+    export default {
     components: {
         PageTitle,
         Item

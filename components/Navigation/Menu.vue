@@ -56,38 +56,40 @@
         </v-navigation-drawer>
         <v-toolbar color="cyan" dark fixed app>
             <v-spacer></v-spacer>
-            <v-toolbar-title>{{username}}</v-toolbar-title>
-            <v-toolbar-title class="logout" @click="logoutAndRedirect()"> Wyloguj się</v-toolbar-title>
+            <v-badge overlap>
+                <span slot="badge">3</span>
+                <v-avatar
+                        color="cyan red--after"
+                >
+                    <v-icon dark>notifications</v-icon>
+                </v-avatar>
+            </v-badge>
+            <user-menu/>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         </v-toolbar>
     </div>
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex'
+    import {mapState} from 'vuex'
+    import UserMenu from "~/components/User/Menu"
 
     export default {
         name: 'Navigation',
+        components: {UserMenu},
         data() {
             return {
-                drawer: false
+                drawer: false,
             }
         },
         computed: {
             ...mapState('auth', [
-                'token', 'username'
-            ])
-        },
-        methods: {
-            ...mapActions('auth', [
-                'logout'
-            ]),
-            logoutAndRedirect() {
-                this.logout()
-                    .then(() => {
-                        this.$router.push('/')
-                    })
-            }
+                    'token', 'username'
+                ],
+                'user'[
+                    'user'
+                    ]
+            )
         }
     }
 </script>
@@ -95,10 +97,6 @@
 <style scoped>
     .v-list-tile:hover {
         background: rgba(0, 0, 0, 0.04);
-    }
-
-    .logout {
-        cursor: pointer;
     }
 
     a {
