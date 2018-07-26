@@ -1,57 +1,33 @@
 <template>
   <section class="container">
-    <div>
-      <h1>
-        rebridge
-      </h1>
-      <h2 class="subtitle">
-        Perfect collaboration tool for investor and architect
-      </h2>
-    </div>
+      <h2 class="headline font-weight-medium">{{ currentFormTitle }}</h2>
+      <auth-form />
   </section>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import AppLogo from '~/components/AppLogo.vue'
+import AuthForm from "../components/Auth/AuthForm";
 
 export default {
-  components: {
-    AppLogo
-  }
+    components: {
+        AuthForm,
+        AppLogo
+    },
+    computed: {
+        ...mapState('auth', [
+            'isLoginForm'
+        ]),
+        currentFormTitle () {
+            return this.isLoginForm ? 'Zaloguj się' : 'Zarejestruj się'
+        }
+    }
 }
 </script>
 
-<style>
-h1 {
-  font-size: 40px;
-  text-transform: uppercase;
-}
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+<style scoped>
+  .container {
+    text-align: center;
+  }
 </style>

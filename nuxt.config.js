@@ -18,6 +18,7 @@ module.exports = {
         '~/assets/styles/main.css'
     ],
     plugins: ['~plugins/vuetify'],
+    modules: ['nuxt-material-design-icons'],
     /*
     ** Customize the progress bar color
     */
@@ -29,6 +30,7 @@ module.exports = {
         /*
         ** Run ESLint on save
         */
+        cssSourceMap: false,
         extractCSS: true,
         vendor: [
             'vuetify'
@@ -43,5 +45,9 @@ module.exports = {
                 })
             }
         }
+    },
+    env: {
+        baseUrl: process.env.BASE_URL || 'http://localhost:8080'
+        //baseUrl: process.env.BASE_URL || 'http://vps563480.ovh.net:8080'
     }
 }
