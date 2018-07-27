@@ -1,12 +1,10 @@
-import { mutations } from './mutations'
+import {mutations} from './mutations'
 import actions from './actions'
 
 export default {
     namespaced: true,
     state: {
-        isLoginForm: true,
-        token: null,
-        authError: null
+        projects: []
     },
     mutations,
     actions

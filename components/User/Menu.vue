@@ -5,19 +5,20 @@
                 <v-icon dark>settings</v-icon>
             </v-avatar>
             <v-list>
-                <v-list-tile >
+                <v-list-tile>
                     <v-list-tile-avatar>
                         <img src="https://cdn.vuetifyjs.com/images/lists/1.jpg">
                     </v-list-tile-avatar>
                     <v-list-tile-content>
-                        <v-list-tile-title>{{username}}</v-list-tile-title>
+                        <v-list-tile-title class="font-weight-bold">{{currentUser.email}}</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
                 <v-list-tile>
-                    <v-list-tile-title>Ustawienia</v-list-tile-title>
+                    <v-list-tile-title class="clickable" @click="redirectToProfile()">Profil</v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile>
-                    <v-list-tile-title class="logout" color="cyan" @click="logoutAndRedirect">Wyloguj</v-list-tile-title>
+                    <v-list-tile-title class="clickable red--text" color="cyan" @click="logoutAndRedirect">Wyloguj
+                    </v-list-tile-title>
                 </v-list-tile>
             </v-list>
         </v-menu>
@@ -30,39 +31,31 @@
     export default {
         name: 'UserMenu',
         computed: {
-            ...mapState('auth', [
-                    'token', 'username'
-                ],
+            ...mapState(
+                'user', [
+                    'currentUser'
+                ]
             )
         },
         methods: {
             ...mapActions('auth', [
                     'logout'
-                ],
-                'user', [
-                    'loadUser'
-                ]),
+                ]
+            ),
             logoutAndRedirect() {
                 this.logout()
                     .then(() => {
                         this.$router.push('/')
                     })
+            },
+            redirectToProfile() {
+                this.$router.push('/profile')
             }
         }
     }
 </script>
 <style scoped>
-    .v-list-tile:hover {
-        background: rgba(0, 0, 0, 0.04);
-    }
-
-    .logout {
+    .clickable {
         cursor: pointer;
-        color: red;
-    }
-
-    a {
-        color: inherit;
-        text-decoration: none;
     }
 </style>

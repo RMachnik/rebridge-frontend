@@ -4,7 +4,7 @@ import actions from './actions'
 export default {
     namespaced: true,
     state: {
-        user: null
+        currentUser: null
     },
     mutations,
     actions

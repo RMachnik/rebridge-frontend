@@ -3,14 +3,14 @@ import userService from '~/assets/js/api/user'
 import util from '~/assets/js/util/util'
 
 export default {
-    loadUser({state, commit}) {
-        return userService.currentUser(state.auth.token)
+    loadUser({commit}, token) {
+        return userService.currentUser(token)
             .then((response) => {
-                commit(userTypes.SET_USER, response.data)
+                return commit(userTypes.SET_USER, response.data)
             })
             .catch((error) => {
                 commit(userTypes.REMOVE_USER)
                 util.prettyLog(error)
             })
-    }
+    },
 }

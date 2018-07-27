@@ -9,6 +9,7 @@
     import Projects from '~/components/Projects/Projects'
 
     export default {
+        name: 'IndexProjects',
         components: {
             PageTitle,
             Projects

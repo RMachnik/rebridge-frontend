@@ -4,10 +4,10 @@ export const userTypes = {
 }
 
 export const mutations = {
-    [userTypes.SET_USER](state, username) {
-        state.user = username
+    [userTypes.SET_USER](state, user) {
+        state.currentUser = user
     },
     [userTypes.REMOVE_USER](state) {
-        state.user = null
+        state.currentUser = null
     }
 }

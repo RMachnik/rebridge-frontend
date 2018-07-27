@@ -28,7 +28,7 @@
                     </v-list-tile-action>
                     <v-list-tile-content>
                         <v-list-tile-title>
-                            <nuxt-link to="/project">Projekt</nuxt-link>
+                            <nuxt-link to="/">Projekty</nuxt-link>
                         </v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
@@ -84,11 +84,8 @@
         },
         computed: {
             ...mapState('auth', [
-                    'token', 'username'
-                ],
-                'user'[
-                    'user'
-                    ]
+                    'token',
+                ]
             )
         }
     }

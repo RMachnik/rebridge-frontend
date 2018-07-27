@@ -1,35 +1,23 @@
 <template>
     <div>
-        <v-breadcrumbs>
-            <v-icon slot="divider">forward</v-icon>
-
-            <v-breadcrumbs-item
-                v-for="item in items"
-                :disabled="item.disabled"
-                :key="item.text"
-            >
-                {{ item.text }}
-            </v-breadcrumbs-item>
-        </v-breadcrumbs>
+        <new-project/>
+        <v-layout row wrap>
+            <item v-for="(project, index) in this.projects" :key="index" :dataObject="project"/>
+        </v-layout>
     </div>
 </template>
 
 <script>
+    import NewProject from "./NewProject";
+    import Item from './Item';
+    import {mapState} from 'vuex';
+
     export default {
         name: "Projects",
-        data() {
-            return {
-                items: [
-                    {
-                        text: 'Projekty',
-                        disabled: false
-                    },
-                    {
-                        text: 'Link 1',
-                        disabled: false
-                    },
-                ]
-            }
+        components: {NewProject, Item},
+        data: () => ({}),
+        computed: {
+            ...mapState('project', ['projects'])
         }
     }
 </script>
