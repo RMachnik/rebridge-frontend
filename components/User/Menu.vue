@@ -1,5 +1,5 @@
 <template>
-    <div class="text-xs-center">
+    <div class="text-xs-center" v-if="currentUser">
         <v-menu offset-y>
             <v-avatar color="cyan" slot="activator">
                 <v-icon dark>settings</v-icon>

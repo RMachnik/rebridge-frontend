@@ -8,13 +8,13 @@
 
             <v-card-title primary-title>
                 <div>
-                    <h3 class="headline mb-0">{{ dataObject.name }}</h3>
-                    <div>jeszcze nic</div>
+                    <h3 class="headline mb-0">{{ project.name }}</h3>
+                    <div>{{project.id}}</div>
                 </div>
             </v-card-title>
 
             <v-card-actions>
-                <v-btn flat color="orange" @click="redirectToProject()">Otwórz</v-btn>
+                <v-btn flat color="orange" @click="redirectToProject(project.id)">Otwórz</v-btn>
             </v-card-actions>
         </v-card>
     </v-flex>
@@ -22,19 +22,20 @@
 
 <script>
     export default {
-        name: 'Item',
+        name: 'ProjectTail',
         props: {
-            dataObject: {
+            project: {
                 type: Object,
-                required: true
-            }
+                required: true,
+            },
         },
         methods: {
-            redirectToProject() {
-                this.$router.push('/projects/' + this.dataObject.id)
-            }
-        }
-    }
+            redirectToProject(id) {
+                console.log(this.project)
+                this.$router.push('/projects/' + id);
+            },
+        },
+    };
 </script>
 
 <style scoped>

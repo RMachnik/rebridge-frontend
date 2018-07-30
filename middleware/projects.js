@@ -1,5 +1,5 @@
 export default function (context) {
     if (process.server) {
-        context.store.dispatch('project/loadProjects', context.store.state.auth.token)
+        context.store.dispatch('projects/loadAll', context.store.state.auth.token)
     }
 }

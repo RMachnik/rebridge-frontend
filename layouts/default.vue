@@ -16,7 +16,7 @@
 
     export default {
         components: {Menu, Footer},
-        middleware: ['initAuth', 'auth', 'projects']
+        middleware: ['initAuth', 'auth','userMenu']
     }
 </script>
 

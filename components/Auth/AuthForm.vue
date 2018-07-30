@@ -67,13 +67,17 @@
         },
         methods: {
             ...mapActions('auth', [
-                'toggleLoginFormState',
-                'register',
-                'login'
-            ]),
+                    'toggleLoginFormState',
+                    'register',
+                    'login'
+                ],
+                'user',
+                ['loadUser']
+            ),
             redirectToProjects() {
                 this.$router.push('/projects')
-            },
+            }
+            ,
             submit() {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
@@ -94,7 +98,8 @@
                         }
                     }
                 })
-            },
+            }
+            ,
             clear() {
                 Object.keys(this.formData).forEach(key => {
                     this.formData[key] = ''

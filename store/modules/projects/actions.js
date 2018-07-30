@@ -1,6 +1,6 @@
 import {types} from './mutations'
 import util from '~/assets/js/util/util'
-import projectService from '~/assets/js/api/project'
+import projectService from '~/assets/js/api/projects'
 
 export default {
     addProject({state, commit}, data) {
@@ -11,7 +11,7 @@ export default {
             util.prettyLog(error)
         })
     },
-    loadProjects({commit}, token) {
+    loadAll({commit}, token) {
         return projectService.loadAll(token).then(
             (response) => {
                 commit(types.SET_PROJECTS, response.data)

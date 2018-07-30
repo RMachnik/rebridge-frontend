@@ -5,14 +5,16 @@
     </section>
 </template>
 <script>
-    import PageTitle from '~/components/Common/PageTitle'
-    import Projects from '~/components/Projects/Projects'
+    import PageTitle from '~/components/Common/PageTitle';
+    import Projects from '~/components/Projects/Projects';
 
     export default {
         name: 'IndexProjects',
         components: {
             PageTitle,
-            Projects
-        }
-    }
+            Projects,
+        }, async fetch({store}) {
+            await store.dispatch('projects/loadAll', store.state.auth.token);
+        },
+    };
 </script>

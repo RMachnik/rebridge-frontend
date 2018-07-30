@@ -2,22 +2,21 @@
     <div>
         <new-project/>
         <v-layout row wrap>
-            <item v-for="(project, index) in this.projects" :key="index" :dataObject="project"/>
+            <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
         </v-layout>
     </div>
 </template>
 
 <script>
-    import NewProject from "./NewProject";
-    import Item from './Item';
+    import NewProject from './NewProject';
+    import ProjectTail from './ProjectTail';
     import {mapState} from 'vuex';
 
     export default {
-        name: "Projects",
-        components: {NewProject, Item},
-        data: () => ({}),
+        name: 'Projects',
+        components: {ProjectTail, NewProject},
         computed: {
-            ...mapState('project', ['projects'])
-        }
-    }
+            ...mapState('projects', ['projects']),
+        },
+    };
 </script>
