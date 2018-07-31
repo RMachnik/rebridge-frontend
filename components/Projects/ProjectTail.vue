@@ -21,6 +21,8 @@
 </template>
 
 <script>
+    import {mapActions, mapState} from 'vuex';
+
     export default {
         name: 'ProjectTail',
         props: {
@@ -29,10 +31,18 @@
                 required: true,
             },
         },
+        computed: {
+            ...mapState('auth', ['token']),
+        },
         methods: {
+            ...mapActions('projects', ['loadDetails']),
             redirectToProject(id) {
-                console.log(this.project)
-                this.$router.push('/projects/' + id);
+                console.log(this.project);
+                var data = {projectId: id, token: this.token};
+                this.loadDetails(data).then(() => {
+                    this.$router.push('/projects/' + id);
+                }).catch((error) => {});
+
             },
         },
     };

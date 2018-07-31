@@ -1,55 +1,64 @@
-import {types} from './mutations'
-import {user} from '~/store/modules/user/mutations'
-import authService from '~/assets/js/api/auth'
-import util from '~/assets/js/util/util'
-import Cookie from 'js-cookie'
+import {types} from './mutations';
+import {user} from '~/store/modules/user/mutations';
+import authService from '~/assets/js/api/auth';
+import util from '~/assets/js/util/util';
+import Cookie from 'js-cookie';
 
 export default {
     toggleLoginFormState({commit}) {
-        commit(types.TOGGLE_LOGIN_FORM_STATE)
+        commit(types.TOGGLE_LOGIN_FORM_STATE);
     },
-    register({commit}, data) {
-        return authService.register(data)
-            .then((response) => {
-                commit(types.REMOVE_ERROR)
-                commit(types.ADD_TOKEN, response.data.token)
-                Cookie.set('authToken', response.data.token)
-            })
-            .catch((error) => {
-                commit(types.ADD_ERROR, error.response.data.message)
-                util.prettyLog(error)
-            })
+    register({commit, dispatch}, data) {
+        return authService.register(data).then((response) => {
+            dispatch('setTokenAndCookie', response.data.token);
+        }).catch((error) => {
+            commit(types.ADD_ERROR, error.response.data.message);
+            util.prettyLog(error);
+        });
     },
-    login({commit}, data) {
-        return authService.login(data)
-            .then((response) => {
-                commit(types.REMOVE_ERROR)
-                commit(types.ADD_TOKEN, response.data.token)
-                Cookie.set('authToken', response.data.token)
-            })
-            .catch((error) => {
-                commit(types.ADD_ERROR, error.response.data.message)
-                util.prettyLog(error)
-            })
+    login({commit, dispatch}, data) {
+        return authService.login(data).then((response) => {
+            dispatch('setTokenAndCookie', response.data.token);
+        }).catch((error) => {
+            commit(types.ADD_ERROR, error.response.data.message);
+            commit(types.REMOVE_TOKEN);
+            Cookie.remove('authToken');
+            util.prettyLog(error);
+        });
     },
-    logout({state, commit}) {
-        return authService.logout(state.token)
-            .then(() => {
-                commit(types.REMOVE_TOKEN)
-                Cookie.remove('authToken')
-            })
-            .catch(error => {
-                util.prettyLog(error);
-            })
-
+    loginCheck({commit, dispatch}, token) {
+        return authService.loginCheck(token).then((response) => {
+            dispatch('setTokenAndCookie', response.data.token);
+        }).catch((error) => {
+            dispatch('removeTokenAndCookie');
+            util.prettyLog(error);
+        });
     },
-    initAuth({commit}, data) {
+    logout({state, commit, dispatch}) {
+        return authService.logout(state.token).then(() => {
+            dispatch('removeTokenAndCookie');
+        }).catch(error => {
+            util.prettyLog(error);
+        });
+    },
+    initAuth({commit, dispatch}, data) {
         if (data.cookie) {
-            let authCookie = data.cookie.split(";").find(c => c.trim().startsWith("authToken="))
+            let authCookie = data.cookie.split(';').
+                find(c => c.trim().startsWith('authToken='));
             if (authCookie) {
-                authCookie = authCookie.split("=")[1]
-                commit(types.ADD_TOKEN, authCookie)
+                authCookie = authCookie.split('=')[1];
+                commit(types.ADD_TOKEN, authCookie);
             }
+            dispatch('loginCheck', authCookie);
         }
-    }
-}
+    },
+    setTokenAndCookie({commit,state}, token) {
+        commit(types.REMOVE_ERROR);
+        commit(types.ADD_TOKEN, token);
+        Cookie.set('authToken', token);
+    },
+    removeTokenAndCookie({commit}) {
+        commit(types.REMOVE_TOKEN);
+        Cookie.remove('authToken');
+    },
+};

@@ -13,7 +13,8 @@
                         <v-container grid-list-md>
                             <v-layout wrap>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field label="Nazwa" v-model="formData.name" required></v-text-field>
+                                    <v-text-field label="Email inwestora" v-model="formData.investorEmails"
+                                                  required></v-text-field>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -21,7 +22,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1" flat @click.native="dialog = false">Zamknij</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="dialog = false" type="submit">Stwórz</v-btn>
+                        <v-btn color="blue darken-1" flat @click.native="dialog = false" type="submit">Dodaj</v-btn>
                     </v-card-actions>
                 </v-card>
             </form>
@@ -33,10 +34,13 @@
     import {mapActions, mapState} from 'vuex';
 
     export default {
-        name: 'NewProject',
+        name: 'AddInvestor',
+        props: {
+            projectId: null
+        },
         data: () => ({
             dialog: false,
-            formData: {name: ''},
+            formData: {investorEmails: ''},
         }),
         computed: {
             ...mapState(
@@ -44,10 +48,10 @@
             ),
         },
         methods: {
-            ...mapActions('projects', ['addProject']),
+            ...mapActions('projects', ['addInvestor']),
             submit() {
-                var data = {token: this.token, data: this.formData};
-                this.addProject(data);
+                var data = {token: this.token, projectId: this.projectId, data: this.formData};
+                this.addInvestor(data);
             },
         },
     };
