@@ -12,18 +12,18 @@ export default {
         return authService.register(data).then((response) => {
             dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
-            commit(types.ADD_ERROR, error.response.data.message);
-            util.prettyLog(error);
+            var errorMessage = util.prettyLog(error);
+            commit(types.ADD_ERROR, errorMessage);
         });
     },
     login({commit, dispatch}, data) {
         return authService.login(data).then((response) => {
             dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
-            commit(types.ADD_ERROR, error.response.data.message);
             commit(types.REMOVE_TOKEN);
             Cookie.remove('authToken');
-            util.prettyLog(error);
+            var errorMessage = util.prettyLog(error);
+            commit(types.ADD_ERROR, errorMessage);
         });
     },
     loginCheck({commit, dispatch}, token) {
@@ -52,7 +52,7 @@ export default {
             dispatch('loginCheck', authCookie);
         }
     },
-    setTokenAndCookie({commit,state}, token) {
+    setTokenAndCookie({commit, state}, token) {
         commit(types.REMOVE_ERROR);
         commit(types.ADD_TOKEN, token);
         Cookie.set('authToken', token);

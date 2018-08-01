@@ -36,16 +36,16 @@
 </template>
 
 <script>
-    import Vue from 'vue'
-    import VeeValidate from 'vee-validate'
-    import {mapActions, mapState} from 'vuex'
+    import Vue from 'vue';
+    import VeeValidate from 'vee-validate';
+    import {mapActions, mapState} from 'vuex';
 
-    Vue.use(VeeValidate)
+    Vue.use(VeeValidate);
 
     export default {
         name: 'AuthForm',
         $_veeValidate: {
-            validator: 'new'
+            validator: 'new',
         },
         data() {
             return {
@@ -53,59 +53,57 @@
                     email: '',
                     password: '',
                 },
-            }
+            };
         },
         computed: {
             ...mapState('auth', [
                 'isLoginForm',
                 'token',
-                'authError'
+                'authError',
             ]),
             currentButtonTitle() {
-                return this.isLoginForm ? 'Zarejestruj się' : 'Zaloguj się'
-            }
+                return this.isLoginForm ? 'Zarejestruj się' : 'Zaloguj się';
+            },
         },
         methods: {
             ...mapActions('auth', [
                     'toggleLoginFormState',
                     'register',
-                    'login'
+                    'login',
                 ],
                 'user',
-                ['loadUser']
+                ['loadUser'],
             ),
             redirectToProjects() {
-                this.$router.push('/projects')
+                this.$router.push('/projects');
             }
             ,
             submit() {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
                         if (this.isLoginForm) {
-                            this.login(this.formData)
-                                .then(() => {
-                                    if (this.token) {
-                                        this.redirectToProjects()
-                                    }
-                                })
+                            this.login(this.formData).then(() => {
+                                if (this.token) {
+                                    this.redirectToProjects();
+                                }
+                            }).then(() => this.loadUser(this.token));
                         } else {
-                            this.register(this.formData)
-                                .then(() => {
-                                    if (this.token) {
-                                        this.redirectToProjects()
-                                    }
-                                })
+                            this.register(this.formData).then(() => {
+                                if (this.token) {
+                                    this.redirectToProjects();
+                                }
+                            }).then(()=>this.loadUser(this.token));
                         }
                     }
-                })
+                });
             }
             ,
             clear() {
                 Object.keys(this.formData).forEach(key => {
-                    this.formData[key] = ''
-                })
-                this.$validator.reset()
-            }
-        }
-    }
+                    this.formData[key] = '';
+                });
+                this.$validator.reset();
+            },
+        },
+    };
 </script>
