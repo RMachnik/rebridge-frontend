@@ -4,7 +4,6 @@ export default function(context) {
     }
     if (context.store.state.auth.token) {
         context.store.dispatch('user/loadUser', context.store.state.auth.token);
-        context.store.dispatch('projects/loadAll',
-            context.store.state.auth.token);
+        context.store.dispatch('projects/all', context.store.state.auth.token);
     }
 }

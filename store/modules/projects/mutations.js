@@ -3,8 +3,10 @@ export const types = {
     ADD_PROJECT: 'ADD_PROJECT',
     SET_CURRENT_PROJECT: 'SET_CURRENT_PROJECT',
     REMOVE_CURRENT_PROJECT: 'REMOVE_CURRENT_PROJECT',
-    ADD_SURVEY: 'ADD_SURVEY',
-    REMOVE_SURVEY: 'REMOVE_SURVEY',
+    ADD_QUESTIONNAIRE: 'ADD_QUESTIONNAIRE',
+    REMOVE_QUESTIONNAIRE: 'REMOVE_QUESTIONNAIRE',
+    SET_ERROR: 'ADD_ERROR',
+    REMOVE_ERROR: 'REMOVE_ERROR',
 };
 
 export const mutations = {
@@ -25,5 +27,11 @@ export const mutations = {
     },
     [types.REMOVE_CURRENT_PROJECT](state) {
         state.survey = null;
+    },
+    [types.SET_ERROR](state, error) {
+        state.error = error;
+    },
+    [types.REMOVE_ERROR](state) {
+        state.error = null;
     },
 };

@@ -17,11 +17,20 @@
                                 </v-flex>
                             </v-layout>
                         </v-container>
+                        <v-alert
+                                :value="true"
+                                color="error"
+                                icon="warning"
+                                outline
+                                v-if="error">
+                            {{error}}
+                        </v-alert>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1" flat @click.native="dialog = false">Zamknij</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="dialog = false" type="submit">Stwórz</v-btn>
+                        <v-btn color="blue darken-1" flat @click.native="dialog = this.error" type="submit">Stwórz
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </form>
@@ -39,15 +48,14 @@
             formData: {name: ''},
         }),
         computed: {
-            ...mapState(
-                'auth', ['token'],
-            ),
+            ...mapState('auth', ['token']),
+            ...mapState('projects', ['error']),
         },
         methods: {
-            ...mapActions('projects', ['addProject']),
+            ...mapActions('projects', ['add']),
             submit() {
-                var data = {token: this.token, data: this.formData};
-                this.addProject(data);
+                let data = {token: this.token, data: this.formData};
+                this.add(data);
             },
         },
     };

@@ -12,7 +12,7 @@ export default {
         return authService.register(data).then((response) => {
             dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
-            var errorMessage = util.prettyLog(error);
+            let errorMessage = util.prettyLog(error);
             commit(types.ADD_ERROR, errorMessage);
         });
     },
@@ -20,9 +20,8 @@ export default {
         return authService.login(data).then((response) => {
             dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
-            commit(types.REMOVE_TOKEN);
-            Cookie.remove('authToken');
-            var errorMessage = util.prettyLog(error);
+            dispatch('removeTokenAndCookie')
+            let errorMessage = util.prettyLog(error);
             commit(types.ADD_ERROR, errorMessage);
         });
     },

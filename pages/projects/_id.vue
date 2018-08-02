@@ -22,22 +22,22 @@
                             three-line>
                         <v-subheader>Adres inwestycji</v-subheader>
                         <v-text-field
-                                v-model="currentProject.streetName"
+                                v-model="currentProject.location.streetName"
                                 label="Ulica"
                                 :readonly="isReadonly()"
                         ></v-text-field>
                         <v-text-field
-                                v-model="currentProject.number"
+                                v-model="currentProject.location.number"
                                 label="Numer mieszkania"
                                 :readonly="isReadonly()"
                         ></v-text-field>
                         <v-text-field
-                                v-model="currentProject.postalCode"
+                                v-model="currentProject.location.postalCode"
                                 label="Kod pocztowy"
                                 :readonly="isReadonly()"
                         ></v-text-field>
                         <v-text-field
-                                v-model="currentProject.city"
+                                v-model="currentProject.location.city"
                                 label="Miasto"
                                 :readonly="isReadonly()"
                         ></v-text-field>
@@ -72,8 +72,8 @@
                         <v-subheader>Kwestionariusz</v-subheader>
                         <v-select
                                 label="email"
-                                :options="currentProject.investors"
-                                v-model="selectedInvestor"
+                                :options="templates"
+                                v-model="name"
                         ></v-select>
                     </v-flex>
                     <v-flex v-if="currentUser.roles.includes('ARCHITECT')">
@@ -102,6 +102,7 @@
         computed: {
             ...mapState('projects', ['currentProject']),
             ...mapState('user', ['currentUser']),
+            ...mapState('questionnaire', ['templates']),
         },
         methods: {
             ...mapActions('projects', ['updateDetails']),
@@ -109,7 +110,9 @@
 
             },
             isReadonly() {
-                return !this.currentUser.roles.includes('ARCHITECT');
+                if (this.currentUser) {
+                    return !this.currentUser.roles.includes('ARCHITECT');
+                }
             },
         },
     };

@@ -6,7 +6,7 @@ export default {
         return axios.post(`${BASE_URL}/projects`, data.data,
             config(data.token));
     },
-    loadAll(token) {
+    all(token) {
         return axios.get(`${BASE_URL}/projects`, config(token));
     },
     loadDetails(data) {

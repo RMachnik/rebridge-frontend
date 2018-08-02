@@ -2,8 +2,8 @@ import {BASE_URL, config} from './api.config';
 import axios from '~/plugins/axios';
 
 export default {
-    getAll(data) {
-        return axios.get(`${BASE_URL}/survey/templates`, config(data.token));
+    all(token) {
+        return axios.get(`${BASE_URL}/survey/templates`, config(token));
     },
     create(data) {
         return axios.post(`${BASE_URL}/survey/templates`, data.data, config(data.token));

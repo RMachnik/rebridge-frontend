@@ -14,7 +14,8 @@
             PageTitle,
             Projects,
         }, async fetch({store}) {
-            await store.dispatch('projects/loadAll', store.state.auth.token);
+            await store.dispatch('projects/all', store.state.auth.token);
+            await store.dispatch('questionnaire/all', store.state.auth.token);
         },
     };
 </script>
