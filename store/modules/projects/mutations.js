@@ -3,6 +3,8 @@ export const types = {
     ADD_PROJECT: 'ADD_PROJECT',
     SET_CURRENT_PROJECT: 'SET_CURRENT_PROJECT',
     REMOVE_CURRENT_PROJECT: 'REMOVE_CURRENT_PROJECT',
+    ADD_SURVEY: 'ADD_SURVEY',
+    REMOVE_SURVEY: 'REMOVE_SURVEY',
 };
 
 export const mutations = {
@@ -15,7 +17,13 @@ export const mutations = {
     [types.SET_CURRENT_PROJECT](state, project) {
         state.currentProject = project;
     },
-    [types.REMOVE_CURRENT_PROJECT](state, project) {
+    [types.REMOVE_CURRENT_PROJECT](state) {
         state.currentProject = null;
+    },
+    [types.ADD_SURVEY](state, survey) {
+        state.survey = survey;
+    },
+    [types.REMOVE_CURRENT_PROJECT](state) {
+        state.survey = null;
     },
 };

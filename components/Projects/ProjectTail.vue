@@ -39,7 +39,8 @@
             redirectToProject(id) {
                 console.log(this.project);
                 var data = {projectId: id, token: this.token};
-                this.loadDetails(data).then(() => {
+                this.loadDetails(data)
+                .then(() => {
                     this.$router.push('/projects/' + id);
                 }).catch((error) => {});
 

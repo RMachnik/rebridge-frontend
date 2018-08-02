@@ -17,7 +17,7 @@ module.exports = {
         '~/assets/styles/app.styl',
         '~/assets/styles/main.css'
     ],
-    plugins: ['~plugins/vuetify'],
+    plugins: ['~plugins/vuetify',{ src: '~/plugins/vue-select', ssr: false }],
     modules: ['nuxt-material-design-icons'],
     /*
     ** Customize the progress bar color

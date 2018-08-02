@@ -4,9 +4,8 @@ import actions from './actions'
 export default {
     namespaced: true,
     state: {
-        projects: [],
-        currentProject: null,
-        survey: null,
+        templates: [],
+        currentTemplate: null
     },
     mutations,
     actions

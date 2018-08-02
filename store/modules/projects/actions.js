@@ -20,13 +20,29 @@ export default {
             util.prettyLog(error);
         });
     },
-    loadDetails({commit}, data) {
+    loadDetails({commit, dispatch}, data) {
         return projectService.loadDetails(data).then(
             (response) => {
                 commit(types.SET_CURRENT_PROJECT, response.data);
             },
+        ).then(
+            () => dispatch('getSurvey', data)
         ).catch((error) => {
             util.prettyLog(error);
         });
+    },
+    updateDetails({commit}, data) {
+        return projectService.updateDetails(data).then(
+            (response) => {
+                commit(types.SET_CURRENT_PROJECT, response.data);
+            },
+        ).catch((error) => util.prettyLog(error));
+    },
+    getSurvey({commit}, data) {
+        return projectService.getSurvey(data).then(
+            (response) => {
+                commit(types.ADD_SURVEY, response.data);
+            },
+        ).catch((error) => util.prettyLog(error));
     },
 };

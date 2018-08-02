@@ -4,7 +4,7 @@ export default {
             console.log(error.response.data);
             console.log(error.response.status);
             console.log(error.response.headers);
-            return error.response.data
+            return error.response.data.message
         } else if (error.request) {
             console.log(error.request);
             return "Sorry, server is unavailable."
