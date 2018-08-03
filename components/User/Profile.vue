@@ -2,19 +2,25 @@
     <v-layout justify-center>
         <v-flex xs12 sm10 md8 lg6>
             <div></div>
-            <v-card ref="form">
+            <v-card>
                 <v-card-text>
                     <v-text-field
-                            ref="formData.name"
-                            v-model="formData.name"
-                            :rules="[() => !!formData.name || 'To pole jest wymagane']"
+                            v-model="currentUser.name"
+                            :rules="[() => !!currentUser.name || 'To pole jest wymagane']"
                             :error-messages="errorMessages"
-                            label="Imię i nazwisko"
-                            placeholder="Zenek Machnik"
+                            label="Imie"
+                            placeholder="Imie"
                             required
                     ></v-text-field>
                     <v-text-field
-                            ref="formData.email"
+                            v-model="currentUser.surname"
+                            :rules="[() => !!currentUser.surname || 'To pole jest wymagane']"
+                            :error-messages="errorMessages"
+                            label="Nazwisko"
+                            placeholder="Nazwisko"
+                            required
+                    ></v-text-field>
+                    <v-text-field
                             v-model="currentUser.email"
                             :rules="[() => !!currentUser.email || 'To pole jest wymagane']"
                             :error-messages="errorMessages"
@@ -23,11 +29,10 @@
                             required
                     ></v-text-field>
                     <v-text-field
-                            ref="formData.phoneNumber"
-                            v-model="formData.phoneNumber"
+                            v-model="currentUser.phone"
                             :rules="[
-                            () => !!formData.phoneNumber || 'To pole jest wymagane',
-                            () => !!formData.phoneNumber && formData.phoneNumber.length <= 9 || 'Telefon powinien zawierać nie mniej niż 9 cyfr'
+                            () => !!currentUser.phone || 'To pole jest wymagane',
+                            () => !!currentUser.phone && currentUser.phone.length <= 9 || 'Telefon powinien zawierać nie mniej niż 9 cyfr'
                             ]"
                             :error-messages="errorMessages"
                             label="Numer telefonu"
@@ -36,45 +41,37 @@
                             required
                     ></v-text-field>
                     <v-text-field
-                            ref="formData.address"
                             :rules="[
-              () => !!formData.address || 'To pole jest wymagane',
-              () => !!formData.address && formData.address.length <= 5 || 'Address powinien zawierać min 5 znaków',
-              addressCheck
-            ]"
-                            v-model="formData.address"
+              () => !!currentUser.address.streetName || 'To pole jest wymagane'            ]"
+                            v-model="currentUser.address.streetName"
                             label="Adres"
-                            placeholder="Lipińskiego 1A/66"
+                            placeholder="Lipińskiego"
                             counter="50"
                             required
                     ></v-text-field>
                     <v-text-field
-                            ref="formData.city"
-                            :rules="[() => !!formData.city || 'To pole jest wymagane', addressCheck]"
-                            v-model="formData.city"
+                            :rules="[() => !!currentUser.address.number || 'To pole jest wymagane']"
+                            v-model="currentUser.address.number"
+                            label="Numer"
+                            placeholder="1A/66"
+                            required
+                    ></v-text-field>
+                    <v-text-field
+                            :rules="[() => !!currentUser.address.city || 'To pole jest wymagane']"
+                            v-model="currentUser.address.city"
                             label="Miasto"
                             placeholder="Kraków"
                             required
                     ></v-text-field>
                     <v-text-field
-                            ref="formData.zip"
-                            :rules="[() => !!formData.zip || 'To pole jest wymagane',zipCheck]"
+                            :rules="[() => !!currentUser.address.postalCode || 'To pole jest wymagane',zipCheck]"
                             :error-messages="zipError"
-                            v-model="formData.zip"
+                            v-model="currentUser.address.postalCode"
                             label="Kod pocztowy"
                             required
                             placeholder="30-349"
                             counter="6"
                     ></v-text-field>
-                    <v-autocomplete
-                            ref="formData.country"
-                            :rules="[() => !!formData.country || 'To pole jest wymagane']"
-                            :items="countries"
-                            v-model="formData.country"
-                            label="Państwo"
-                            placeholder="Wybierz..."
-                            required
-                    ></v-autocomplete>
                 </v-card-text>
                 <v-divider class="mt-2"></v-divider>
                 <v-card-actions>
@@ -89,56 +86,40 @@
 
 
 <script>
-    import {mapState} from 'vuex'
+    import {mapActions, mapState} from 'vuex';
 
     export default {
         name: 'Profile',
         data: () => ({
-            countries: ['Polska', 'Afganistan'],
             errorMessages: '',
-            formHasErrors: false,
             zipError: '',
-            formData: {
-                name: null,
-                email: null,
-                address: null,
-                city: null,
-                zip: null,
-                country: null,
-                phoneNumber: null,
-
-            }
         }),
         computed: {
-            ...mapState('user', [
-                'currentUser'
-            ]),
-        },
-        watch: {
-            name() {
-                this.errorMessages = ''
-            }
+            ...mapState('user', ['currentUser']),
+            ...mapState('auth', ['token']),
         },
         methods: {
-            addressCheck() {
-                this.errorMessages = this.address && !this.name
-                    ? 'Pole wymagane!'
-                    : ''
-                return true
-            },
+            ...mapActions('user', ['update']),
             zipCheck() {
                 this.zipError =
-                    this.zip && (this.zip.length != 6 || this.zip.split('-').length != 2) ? 'Wprowadz wlasciwy format kodu pocztowego, przykład: 39-310' : ''
+                    this.zip && (this.zip.length != 6 || this.zip.split('-').length != 2)
+                        ? 'Wprowadz wlasciwy format kodu pocztowego, przykład: 39-310'
+                        : '';
                 return true;
             },
             submit() {
-                this.formHasErrors = false
-                Object.keys(this.formData).forEach(f => {
-                    if (!this.formData[f]) this.formHasErrors = true
-                    // this.$refs[f].validate(true)
-                })
-
+                let profile = {
+                    email: this.currentUser.email,
+                    name: this.currentUser.name,
+                    surname: this.currentUser.surname,
+                    phone: this.currentUser.phone,
+                    address: this.currentUser.address,
+                };
+                let data = {token: this.token, data: profile};
+                this.update(data).then(
+                    this.$router.push('/'),
+                );
             },
-        }
-    }
+        },
+    };
 </script>
