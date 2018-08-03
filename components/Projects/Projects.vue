@@ -1,9 +1,17 @@
 <template>
     <div>
-        <new-project/>
+        <new-project v-if="!error"/>
         <v-layout row wrap>
             <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
         </v-layout>
+        <v-alert
+                :value="true"
+                color="error"
+                icon="warning"
+                outline
+                v-if="error">
+            {{error}}
+        </v-alert>
     </div>
 </template>
 
@@ -16,7 +24,7 @@
         name: 'Projects',
         components: {ProjectTail, NewProject},
         computed: {
-            ...mapState('projects', ['projects']),
+            ...mapState('projects', ['projects', 'error']),
         },
     };
 </script>

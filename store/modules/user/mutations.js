@@ -1,6 +1,6 @@
 export const userTypes = {
     SET_USER: 'SET_USER',
-    REMOVE_USER: 'REMOVE_USER'
+    REMOVE_USER: 'REMOVE_USER',
 }
 
 export const mutations = {
@@ -9,5 +9,5 @@ export const mutations = {
     },
     [userTypes.REMOVE_USER](state) {
         state.currentUser = null
-    }
+    },
 }

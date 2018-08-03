@@ -1,10 +1,11 @@
 export const types = {
     SET_PROJECTS: 'SET_PROJECTS',
     ADD_PROJECT: 'ADD_PROJECT',
-    SET_CURRENT_PROJECT: 'SET_CURRENT_PROJECT',
-    REMOVE_CURRENT_PROJECT: 'REMOVE_CURRENT_PROJECT',
-    ADD_QUESTIONNAIRE: 'ADD_QUESTIONNAIRE',
-    REMOVE_QUESTIONNAIRE: 'REMOVE_QUESTIONNAIRE',
+    REMOVE_PROJECT: 'REMOVE_PROJECT',
+    SET_PROJECT_DETAILS: 'SET_PROJECT_DETAILS',
+    REMOVE_PROJECT_DETAILS: 'REMOVE_PROJECT_DETAILS',
+    SET_QUESTIONS: 'SET_QUESTIONS',
+    REMOVE_QUESTIONS: 'REMOVE_QUESTIONS',
     SET_ERROR: 'ADD_ERROR',
     REMOVE_ERROR: 'REMOVE_ERROR',
 };
@@ -16,17 +17,23 @@ export const mutations = {
     [types.ADD_PROJECT](state, project) {
         state.projects.unshift(project);
     },
-    [types.SET_CURRENT_PROJECT](state, project) {
-        state.currentProject = project;
+    [types.REMOVE_PROJECT](state, project) {
+        let index = state.projects.indexOf(project);
+        if (index > -1) {
+            state.projects.splice(index, 1);
+        }
     },
-    [types.REMOVE_CURRENT_PROJECT](state) {
-        state.currentProject = null;
+    [types.SET_PROJECT_DETAILS](state, projectDetails) {
+        state.selectedProjectDetails = projectDetails;
     },
-    [types.ADD_SURVEY](state, survey) {
-        state.survey = survey;
+    [types.REMOVE_PROJECT_DETAILS](state) {
+        state.selectedProjectDetails = null;
     },
-    [types.REMOVE_CURRENT_PROJECT](state) {
-        state.survey = null;
+    [types.SET_QUESTIONS](state, questions) {
+        state.questions = questions.questions;
+    },
+    [types.REMOVE_QUESTIONS](state) {
+        state.questions = null;
     },
     [types.SET_ERROR](state, error) {
         state.error = error;

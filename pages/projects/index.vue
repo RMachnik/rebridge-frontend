@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <page-title title="Projekty"/>
+        <page-title title="Twoje Projekty"/>
         <projects/>
     </section>
 </template>
@@ -13,7 +13,9 @@
         components: {
             PageTitle,
             Projects,
-        }, async fetch({store}) {
+        },
+        watchQuery: ['page'],
+        async fetch({store}) {
             await store.dispatch('projects/all', store.state.auth.token);
             await store.dispatch('questionnaire/all', store.state.auth.token);
         },

@@ -15,6 +15,7 @@
 
             <v-card-actions>
                 <v-btn flat color="orange" @click="redirectToProject(project.id)">Otwórz</v-btn>
+                <v-btn flat color="red" @click="remove(project)">delete</v-btn>
             </v-card-actions>
         </v-card>
     </v-flex>
@@ -35,15 +36,19 @@
             ...mapState('auth', ['token']),
         },
         methods: {
-            ...mapActions('projects', ['loadDetails']),
+            ...mapActions('projects', ['loadDetails', 'delete', 'loadQuestionnaire']),
             redirectToProject(id) {
-                console.log(this.project);
-                var data = {projectId: id, token: this.token};
-                this.loadDetails(data)
-                .then(() => {
+                let data = {projectId: id, token: this.token};
+                this.loadDetails(data).then(
+                    () => this.loadQuestionnaire(data),
+                ).then(() => {
                     this.$router.push('/projects/' + id);
                 }).catch((error) => {});
 
+            },
+            remove(project) {
+                let data = {token: this.token, project: project};
+                this.delete(data);
             },
         },
     };

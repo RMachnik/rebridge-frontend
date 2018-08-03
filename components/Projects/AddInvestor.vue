@@ -1,28 +1,36 @@
 <template>
     <v-layout row justify>
         <v-dialog v-model="dialog" persistent max-width="500px">
-            <v-btn slot="activator" color="cyan" dark>
+            <v-btn slot="activator" color="green" dark>
                 Dodaj
             </v-btn>
             <form @submit.prevent="submit" novalidate>
                 <v-card>
                     <v-card-title>
-                        <span class="headline">Nowy projekt</span>
+                        <span class="headline">Dodaj inwestora</span>
                     </v-card-title>
                     <v-card-text>
                         <v-container grid-list-md>
                             <v-layout wrap>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field label="Email inwestora" v-model="formData.investorEmails"
+                                    <v-text-field label="Email inwestora" v-model="formData.email"
                                                   required></v-text-field>
                                 </v-flex>
+                                <v-alert
+                                        :value="true"
+                                        color="error"
+                                        icon="warning"
+                                        outline
+                                        v-if="error">
+                                    {{error}}
+                                </v-alert>
                             </v-layout>
                         </v-container>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1" flat @click.native="dialog = false">Zamknij</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="dialog = false" type="submit">Dodaj</v-btn>
+                        <v-btn color="blue darken-1" flat type="submit">Dodaj</v-btn>
                     </v-card-actions>
                 </v-card>
             </form>
@@ -36,21 +44,23 @@
     export default {
         name: 'AddInvestor',
         props: {
-            projectId: null
+            projectId: {
+                type: String,
+                required: true
+            },
         },
         data: () => ({
             dialog: false,
-            formData: {investorEmails: ''},
+            formData: {email: ''},
         }),
         computed: {
-            ...mapState(
-                'auth', ['token'],
-            ),
+            ...mapState('auth', ['token']),
+            ...mapState('projects', ['error']),
         },
         methods: {
             ...mapActions('projects', ['addInvestor']),
             submit() {
-                var data = {token: this.token, projectId: this.projectId, data: this.formData};
+                let data = {token: this.token, projectId: this.projectId, data: this.formData};
                 this.addInvestor(data);
             },
         },

@@ -12,10 +12,10 @@ export const mutations = {
     [types.ADD_TEMPLATE](state, template) {
         state.templates.unshift(template);
     },
-    [types.SET_CURRENT_PROJECT](state, template) {
+    [types.SET_PROJECT_DETAILS](state, template) {
         state.currentTemplate = template;
     },
-    [types.REMOVE_CURRENT_PROJECT](state) {
+    [types.REMOVE_PROJECT_DETAILS](state) {
         state.currentTemplate = null;
     },
 };

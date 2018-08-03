@@ -137,8 +137,7 @@
                     if (!this.formData[f]) this.formHasErrors = true
                     // this.$refs[f].validate(true)
                 })
-                console.log(this.currentUser.email)
-                console.log(this.formData.name)
+
             },
         }
     }
