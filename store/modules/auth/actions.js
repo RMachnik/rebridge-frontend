@@ -20,7 +20,7 @@ export default {
         return authService.login(data).then((response) => {
             dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
-            dispatch('removeTokenAndCookie')
+            dispatch('removeTokenAndCookie');
             let errorMessage = util.prettyLog(error);
             commit(types.ADD_ERROR, errorMessage);
         });
@@ -48,7 +48,7 @@ export default {
                 authCookie = authCookie.split('=')[1];
                 commit(types.ADD_TOKEN, authCookie);
             }
-            dispatch('loginCheck', authCookie);
+            return dispatch('loginCheck', authCookie);
         }
     },
     setTokenAndCookie({commit, state}, token) {

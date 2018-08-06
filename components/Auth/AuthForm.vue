@@ -86,13 +86,13 @@
                                 if (this.token) {
                                     this.redirectToProjects();
                                 }
-                            }).then(() => this.loadUser(this.token));
+                            });
                         } else {
                             this.register(this.formData).then(() => {
                                 if (this.token) {
                                     this.redirectToProjects();
                                 }
-                            }).then(()=>this.loadUser(this.token));
+                            });
                         }
                     }
                 });

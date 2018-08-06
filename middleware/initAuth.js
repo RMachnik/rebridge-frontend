@@ -1,9 +1,34 @@
 export default function(context) {
     if (process.server) {
-        context.store.dispatch('auth/initAuth', context.req.headers);
+        context.store.dispatch('auth/initAuth', context.req.headers).then(
+            () => {
+                let token = context.store.state.auth.token;
+                context.store.dispatch('user/loadUser', token).then(
+                    () => context.store.dispatch('projects/all', token),
+                );
+            },
+        ).then(()=>handleRouting(context));
+    } else {
+        let token = context.store.state.auth.token;
+        if (token) {
+            context.store.dispatch('user/loadUser', token).then(
+                () => context.store.dispatch('projects/all', token),
+            ).then(()=>handleRouting(context));
+        }
     }
-    if (context.store.state.auth.token) {
-        context.store.dispatch('user/loadUser', context.store.state.auth.token);
-        context.store.dispatch('projects/all', context.store.state.auth.token);
+}
+
+function handleRouting(context) {
+    if (context.route.name !== 'index' && !context.store.state.auth.token) {
+        context.redirect('/');
+    } else {
+        if (context.route.name === 'index' && context.store.state.auth.token) {
+            context.redirect('/projects');
+        }
+    }
+    if (process.server) {
+        if (context.store.state.auth.token) {
+            context.redirect('/projects');
+        }
     }
 }
