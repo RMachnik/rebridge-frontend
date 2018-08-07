@@ -46,22 +46,31 @@
         props: {
             projectId: {
                 type: String,
-                required: true
+                required: true,
             },
         },
         data: () => ({
             dialog: false,
             formData: {email: ''},
+            error: ''
         }),
         computed: {
             ...mapState('auth', ['token']),
-            ...mapState('projects', ['error']),
         },
         methods: {
             ...mapActions('projects', ['addInvestor']),
             submit() {
                 let data = {token: this.token, projectId: this.projectId, data: this.formData};
-                this.addInvestor(data);
+                this.addInvestor(data).then(
+                    () => {
+                        this.dialog = false;
+                        this.error = ''
+                }).catch(
+                    (ex) => {
+                        this.error = ex;
+                        this.dialog = true;
+                    }
+                );
             },
         },
     };

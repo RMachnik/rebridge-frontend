@@ -1,18 +1,16 @@
 <template>
     <section class="container">
-        <page-title title="Projekty"/>
+        <H1>Projekt: {{selected.name}}</H1>
         <project-details :selectedProject="selected"/>
     </section>
 </template>
 
 <script>
-    import PageTitle from '~/components/Common/PageTitle';
     import ProjectDetails from '~/components/Projects/ProjectDetails';
     import {mapGetters} from 'vuex';
 
     export default {
         components: {
-            PageTitle,
             ProjectDetails,
         },
         computed: {
@@ -20,7 +18,6 @@
             selected: function() {
                 return this.find(this.$route.params.id);
             },
-
         },
     };
 </script>

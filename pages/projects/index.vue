@@ -16,6 +16,7 @@
         },
         watchQuery: ['page'],
         async fetch({store}) {
+            await store.dispatch('user/loadUser', store.state.auth.token);
             await store.dispatch('projects/all', store.state.auth.token);
             await store.dispatch('questionnaire/all', store.state.auth.token);
         },

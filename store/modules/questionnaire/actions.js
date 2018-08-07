@@ -7,7 +7,11 @@ export default {
         return questionnaireService.all(token).then(
             (response) => {
                 commit(types.SET_TEMPLATES, response.data);
+                return Promise.resolve()
             },
-        ).catch((error) => util.prettyLog(error));
+        ).catch((error) => {
+            let errorMessage = util.prettyLog(error);
+            return Promise.reject(errorMessage)
+        });
     },
 };

@@ -6,7 +6,7 @@ export const types = {
     REMOVE_PROJECT_DETAILS: 'REMOVE_PROJECT_DETAILS',
     SET_QUESTIONS: 'SET_QUESTIONS',
     REMOVE_QUESTIONS: 'REMOVE_QUESTIONS',
-    SET_ERROR: 'ADD_ERROR',
+    ADD_ERROR: 'ADD_ERROR',
     REMOVE_ERROR: 'REMOVE_ERROR',
 };
 
@@ -35,7 +35,7 @@ export const mutations = {
     [types.REMOVE_QUESTIONS](state) {
         state.questions = null;
     },
-    [types.SET_ERROR](state, error) {
+    [types.ADD_ERROR](state, error) {
         state.error = error;
     },
     [types.REMOVE_ERROR](state) {

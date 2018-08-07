@@ -7,6 +7,7 @@
                     name="input-7-4"
                     label="Outline textarea"
                     v-model="question.answer"
+                    :readonly="readonly"
             ></v-textarea>
         </v-flex>
     </v-list-tile-content>
@@ -29,8 +30,13 @@
         computed: {
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
+            readonly: function() {
+                if (this.currentUser) {
+                    return this.currentUser.roles.includes('ARCHITECT');
+                }
+            },
         },
-    };
+    }
 </script>
 
 <style scoped>

@@ -23,8 +23,8 @@
                     color="error"
                     icon="warning"
                     outline
-                    v-if="authError">
-                {{authError}}
+                    v-if="error">
+                {{error}}
             </v-alert>
             <v-btn type="submit" color="success">
                 wyślij
@@ -53,13 +53,13 @@
                     email: '',
                     password: '',
                 },
+                error: ''
             };
         },
         computed: {
             ...mapState('auth', [
                 'isLoginForm',
-                'token',
-                'authError',
+                'token'
             ]),
             currentButtonTitle() {
                 return this.isLoginForm ? 'Zarejestruj się' : 'Zaloguj się';
@@ -82,22 +82,29 @@
                 this.$validator.validateAll().then((result) => {
                     if (result) {
                         if (this.isLoginForm) {
-                            this.login(this.formData).then(() => {
-                                if (this.token) {
-                                    this.redirectToProjects();
-                                }
-                            });
+                            this.logInUser()
                         } else {
-                            this.register(this.formData).then(() => {
-                                if (this.token) {
-                                    this.redirectToProjects();
-                                }
-                            });
+                            this.registerUser()
                         }
                     }
                 });
-            }
-            ,
+            },
+            logInUser() {
+                this.error = null
+                this.login(this.formData).then(
+                    () => this.redirectToProjects()
+                ).catch(
+                    (ex) => this.error = ex
+                )
+            },
+            registerUser() {
+                this.error = null
+                this.register(this.formData).then(
+                    () => this.redirectToProjects()
+                ).catch(
+                    (ex) => this.error = ex
+                )
+            },
             clear() {
                 Object.keys(this.formData).forEach(key => {
                     this.formData[key] = '';

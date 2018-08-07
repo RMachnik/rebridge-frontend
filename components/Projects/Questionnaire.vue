@@ -1,7 +1,7 @@
 <template>
     <v-layout row justify-center>
         <v-btn color="green" dark @click.stop="dialog = true">Pokaż</v-btn>
-            <v-dialog v-model="dialog" width="600px">
+        <v-dialog v-model="dialog" width="600px">
             <v-card tile>
                 <v-toolbar card dark color="cyan">
                     <v-btn icon dark @click.native="dialog = false">
@@ -11,11 +11,18 @@
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
                         <v-btn
-                                v-if="currentUser.roles.includes('ARCHITECT')"
+                                v-if="!currentUser.roles.includes('ARCHITECT')"
                                 dark flat
                                 @click.native="dialog = false"
                                 @click="save()">
                             Zapisz
+                        </v-btn>
+                        <v-btn
+                                v-if="currentUser.roles.includes('ARCHITECT')"
+                                dark flat
+                                @click.native="dialog = false"
+                                @click="dialog = false">
+                            Zamknij
                         </v-btn>
                     </v-toolbar-items>
                 </v-toolbar>
@@ -53,8 +60,7 @@
             ...mapActions('projects', ['loadDetails', 'delete', 'answer']),
             save() {
                 let data = {projectId: this.projectId, token: this.token, data: {answers: this.questions}};
-                console.log(data);
-                this.answer(data);
+                this.answer(data).then(() => this.dialog = false);
             },
         },
     };

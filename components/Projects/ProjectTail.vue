@@ -9,7 +9,17 @@
             <v-card-title primary-title>
                 <div>
                     <h3 class="headline mb-0">{{ project.name }}</h3>
-                    <div>{{project.id}}</div>
+                    <div v-if="project.details">
+                        <div v-if="project.details.budget>0">Budżet: {{project.details.budget}} PLN</div>
+                        <div v-if="project.details.surface>0">Powierzchnia: {{project.details.surface}} m<sup>2</sup>
+                        </div>
+                        <div v-if="project.details.location">
+                            <div v-if="project.details.location.streetName">Adres:
+                                {{project.details.location.streetName}},
+                                {{project.details.location.city}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </v-card-title>
 
@@ -43,7 +53,8 @@
                     () => this.loadQuestionnaire(data),
                 ).then(() => {
                     this.$router.push('/projects/' + id);
-                }).catch((error) => {});
+                }).catch((error) => {
+                });
 
             },
             remove(project) {

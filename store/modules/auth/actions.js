@@ -10,32 +10,34 @@ export default {
     },
     register({commit, dispatch}, data) {
         return authService.register(data).then((response) => {
-            dispatch('setTokenAndCookie', response.data.token);
+            return dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
             let errorMessage = util.prettyLog(error);
-            commit(types.ADD_ERROR, errorMessage);
+            return Promise.reject(errorMessage)
         });
     },
     login({commit, dispatch}, data) {
         return authService.login(data).then((response) => {
-            dispatch('setTokenAndCookie', response.data.token);
+            return dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
-            dispatch('removeTokenAndCookie');
             let errorMessage = util.prettyLog(error);
-            commit(types.ADD_ERROR, errorMessage);
+             return dispatch('removeTokenAndCookie').then(()=>{
+                 return Promise.reject(errorMessage)
+             });
         });
     },
     loginCheck({commit, dispatch}, token) {
         return authService.loginCheck(token).then((response) => {
-            dispatch('setTokenAndCookie', response.data.token);
+            return dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
-            dispatch('removeTokenAndCookie');
-            util.prettyLog(error);
+            let errorMessage = util.prettyLog(error);
+            commit(types.ADD_ERROR, errorMessage);
+            return dispatch('removeTokenAndCookie');
         });
     },
     logout({state, commit, dispatch}) {
         return authService.logout(state.token).then(() => {
-            dispatch('removeTokenAndCookie');
+            return dispatch('removeTokenAndCookie');
         }).catch(error => {
             util.prettyLog(error);
         });
@@ -46,7 +48,6 @@ export default {
                 find(c => c.trim().startsWith('authToken='));
             if (authCookie) {
                 authCookie = authCookie.split('=')[1];
-                commit(types.ADD_TOKEN, authCookie);
             }
             return dispatch('loginCheck', authCookie);
         }

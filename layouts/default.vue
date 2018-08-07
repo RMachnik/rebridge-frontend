@@ -6,6 +6,7 @@
                 <nuxt/>
             </v-container>
         </v-content>
+        <snackbar/>
         <Footer/>
     </v-app>
 </template>
@@ -13,10 +14,11 @@
 <script>
     import Menu from "~/components/Navigation/Menu";
     import Footer from "~/components/Footer/Footer";
+    import Snackbar from "~/components/Common/Snackbar";
 
     export default {
-        components: {Menu, Footer},
-        middleware: ['initAuth']
+        components: {Menu, Footer,Snackbar},
+        middleware: ['initAuth','route']
     }
 </script>
 

@@ -72,6 +72,14 @@
                             placeholder="30-349"
                             counter="6"
                     ></v-text-field>
+                    <v-alert
+                            :value="true"
+                            color="error"
+                            icon="warning"
+                            outline
+                            v-if="error">
+                        {{error}}
+                    </v-alert>
                 </v-card-text>
                 <v-divider class="mt-2"></v-divider>
                 <v-card-actions>
@@ -93,6 +101,7 @@
         data: () => ({
             errorMessages: '',
             zipError: '',
+            error: ''
         }),
         computed: {
             ...mapState('user', ['currentUser']),
@@ -116,8 +125,12 @@
                     address: this.currentUser.address,
                 };
                 let data = {token: this.token, data: profile};
-                this.update(data).then(
-                    this.$router.push('/'),
+                this.update(data).then(() => {
+                        console.log("great success")
+                        this.$router.push('/')
+                    }
+                ).catch(
+                    (ex) => this.error = ex
                 );
             },
         },

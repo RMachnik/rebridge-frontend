@@ -9,9 +9,12 @@
     import Profile from '~/components/User/Profile'
 
     export default {
-        name:"IndexProfile",
+        name: "IndexProfile",
         components: {
             PageTitle, Profile
         },
+        async fetch({store}) {
+            await store.dispatch('user/loadUser', store.state.auth.token);
+        }
     }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <new-project v-if="!error"/>
+        <add-project v-if="!error"/>
         <v-layout row wrap>
             <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
         </v-layout>
@@ -16,13 +16,13 @@
 </template>
 
 <script>
-    import NewProject from './NewProject';
+    import AddProject from './AddProject';
     import ProjectTail from './ProjectTail';
     import {mapState} from 'vuex';
 
     export default {
         name: 'Projects',
-        components: {ProjectTail, NewProject},
+        components: {ProjectTail, AddProject},
         computed: {
             ...mapState('projects', ['projects', 'error']),
         },

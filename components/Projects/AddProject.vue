@@ -53,16 +53,15 @@
     import questionnaire from '../../assets/js/api/questionnaire';
 
     export default {
-        name: 'NewProject',
-
+        name: 'AddProject',
         data: () => ({
             dialog: false,
             questionnaireTemplate: null,
             formData: {name: '', questionnaireId: ''},
+            error: ''
         }),
         computed: {
             ...mapState('auth', ['token']),
-            ...mapState('projects', ['error']),
             ...mapState('questionnaire', ['templates']),
         },
         methods: {
@@ -70,8 +69,15 @@
             submit() {
                 this.formData.questionnaireTemplateId = this.questionnaireTemplate.id;
                 let data = {token: this.token, data: this.formData};
-                this.add(data);
-            },
+                this.add(data).then(() => {
+                    this.dialog = false;
+                    this.error = '';
+                }, (ex) => {
+                    console.log(ex)
+                    this.dialog = true;
+                    this.error = ex;
+                })
+            }
         },
     };
 </script>
