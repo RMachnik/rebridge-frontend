@@ -25,7 +25,7 @@
 
             <v-card-actions>
                 <v-btn flat color="orange" @click="redirectToProject(project.id)">Otwórz</v-btn>
-                <v-btn flat color="red" @click="remove(project)">delete</v-btn>
+                <v-btn v-if="show" flat color="red" @click="remove(project)">delete</v-btn>
             </v-card-actions>
         </v-card>
     </v-flex>
@@ -44,6 +44,12 @@
         },
         computed: {
             ...mapState('auth', ['token']),
+            ...mapState('user', ['currentUser']),
+            show: function () {
+                if (this.currentUser) {
+                    return this.currentUser.roles.includes('ARCHITECT');
+                }
+            }
         },
         methods: {
             ...mapActions('projects', ['loadDetails', 'delete', 'loadQuestionnaire']),

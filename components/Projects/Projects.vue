@@ -1,6 +1,6 @@
 <template>
     <div>
-        <add-project v-if="!error"/>
+        <add-project v-if="show"/>
         <v-layout row wrap>
             <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
         </v-layout>
@@ -25,6 +25,12 @@
         components: {ProjectTail, AddProject},
         computed: {
             ...mapState('projects', ['projects', 'error']),
+            ...mapState('user', ['currentUser']),
+            show: function () {
+                if (this.currentUser) {
+                    return this.currentUser.roles.includes('ARCHITECT');
+                }
+            }
         },
     };
 </script>

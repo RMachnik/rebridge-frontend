@@ -1,5 +1,5 @@
 <template>
-    <v-layout row justify>
+    <v-layout centered justify>
         <v-dialog v-model="dialog" persistent max-width="500px">
             <v-btn slot="activator" color="green" dark>
                 Dodaj
@@ -11,8 +11,8 @@
                     </v-card-title>
                     <v-card-text>
                         <v-container grid-list-md>
-                            <v-layout wrap>
-                                <v-flex xs12 sm6 md4>
+                            <v-layout column>
+                                <v-flex>
                                     <v-text-field label="Email inwestora" v-model="formData.email"
                                                   required></v-text-field>
                                 </v-flex>
@@ -65,7 +65,7 @@
                     () => {
                         this.dialog = false;
                         this.error = ''
-                }).catch(
+                    }).catch(
                     (ex) => {
                         this.error = ex;
                         this.dialog = true;

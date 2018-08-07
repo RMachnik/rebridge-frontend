@@ -1,16 +1,18 @@
 <template>
-    <div class="text-xs-center">
+    <v-layout center column>
         <v-dialog
                 v-model="dialog"
                 width="500"
         >
-            <v-btn
+            <v-chip
                     slot="activator"
-                    color="red lighten-2"
-                    dark
+                    v-model="investor"
             >
+                <v-avatar>
+                    <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="trevor">
+                </v-avatar>
                 {{investor.email}}
-            </v-btn>
+            </v-chip>
             <v-card>
                 <v-card-title
                         class="headline grey lighten-2"
@@ -36,13 +38,21 @@
                             @click="dialog = false"
                     >Zamknij
                     </v-btn>
+                    <v-btn
+                            color="red"
+                            flat
+                            @click="dialog = false"
+                    >Usuń
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
-    </div>
+    </v-layout>
 </template>
 
 <script>
+    import {mapActions, mapState} from 'vuex'
+
     export default {
         name: 'ContactDetails',
         props: {
@@ -50,11 +60,28 @@
                 type: Object,
                 required: true,
             },
+            projectId: {
+                type: String,
+                required: true
+            }
         },
         data() {
             return {
                 dialog: false,
             };
         },
+        computed: {
+            ...mapState('auth', ['token']),
+        },
+        methods: {
+            ...mapActions('projects', ['removeInvestor']),
+            delete() {
+                if (this.investorEmail) {
+                    let data = {token: this.token, projectId: this.projectId, email: this.investor.email};
+                    console.log(this.investorEmail)
+                    console.log(data)
+                }
+            }
+        }
     };
 </script>

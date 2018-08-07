@@ -3,6 +3,10 @@
         <v-form v-if="selectedProjectDetails">
             <v-container>
                 <v-layout column wrap>
+                    <v-flex>
+                        <v-subheader>Kwestionariusz</v-subheader>
+                        <questionnaire v-if="!currentUser.roles.includes('ARCHITECT')" :projectId="selectedProject.id"/>
+                    </v-flex>
                     <v-flex subheader three-line>
                         <v-subheader>Dane podstawowe</v-subheader>
                         <v-text-field
@@ -41,16 +45,11 @@
                         ></v-text-field>
                     </v-flex>
                     <v-flex subheader
-                            three-line>
+                            three-line v-if="!readonly">
                         <v-subheader>Inwestorzy</v-subheader>
                         <add-investor :projectId="selectedProject.id"/>
                         <contact-details v-for="(investor,index) in selectedProjectDetails.investors"
-                                         :investor="investor" :key="index"/>
-                    </v-flex>
-                    <v-flex>
-                        <v-subheader>Kwestionariusz</v-subheader>
-                        <questionnaire v-if="currentUser.roles.includes('ARCHITECT')" :projectId="selectedProject.id"/>
-                        <v-btn v-if="!currentUser.roles.includes('ARCHITECT')">Wypelnij</v-btn>
+                                         :investor="investor" :projectId="selectedProject.id" :key="index"/>
                     </v-flex>
                     <v-flex v-if="currentUser.roles.includes('ARCHITECT')">
                         <v-btn @click="submit()" color="success">
@@ -114,7 +113,9 @@
                         location: location,
                     },
                 };
-                this.updateDetails(data);
+                this.updateDetails(data).then(
+                    this.$router.go(-1)
+                );
             },
         }
     };

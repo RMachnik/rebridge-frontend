@@ -1,7 +1,7 @@
 <template>
-    <v-layout row justify>
+    <v-layout centered justify>
         <v-dialog v-model="dialog" persistent max-width="500px">
-            <v-btn slot="activator" color="cyan" dark>
+            <v-btn slot="activator" color="cyan" dark >
                 Dodaj
             </v-btn>
             <form @submit.prevent="submit" novalidate>
@@ -11,7 +11,7 @@
                     </v-card-title>
                     <v-card-text>
                         <v-container grid-list-md>
-                            <v-layout wrap>
+                            <v-layout column>
                                 <v-flex>
                                     <v-content>Nazwa projektu</v-content>
                                     <v-text-field label="Nazwa" v-model="formData.name" required></v-text-field>

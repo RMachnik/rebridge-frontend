@@ -48,6 +48,17 @@ export default {
             return Promise.reject(errorMessage)
         });
     },
+    removeInvestor({commit, dispatch}, data) {
+        return projectService.removeInvestor(data).then(
+            () => {
+                commit(global.ADD_SUCCESS, "Usunięto", {root: true})
+                return dispatch('loadDetails', data);
+            },
+        ).catch((error) => {
+            let errorMessage = util.prettyLog(error);
+            return Promise.reject(errorMessage)
+        });
+    },
     loadDetails({commit, dispatch}, data) {
         return projectService.loadDetails(data).then(
             (response) => {
