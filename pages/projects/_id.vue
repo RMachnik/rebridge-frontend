@@ -1,23 +1,34 @@
 <template>
-    <section class="container">
-        <H1>Projekt: {{selected.name}}</H1>
-        <project-details :selectedProject="selected"/>
+    <section class="container" v-if="selected">
+        <section id="header">
+            <page-title :title="selected.name"/>
+        </section>
+        <section id="details">
+            <project-details :selectedProject="selected"/>
+        </section>
     </section>
 </template>
 
 <script>
     import ProjectDetails from '~/components/Projects/ProjectDetails';
+    import PageTitle from '~/components/Common/PageTitle';
     import {mapGetters} from 'vuex';
 
     export default {
         components: {
             ProjectDetails,
+            PageTitle,
         },
         computed: {
             ...mapGetters('projects', ['find']),
-            selected: function() {
+            selected: function () {
                 return this.find(this.$route.params.id);
             },
         },
+        methods:{
+            return(){
+                this.$router.go(-1)
+            }
+        }
     };
 </script>

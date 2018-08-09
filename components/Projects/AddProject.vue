@@ -1,51 +1,28 @@
 <template>
-    <v-layout centered justify>
-        <v-dialog v-model="dialog" persistent max-width="500px">
-            <v-btn slot="activator" color="cyan" dark >
-                Dodaj
-            </v-btn>
+        <v-card>
             <form @submit.prevent="submit" novalidate>
-                <v-card>
-                    <v-card-title>
-                        <span class="headline">Nowy projekt</span>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-container grid-list-md>
-                            <v-layout column>
-                                <v-flex>
-                                    <v-content>Nazwa projektu</v-content>
-                                    <v-text-field label="Nazwa" v-model="formData.name" required></v-text-field>
-                                </v-flex>
-                                <v-flex>
-                                    <v-content>Szablon kwestionariusza</v-content>
-                                    <v-select
-                                            label="name"
-                                            :options="templates"
-                                            v-model="questionnaireTemplate"
-                                    ></v-select>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                        <v-alert
-                                :value="true"
-                                color="error"
-                                icon="warning"
-                                outline
-                                v-if="error">
-                            {{error}}
-                        </v-alert>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click.native="dialog = false">Zamknij</v-btn>
-                        <v-btn color="blue darken-1" flat type="submit">
-                            Stwórz
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
+                <v-card-title>
+                    <v-layout row wrap>
+                        <v-flex>
+                            <v-text-field label="Nazwa" v-model="formData.name" required></v-text-field>
+                        </v-flex>
+                        <v-flex>
+                            <v-select
+                                    placeholder="kwestionariusz"
+                                    label="name"
+                                    :options="templates"
+                                    v-model="questionnaireTemplate"
+                            ></v-select>
+                        </v-flex>
+                        <v-flex>
+                            <v-btn color="success" type="submit">
+                                Dodaj
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
+                </v-card-title>
             </form>
-        </v-dialog>
-    </v-layout>
+        </v-card>
 </template>
 
 <script>
@@ -55,10 +32,8 @@
     export default {
         name: 'AddProject',
         data: () => ({
-            dialog: false,
             questionnaireTemplate: null,
             formData: {name: '', questionnaireId: ''},
-            error: ''
         }),
         computed: {
             ...mapState('auth', ['token']),
@@ -69,14 +44,7 @@
             submit() {
                 this.formData.questionnaireTemplateId = this.questionnaireTemplate.id;
                 let data = {token: this.token, data: this.formData};
-                this.add(data).then(() => {
-                    this.dialog = false;
-                    this.error = '';
-                }, (ex) => {
-                    console.log(ex)
-                    this.dialog = true;
-                    this.error = ex;
-                })
+                this.add(data);
             }
         },
     };

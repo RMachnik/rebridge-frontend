@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <page-title title="Profile"/>
+        <page-title title="Twoje dane"/>
         <profile/>
     </section>
 </template>

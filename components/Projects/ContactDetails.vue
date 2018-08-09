@@ -1,57 +1,26 @@
 <template>
-    <v-layout center column>
-        <v-dialog
-                v-model="dialog"
-                width="500"
-        >
-            <v-chip
-                    slot="activator"
-                    v-model="investor"
-            >
-                <v-avatar>
-                    <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="trevor">
-                </v-avatar>
+    <v-card>
+        <v-card-title>
+            <v-chip>
                 {{investor.email}}
             </v-chip>
-            <v-card>
-                <v-card-title
-                        class="headline grey lighten-2"
-                        primary-title
-                >
-                    Dane Kontaktowe
-                </v-card-title>
-
-                <v-card-text>
-                    <div>Imie: {{investor.name}}</div>
-                    <div>Nazwisko: {{investor.surname}}</div>
-                    <div>Telefon: {{investor.phone}}</div>
-                    <div>Email: {{investor.email}}</div>
-                </v-card-text>
-
-                <v-divider></v-divider>
-
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                            color="primary"
-                            flat
-                            @click="dialog = false"
-                    >Zamknij
-                    </v-btn>
-                    <v-btn
-                            color="red"
-                            flat
-                            @click="dialog = false"
-                    >Usuń
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-    </v-layout>
+            <v-btn
+                    color="error"
+                    flat
+                    @click="remove()"
+            >
+                <v-icon>delete</v-icon>
+            </v-btn>
+        </v-card-title>
+        <v-card-text v-if="hasData">
+            <div v-if="investor.name">{{investor.name}} {{investor.surname}}</div>
+            <div v-if="investor.phone">{{investor.phone}}</div>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex'
+    import {mapActions, mapState} from 'vuex';
 
     export default {
         name: 'ContactDetails',
@@ -60,27 +29,19 @@
                 type: Object,
                 required: true,
             },
-            projectId: {
-                type: String,
-                required: true
-            }
-        },
-        data() {
-            return {
-                dialog: false,
-            };
         },
         computed: {
             ...mapState('auth', ['token']),
+            ...mapState('projects', ['selectedProjectDetails']),
+            hasData: function () {
+                return this.investor.surname || this.investor.phone || this.investor.name;
+            }
         },
         methods: {
             ...mapActions('projects', ['removeInvestor']),
-            delete() {
-                if (this.investorEmail) {
-                    let data = {token: this.token, projectId: this.projectId, email: this.investor.email};
-                    console.log(this.investorEmail)
-                    console.log(data)
-                }
+            remove() {
+                let data = {token: this.token, projectId: this.selectedProjectDetails.projectId, email: this.investor.email};
+                this.removeInvestor(data)
             }
         }
     };

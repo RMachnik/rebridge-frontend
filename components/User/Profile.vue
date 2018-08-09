@@ -1,7 +1,6 @@
 <template>
     <v-layout justify-center>
         <v-flex xs12 sm10 md8 lg6>
-            <div></div>
             <v-card>
                 <v-card-text>
                     <v-text-field
@@ -85,7 +84,7 @@
                 <v-card-actions>
                     <v-btn flat>Anuluj</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" flat @click="submit">Zapisz</v-btn>
+                    <v-btn color="success" @click="submit">Zapisz</v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>

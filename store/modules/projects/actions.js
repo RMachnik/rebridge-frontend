@@ -12,6 +12,7 @@ export default {
                 return Promise.resolve()
             }).catch((error) => {
             let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało się projektu " + errorMessage, {root: true})
             return Promise.reject(errorMessage)
         });
     },
@@ -23,6 +24,7 @@ export default {
                 return Promise.resolve()
             }).catch((error) => {
             let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało się usunąc projektu" + errorMessage, {root: true})
             return Promise.reject(errorMessage)
         });
     },
@@ -45,17 +47,19 @@ export default {
             },
         ).catch((error) => {
             let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało się dodać inwestora " + errorMessage, {root: true})
             return Promise.reject(errorMessage)
         });
     },
     removeInvestor({commit, dispatch}, data) {
         return projectService.removeInvestor(data).then(
             () => {
-                commit(global.ADD_SUCCESS, "Usunięto", {root: true})
+                commit(global.ADD_SUCCESS, "Usunięto inwestora", {root: true})
                 return dispatch('loadDetails', data);
             },
         ).catch((error) => {
             let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało się usunąć investora " + errorMessage, {root: true})
             return Promise.reject(errorMessage)
         });
     },
@@ -74,11 +78,12 @@ export default {
         return projectService.updateDetails(data).then(
             (response) => {
                 commit(types.SET_PROJECT_DETAILS, response.data);
-                commit(global.ADD_SUCCESS, "Zmiemiono dane", {root: true})
+                commit(global.ADD_SUCCESS, "Zaktualizowane dane projektu.", {root: true})
                 return Promise.resolve()
             },
         ).catch((error) => {
             let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało zaktualizować projektu " + errorMessage, {root: true})
             return Promise.reject(errorMessage)
         });
     },
@@ -104,6 +109,7 @@ export default {
             },
         ).catch((error) => {
             let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało zaktualizować odpowiedzi " + errorMessage, {root: true})
             return Promise.reject(errorMessage)
         });
     },

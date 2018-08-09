@@ -1,18 +1,12 @@
 <template>
-    <div>
-        <add-project v-if="show"/>
-        <v-layout row wrap>
-            <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
-        </v-layout>
-        <v-alert
-                :value="true"
-                color="error"
-                icon="warning"
-                outline
-                v-if="error">
-            {{error}}
-        </v-alert>
-    </div>
+    <v-container fluid grid-list-md>
+        <v-card>
+            <add-project v-if="isArchitect"/>
+            <v-layout row wrap>
+                <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
+            </v-layout>
+        </v-card>
+    </v-container>
 </template>
 
 <script>
@@ -26,7 +20,7 @@
         computed: {
             ...mapState('projects', ['projects', 'error']),
             ...mapState('user', ['currentUser']),
-            show: function () {
+            isArchitect: function () {
                 if (this.currentUser) {
                     return this.currentUser.roles.includes('ARCHITECT');
                 }

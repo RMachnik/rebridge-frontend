@@ -1,16 +1,16 @@
 <template>
-    <v-list-tile-content>
-        <v-list-tile-title>{{question.id}}. {{question.question}}</v-list-tile-title>
-        <v-flex xs6>
-            <v-textarea
-                    outline
-                    name="input-7-4"
-                    label="Outline textarea"
-                    v-model="question.answer"
-                    :readonly="readonly"
-            ></v-textarea>
-        </v-flex>
-    </v-list-tile-content>
+    <v-card>
+        <v-card-title><h4>{{question.id}}. {{question.question}}</h4></v-card-title>
+        <v-card-text>
+                <v-textarea
+                        solo
+                        auto-grow
+                        label="odpowiedź"
+                        v-model="question.answer"
+                        :readonly="isArchitect"
+                ></v-textarea>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
@@ -30,7 +30,7 @@
         computed: {
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
-            readonly: function() {
+            isArchitect: function () {
                 if (this.currentUser) {
                     return this.currentUser.roles.includes('ARCHITECT');
                 }

@@ -1,5 +1,5 @@
 import {types} from './mutations';
-import {user} from '~/store/modules/user/mutations';
+import {userGlobal} from '~/store/modules/user/mutations';
 import authService from '~/assets/js/api/auth';
 import util from '~/assets/js/util/util';
 import Cookie from 'js-cookie';
@@ -21,9 +21,9 @@ export default {
             return dispatch('setTokenAndCookie', response.data.token);
         }).catch((error) => {
             let errorMessage = util.prettyLog(error);
-             return dispatch('removeTokenAndCookie').then(()=>{
-                 return Promise.reject(errorMessage)
-             });
+            return dispatch('removeTokenAndCookie').then(() => {
+                return Promise.reject(errorMessage)
+            });
         });
     },
     loginCheck({commit, dispatch}, token) {
@@ -37,6 +37,7 @@ export default {
     },
     logout({state, commit, dispatch}) {
         return authService.logout(state.token).then(() => {
+            commit(userGlobal.REMOVE_USER, "", {root: true})
             return dispatch('removeTokenAndCookie');
         }).catch(error => {
             util.prettyLog(error);
@@ -44,8 +45,7 @@ export default {
     },
     initAuth({commit, dispatch}, data) {
         if (data.cookie) {
-            let authCookie = data.cookie.split(';').
-                find(c => c.trim().startsWith('authToken='));
+            let authCookie = data.cookie.split(';').find(c => c.trim().startsWith('authToken='));
             if (authCookie) {
                 authCookie = authCookie.split('=')[1];
             }

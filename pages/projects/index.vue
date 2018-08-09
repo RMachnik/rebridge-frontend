@@ -1,7 +1,9 @@
 <template>
     <section class="container">
         <page-title title="Twoje Projekty"/>
-        <projects/>
+        <section id="projects">
+            <projects/>
+        </section>
     </section>
 </template>
 <script>

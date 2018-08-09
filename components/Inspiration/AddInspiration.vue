@@ -1,11 +1,11 @@
 <template>
-    <v-flex d-flex>
+    <v-flex flex-d>
         <form @submit.prevent="submit" novalidate>
             <v-card>
                 <v-card-title>
                     <v-text-field
-                            label="Email inwestora"
-                            v-model="formData.email"
+                            label="Nazwa"
+                            v-model="formData.name"
                             required
                     >
                     </v-text-field>
@@ -24,18 +24,23 @@
     import {mapActions, mapState} from 'vuex';
 
     export default {
-        name: 'AddInvestor',
+        name: 'AddInspiration',
         data: () => ({
-            formData: {email: ''},
+            formData: {
+                name: '',
+                description: '',
+                url: ''
+            },
         }),
         computed: {
             ...mapState('auth', ['token']),
+            ...mapState('projects', ['selectedProjectDetails']),
         },
         methods: {
-            ...mapActions('projects', ['addInvestor']),
+            ...mapActions('inspirations', ['add']),
             submit() {
-                let data = {token: this.token, projectId: this.projectId, data: this.formData};
-                this.addInvestor(data);
+                let data = {token: this.token, projectId: this.selectedProjectDetails.projectId, data: this.formData};
+                this.add(data);
             },
         },
     };

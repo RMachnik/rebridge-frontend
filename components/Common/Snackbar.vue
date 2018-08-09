@@ -13,10 +13,9 @@
                     flat
                     @click="close()"
             >
-                Close
+                Zamknij
             </v-btn>
         </v-snackbar>
-
         <v-snackbar v-if="failure"
                     v-model="failure"
                     :color="errorColor"
@@ -30,7 +29,7 @@
                     flat
                     @click="close()"
             >
-                Close
+                Zamknij
             </v-btn>
         </v-snackbar>
     </v-card>

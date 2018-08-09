@@ -26,4 +26,7 @@ export default {
             return Promise.reject(errorMessage)
         });
     },
+    clear({commit}){
+        commit(userTypes.REMOVE_USER)
+    }
 };

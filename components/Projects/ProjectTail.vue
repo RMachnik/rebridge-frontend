@@ -1,18 +1,25 @@
 <template>
-    <v-flex xs12 sm4 class="item pa-2">
+    <v-flex xs12 sm4>
         <v-card>
-            <v-card-media
-                    src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-                    height="200px"
+            <v-card-media class="clickable" @click="redirectToProject(project.id)"
+                          src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                          height="200px"
             ></v-card-media>
-
-            <v-card-title primary-title>
-                <div>
-                    <h3 class="headline mb-0">{{ project.name }}</h3>
-                    <div v-if="project.details">
-                        <div v-if="project.details.budget>0">Budżet: {{project.details.budget}} PLN</div>
-                        <div v-if="project.details.surface>0">Powierzchnia: {{project.details.surface}} m<sup>2</sup>
-                        </div>
+            <v-card-title class="clickable" @click="redirectToProject(project.id)">
+                <h3>{{ project.name }}</h3>
+            </v-card-title>
+            <v-card-actions class="justify-end">
+                <v-btn red flat @click="remove(project)" v-if="isArchitect">
+                    <v-icon red color="red">delete</v-icon>
+                </v-btn>
+                <v-btn icon v-if="hasDetails" @click="show = !show">
+                    <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                </v-btn>
+            </v-card-actions>
+            <v-slide-y-transition>
+                <v-card-text v-show="show">
+                    <div v-if="project.details.budget>0">Budżet: {{project.details.budget}} PLN</div>
+                    <div v-if="project.details.surface>0">Powierzchnia: {{project.details.surface}} m<sup>2</sup>
                         <div v-if="project.details.location">
                             <div v-if="project.details.location.streetName">Adres:
                                 {{project.details.location.streetName}},
@@ -20,13 +27,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </v-card-title>
-
-            <v-card-actions>
-                <v-btn flat color="orange" @click="redirectToProject(project.id)">Otwórz</v-btn>
-                <v-btn v-if="show" flat color="red" @click="remove(project)">delete</v-btn>
-            </v-card-actions>
+                </v-card-text>
+            </v-slide-y-transition>
         </v-card>
     </v-flex>
 </template>
@@ -42,24 +44,35 @@
                 required: true,
             },
         },
+        data: () => ({
+            show: false
+        }),
         computed: {
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
-            show: function () {
+            isArchitect: function () {
                 if (this.currentUser) {
                     return this.currentUser.roles.includes('ARCHITECT');
                 }
+            },
+            hasDetails: function () {
+                return (this.project.details.budget > 0 ||
+                    this.project.details.surface > 0 ||
+                    this.project.details.location.streetName ||
+                    this.project.details.location.city)
             }
         },
         methods: {
             ...mapActions('projects', ['loadDetails', 'delete', 'loadQuestionnaire']),
+            ...mapActions('inspirations', ['all']),
             redirectToProject(id) {
                 let data = {projectId: id, token: this.token};
-                this.loadDetails(data).then(
-                    () => this.loadQuestionnaire(data),
-                ).then(() => {
-                    this.$router.push('/projects/' + id);
-                }).catch((error) => {
+                this.loadDetails(data)
+                    .then(() => this.loadQuestionnaire(data))
+                    .then(() => this.all(data))
+                    .then(() => {
+                        this.$router.push('/projects/' + id);
+                    }).catch((error) => {
                 });
 
             },
@@ -68,9 +81,13 @@
                 this.delete(data);
             },
         },
-    };
+    }
+    ;
 </script>
 
 <style scoped>
-
+    .clickable:hover {
+        background: rgba(0, 0, 0, 0.04);
+        cursor: pointer;
+    }
 </style>

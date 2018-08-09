@@ -2,7 +2,7 @@
     <v-app>
         <Menu/>
         <v-content>
-            <v-container fluid fill-height>
+            <v-container>
                 <nuxt/>
             </v-container>
         </v-content>
