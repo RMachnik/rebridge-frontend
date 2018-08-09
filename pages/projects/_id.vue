@@ -1,5 +1,5 @@
 <template>
-    <section class="container" v-if="selected">
+    <section v-if="selected">
         <section id="header">
             <page-title :title="selected.name"/>
         </section>
@@ -25,8 +25,8 @@
                 return this.find(this.$route.params.id);
             },
         },
-        methods:{
-            return(){
+        methods: {
+            return() {
                 this.$router.go(-1)
             }
         }

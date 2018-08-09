@@ -1,20 +1,24 @@
 <template>
-    <v-flex flex-d>
+    <v-flex xs12 sm10 md8 lg>
         <form @submit.prevent="submit" novalidate>
             <v-card>
                 <v-card-title>
-                    <v-text-field
-                            label="Nazwa"
-                            v-model="formData.name"
-                            required
-                    >
-                    </v-text-field>
+                    <v-layout column wrap>
+                        <v-flex>
+                            <v-text-field
+                                    label="Nazwa"
+                                    v-model="formData.name"
+                                    required
+                            >
+                            </v-text-field>
+                        </v-flex>
+                        <v-flex>
+                            <v-btn color="success" type="submit">
+                                Dodaj
+                            </v-btn>
+                        </v-flex>
+                    </v-layout>
                 </v-card-title>
-                <v-card-actions>
-                    <v-btn color="success" type="submit">
-                        Dodaj
-                    </v-btn>
-                </v-card-actions>
             </v-card>
         </form>
     </v-flex>

@@ -1,16 +1,20 @@
 <template>
     <v-card>
         <v-card-title>
-            <v-chip>
-                {{investor.email}}
-            </v-chip>
-            <v-btn
-                    color="error"
-                    flat
-                    @click="remove()"
-            >
-                <v-icon>delete</v-icon>
-            </v-btn>
+            <v-layout row wrap>
+                <v-flex>
+                    <v-chip>
+                        {{investor.email}}
+                    </v-chip>
+                </v-flex>
+                <v-btn
+                        color="error"
+                        flat
+                        @click="remove()"
+                >
+                    <v-icon>delete</v-icon>
+                </v-btn>
+            </v-layout>
         </v-card-title>
         <v-card-text v-if="hasData">
             <div v-if="investor.name">{{investor.name}} {{investor.surname}}</div>
@@ -40,7 +44,11 @@
         methods: {
             ...mapActions('projects', ['removeInvestor']),
             remove() {
-                let data = {token: this.token, projectId: this.selectedProjectDetails.projectId, email: this.investor.email};
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                    email: this.investor.email
+                };
                 this.removeInvestor(data)
             }
         }

@@ -6,9 +6,6 @@
             </v-avatar>
             <v-list>
                 <v-list-tile>
-                    <v-list-tile-avatar>
-                        <img src="https://cdn.vuetifyjs.com/images/lists/1.jpg">
-                    </v-list-tile-avatar>
                     <v-list-tile-content>
                         <v-list-tile-title class="font-weight-bold">{{currentUser.email}}</v-list-tile-title>
                     </v-list-tile-content>

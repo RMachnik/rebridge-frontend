@@ -30,11 +30,12 @@
         }),
         computed: {
             ...mapState('auth', ['token']),
+            ...mapState('projects', ['selectedProjectDetails']),
         },
         methods: {
             ...mapActions('projects', ['addInvestor']),
             submit() {
-                let data = {token: this.token, projectId: this.projectId, data: this.formData};
+                let data = {token: this.token, projectId: this.selectedProjectDetails.projectId, data: this.formData};
                 this.addInvestor(data);
             },
         },

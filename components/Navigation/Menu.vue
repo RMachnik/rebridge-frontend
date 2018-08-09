@@ -2,8 +2,10 @@
     <div>
         <v-container>
             <v-toolbar color="cyan" dark fixed app>
-                <v-toolbar-title class="clickable">
-                    <a href="/projects">Rebridge</a>
+                <v-toolbar-title>
+                    <v-btn flat @click="home">
+                        Rebridge
+                    </v-btn>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-badge overlap>
@@ -38,6 +40,11 @@
                 ]
             )
         },
+        methods: {
+            home() {
+                this.$router.push('/')
+            }
+        }
     }
 </script>
 

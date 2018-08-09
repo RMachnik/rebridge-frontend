@@ -57,6 +57,6 @@
 <style scoped>
     .scrollable {
         overflow-y: scroll;
-        height: 215px;
+        height: 212px;
     }
 </style>
