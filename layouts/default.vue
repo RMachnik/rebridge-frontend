@@ -17,8 +17,8 @@
     import Snackbar from "~/components/Common/Snackbar";
 
     export default {
-        components: {Menu, Footer,Snackbar},
-        middleware: ['initAuth','route']
+        components: {Menu, Footer, Snackbar},
+        middleware: ['initAuth']
     }
 </script>
 

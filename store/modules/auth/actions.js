@@ -56,9 +56,11 @@ export default {
         commit(types.REMOVE_ERROR);
         commit(types.ADD_TOKEN, token);
         Cookie.set('authToken', token);
+        return Promise.resolve()
     },
     removeTokenAndCookie({commit}) {
         commit(types.REMOVE_TOKEN);
         Cookie.remove('authToken');
+        return Promise.resolve()
     },
 };

@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-snackbar v-if="success"
-                    v-model="success"
+                    :value="success"
                     :color="successColor"
                     :multi-line="mode === 'multi-line'"
                     :timeout="timeout"
@@ -17,7 +17,7 @@
             </v-btn>
         </v-snackbar>
         <v-snackbar v-if="failure"
-                    v-model="failure"
+                    :value="failure"
                     :color="errorColor"
                     :multi-line="mode === 'multi-line'"
                     :timeout="timeout"

@@ -41,6 +41,7 @@
                             <v-flex>
                                 <v-text-field
                                         v-model="selectedProjectDetails.budget"
+                                        type="number"
                                         label="Budżet projektu"
                                         :readonly="readonly"
                                         suffix="zł"
@@ -49,6 +50,7 @@
                             <v-flex d-flex>
                                 <v-text-field
                                         v-model="selectedProjectDetails.surface"
+                                        type="number"
                                         label="Powierzchnia"
                                         :readonly="readonly"
                                         suffix="m²"

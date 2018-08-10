@@ -10,28 +10,14 @@
                 <v-btn icon @click="show = !show">
                     <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
                 </v-btn>
+                <v-btn flat @click="remove">
+                    <v-icon>delete</v-icon>
+                </v-btn>
             </v-card-title>
             <v-slide-y-transition>
                 <div v-show="show">
                     <v-card-actions>
-                        <v-layout column wrap>
-                            <v-flex>
-                                <v-textarea
-                                        solo
-                                        auto-grow
-                                        label="Komentarz"
-                                        v-model="comment"
-                                        required
-                                >
-                                </v-textarea>
-                            </v-flex>
-                            <v-spacer></v-spacer>
-                            <v-flex>
-                                <v-btn @click="add" color="success">
-                                    Dodaj
-                                </v-btn>
-                            </v-flex>
-                        </v-layout>
+                        <add-comment :inspiration="inspiration"></add-comment>
                     </v-card-actions>
                     <v-card-text>
                         <v-spacer></v-spacer>
@@ -42,6 +28,7 @@
                                             class="scrollable">
                                         <comment v-for="(comment,index) in inspiration.details.comments"
                                                  :comment="comment"
+                                                 :inspiration-id="inspiration.id"
                                                  :key="index"></comment>
                                     </v-list>
                                 </v-card>
@@ -55,12 +42,13 @@
 </template>
 
 <script>
-    import Comment from './Comment'
     import {mapActions, mapState} from 'vuex'
+    import Comment from './Comment'
+    import AddComment from "./AddComment"
 
     export default {
         name: 'Inspiration',
-        components: {Comment},
+        components: {AddComment, Comment},
         props: {
             inspiration: {
                 type: Object,
@@ -73,20 +61,17 @@
         }),
         computed: {
             ...mapState('auth', ['token']),
-            ...mapState('projects', ['selectedProjectDetails'])
+            ...mapState('projects', ['selectedProjectDetails']),
         },
         methods: {
-            ...mapActions('inspirations', ['addComment']),
-            add() {
+            ...mapActions('inspirations', ['delete']),
+            remove() {
                 let data = {
                     token: this.token,
-                    inspirationId: this.inspiration.id,
                     projectId: this.selectedProjectDetails.projectId,
-                    data: {
-                        content: this.comment
-                    }
+                    inspirationId: this.inspiration.id
                 }
-                this.addComment(data);
+                this.delete(data)
             }
         }
     }
