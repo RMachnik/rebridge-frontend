@@ -7,7 +7,7 @@
                 <v-list-tile-sub-title>{{ comment.creationDate }}</v-list-tile-sub-title>
             </v-list-tile-content>
             <v-list-tile-action>
-                <v-btn flat small @click="remove">
+                <v-btn v-if="canDelete" flat small @click="remove">
                     <v-icon small>delete</v-icon>
                 </v-btn>
             </v-list-tile-action>
@@ -34,6 +34,10 @@
         computed: {
             ...mapState('projects', ['selectedProjectDetails']),
             ...mapState('auth', ['token']),
+            ...mapState('user', ['currentUser']),
+            canDelete: function () {
+                return this.comment.author === this.currentUser.email
+            }
         },
         methods: {
             ...mapActions('inspirations', ['deleteComment']),

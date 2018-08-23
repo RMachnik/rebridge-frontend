@@ -82,7 +82,7 @@
                 </v-card-text>
                 <v-divider class="mt-2"></v-divider>
                 <v-card-actions>
-                    <v-btn flat>Anuluj</v-btn>
+                    <v-btn flat @click="back">Anuluj</v-btn>
                     <v-spacer></v-spacer>
                     <v-btn color="success" @click="submit">Zapisz</v-btn>
                 </v-card-actions>
@@ -132,6 +132,9 @@
                     (ex) => this.error = ex
                 );
             },
+            back(){
+                this.$router.go(-1)
+            }
         },
     };
 </script>

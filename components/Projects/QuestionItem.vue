@@ -2,6 +2,15 @@
     <v-card>
         <v-card-title><h4>{{question.id}}. {{question.question}}</h4></v-card-title>
         <v-card-text>
+            <div v-if="isArchitect">
+                <div v-if="question.answer">
+                    {{question.answer}}
+                </div>
+                <div v-else>
+                    ...
+                </div>
+            </div>
+            <div v-else>
                 <v-textarea
                         solo
                         auto-grow
@@ -9,6 +18,7 @@
                         v-model="question.answer"
                         :readonly="isArchitect"
                 ></v-textarea>
+            </div>
         </v-card-text>
     </v-card>
 </template>

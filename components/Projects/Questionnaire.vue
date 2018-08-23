@@ -10,9 +10,8 @@
             <v-slide-y-transition>
                 <v-card-text v-show="show">
                     <question-item v-for="(question,index) in this.questions" :question="question" :key="index"/>
-                    <v-card-actions>
+                    <v-card-actions v-if="!isArchitect">
                         <v-btn
-                                v-if="notArchitect"
                                 color="success"
                                 @click.native="dialog = false"
                                 @click="save()">
@@ -45,8 +44,8 @@
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
             ...mapState('projects', ['questions']),
-            notArchitect: function () {
-                return !this.currentUser.roles.includes('ARCHITECT');
+            isArchitect: function () {
+                return this.currentUser.roles.includes('ARCHITECT');
             }
         },
         methods: {

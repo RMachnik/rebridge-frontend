@@ -19,7 +19,12 @@
                     </v-list-tile-content>
                 </v-list-tile>
                 <v-list-tile>
-                    <v-list-tile-title class="clickable" @click="redirectToProfile()">Profil</v-list-tile-title>
+                    <v-list-tile-title class="clickable" @click="redirectToProfile()">Profil
+                    </v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile v-show="isArchitect">
+                    <v-list-tile-title class="clickable" @click="questionnaireTemplates()">Kwestionariusz
+                    </v-list-tile-title>
                 </v-list-tile>
                 <v-list-tile>
                     <v-list-tile-title class="clickable red--text" color="cyan" @click="logoutAndRedirect">Wyloguj
@@ -40,7 +45,10 @@
                 'user', [
                     'currentUser'
                 ]
-            )
+            ),
+            isArchitect: function () {
+                return this.currentUser.roles.includes('ARCHITECT');
+            }
         },
         methods: {
             ...mapActions('auth', [
@@ -55,6 +63,9 @@
             },
             redirectToProfile() {
                 this.$router.push('/profile')
+            },
+            questionnaireTemplates() {
+                this.$router.push('/questionnaire')
             }
         }
     }

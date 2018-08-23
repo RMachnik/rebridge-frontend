@@ -2,7 +2,7 @@ export default function (context) {
     if (process.server) {
         context.store.dispatch('auth/initAuth', context.req.headers).then(() => handleRouting(context));
     } else {
-        handleRouting(context);
+        context.store.dispatch('auth/loginCheck', context.store.state.auth.token).then(() => handleRouting(context))
     }
 }
 
