@@ -2,7 +2,7 @@
     <v-flex xs12 sm4>
         <v-card>
             <v-card-media
-                    src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                    :src="image"
                     height="200px"
             ></v-card-media>
             <v-card-title primary-title>
@@ -18,6 +18,8 @@
                 <div v-show="show">
                     <v-card-actions>
                         <add-comment :inspiration="inspiration"></add-comment>
+                        <v-spacer></v-spacer>
+                        <dropzone :options="options" :destroyDropzone="true"></dropzone>
                     </v-card-actions>
                     <v-card-text>
                         <v-spacer></v-spacer>
@@ -42,13 +44,19 @@
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex'
+    import {mapActions, mapGetters, mapState} from 'vuex'
     import Comment from './Comment'
     import AddComment from "./AddComment"
+    import Dropzone from 'nuxt-dropzone'
+    import 'nuxt-dropzone/dropzone.css'
 
     export default {
         name: 'Inspiration',
-        components: {AddComment, Comment},
+        components: {
+            AddComment,
+            Comment,
+            Dropzone
+        },
         props: {
             inspiration: {
                 type: Object,
@@ -62,6 +70,21 @@
         computed: {
             ...mapState('auth', ['token']),
             ...mapState('projects', ['selectedProjectDetails']),
+            ...mapGetters('inspirations', ['dropzoneOptions', 'imageUrl']),
+            options: function () {
+                let data = {
+                    projectId: this.selectedProjectDetails.projectId,
+                    inspirationId: this.inspiration.id,
+                    token: this.token
+                }
+
+                let dropzoneOptions = this.dropzoneOptions(data);
+                console.log(dropzoneOptions)
+                return dropzoneOptions
+            },
+            image: function () {
+                return this.imageUrl(this.inspiration.id)
+            },
         },
         methods: {
             ...mapActions('inspirations', ['delete']),

@@ -39,7 +39,9 @@ export default {
             thumbnailWidth: 150,
             maxFilesize: 0.5,
             headers: {"Authorization": "Bearer " + data.token},
-            paramName: "uploadedFile"
+            paramName: "uploadedFile",
+            dictDefaultMessage: "Dodaj zdjęcie",
+            acceptedFiles:"image/*",
         }
     }
 };

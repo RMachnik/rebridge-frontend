@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <dropzone id="foo" ref="el" :options="options" :destroyDropzone="true"></dropzone>
+                    <dropzone :options="options" :destroyDropzone="true"></dropzone>
                 </v-card-text>
             </v-slide-y-transition>
         </v-card>

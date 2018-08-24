@@ -19,8 +19,10 @@ export default {
             url: `${BASE_URL}/projects/` + data.projectId + "/inspirations/" + data.inspirationId + "/image",
             thumbnailWidth: 150,
             maxFilesize: 0.5,
+            acceptedFiles:"image/*",
             headers: {"Authorization": "Bearer " + data.token},
-            paramName: "uploadedFile"
+            paramName: "uploadedFile",
+            dictDefaultMessage: "Dodaj zdjęcie"
         }
     }
 };
