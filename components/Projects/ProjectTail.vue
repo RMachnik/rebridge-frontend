@@ -2,7 +2,7 @@
     <v-flex xs12 sm4>
         <v-card>
             <v-card-media class="clickable" @click="redirectToProject(project.id)"
-                          src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                          :src="image"
                           height="200px"
             ></v-card-media>
             <v-card-title class="clickable" @click="redirectToProject(project.id)">
@@ -27,6 +27,7 @@
                             </div>
                         </div>
                     </div>
+                    <dropzone id="foo" ref="el" :options="options" :destroyDropzone="true"></dropzone>
                 </v-card-text>
             </v-slide-y-transition>
         </v-card>
@@ -34,10 +35,15 @@
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex';
+    import {mapActions, mapGetters, mapState} from 'vuex';
+    import Dropzone from 'nuxt-dropzone'
+    import 'nuxt-dropzone/dropzone.css'
 
     export default {
         name: 'ProjectTail',
+        components: {
+            Dropzone
+        },
         props: {
             project: {
                 type: Object,
@@ -50,6 +56,20 @@
         computed: {
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
+            ...mapGetters('projects', ['dropzoneOptions', 'imageUrl']),
+            options: function () {
+                let data = {
+                    projectId: this.project.id,
+                    token: this.token
+                }
+
+                let dropzoneOptions = this.dropzoneOptions(data);
+                console.log(dropzoneOptions)
+                return dropzoneOptions
+            },
+            image: function () {
+                return this.imageUrl(this.project.id)
+            },
             isArchitect: function () {
                 if (this.currentUser) {
                     return this.currentUser.roles.includes('ARCHITECT');

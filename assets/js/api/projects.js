@@ -32,5 +32,14 @@ export default {
     },
     answer(data) {
         return axios.post(`${BASE_URL}/projects/` + data.projectId + '/questionnaire', data.data, config(data.token))
+    },
+    dropzoneOptions(data) {
+        return {
+            url: `${BASE_URL}/projects/` + data.projectId + "/image",
+            thumbnailWidth: 150,
+            maxFilesize: 0.5,
+            headers: {"Authorization": "Bearer " + data.token},
+            paramName: "uploadedFile"
+        }
     }
 };

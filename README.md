@@ -8,6 +8,9 @@
 # install dependencies
 $ npm install # Or yarn install
 
+# required for dropzone to work
+$ npm i --save nuxt-dropzone 
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 

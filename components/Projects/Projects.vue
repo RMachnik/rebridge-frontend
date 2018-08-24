@@ -14,17 +14,18 @@
     import ProjectTail from './ProjectTail';
     import {mapState} from 'vuex';
 
+
     export default {
         name: 'Projects',
         components: {ProjectTail, AddProject},
         computed: {
-            ...mapState('projects', ['projects', 'error']),
+            ...mapState('projects', ['projects']),
             ...mapState('user', ['currentUser']),
             isArchitect: function () {
                 if (this.currentUser) {
                     return this.currentUser.roles.includes('ARCHITECT');
                 }
-            }
+            },
         },
     };
 </script>
