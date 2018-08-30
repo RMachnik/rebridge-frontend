@@ -1,6 +1,6 @@
 <template>
-    <v-layout column wrap>
-        <v-flex>
+    <v-layout row wrap>
+        <v-flex flex-d>
             <v-text-field
                     solo
                     label="Komentarz"
@@ -9,8 +9,7 @@
             >
             </v-text-field>
         </v-flex>
-        <v-spacer></v-spacer>
-        <v-flex>
+        <v-flex flex-d>
             <v-btn @click="add" color="success">
                 Dodaj
             </v-btn>
@@ -47,7 +46,7 @@
                         content: this.comment
                     }
                 }
-                this.addComment(data);
+                this.addComment(data).then(() => this.comment = '');
             }
         }
     }

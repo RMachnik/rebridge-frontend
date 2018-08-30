@@ -1,6 +1,9 @@
 <template>
     <v-form v-if="selectedProjectDetails">
         <v-card>
+            <v-card-title>
+                O projekcie
+            </v-card-title>
             <v-card-text>
                 <v-layout row wrap>
                     <v-flex d-flex>

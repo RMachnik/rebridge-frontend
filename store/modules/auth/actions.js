@@ -53,7 +53,6 @@ export default {
         }
     },
     setTokenAndCookie({commit, state}, token) {
-        commit(types.REMOVE_ERROR);
         commit(types.ADD_TOKEN, token);
         Cookie.set('authToken', token);
         return Promise.resolve()

@@ -22,7 +22,6 @@
                         <dropzone :options="options" :destroyDropzone="true"></dropzone>
                     </v-card-actions>
                     <v-card-text>
-                        <add-comment :inspiration="inspiration"></add-comment>
                         <v-spacer></v-spacer>
                         <v-layout row>
                             <v-flex flex-d>
@@ -30,6 +29,7 @@
                                     <div v-if="inspiration.details.comments.length>0" class="scrollable">
                                         <comments :comments="inspiration.details.comments" :inspirationId="inspiration.id"/>
                                     </div>
+                                    <add-comment :inspiration="inspiration"></add-comment>
                                 </v-card>
                             </v-flex>
                         </v-layout>

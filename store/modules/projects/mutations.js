@@ -6,8 +6,8 @@ export const types = {
     REMOVE_PROJECT_DETAILS: 'REMOVE_PROJECT_DETAILS',
     SET_QUESTIONS: 'SET_QUESTIONS',
     REMOVE_QUESTIONS: 'REMOVE_QUESTIONS',
-    ADD_ERROR: 'ADD_ERROR',
-    REMOVE_ERROR: 'REMOVE_ERROR',
+    SET_CHAT: 'SET_CHAT',
+    REMOVE_CHAT: 'REMOVE_CHAT'
 };
 
 export const mutations = {
@@ -35,10 +35,10 @@ export const mutations = {
     [types.REMOVE_QUESTIONS](state) {
         state.questions = null;
     },
-    [types.ADD_ERROR](state, error) {
-        state.error = error;
+    [types.SET_CHAT](state, chat) {
+        state.chat = chat;
     },
-    [types.REMOVE_ERROR](state) {
-        state.error = null;
-    },
+    [types.REMOVE_CHAT](state) {
+        state.chat = null;
+    }
 };

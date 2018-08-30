@@ -11,7 +11,7 @@
             <v-card>
                 <v-card-text class="grey lighten-3">
                     <div v-for="(question,index) in template.questions" :question="question" :key="index">
-                        {{index}}. {{question}}
+                        {{index +1}}. {{question}}
                     </div>
                 </v-card-text>
                 <v-card-actions>

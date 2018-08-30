@@ -10,7 +10,7 @@
                                 label="Nazwa szablonu"
                         ></v-text-field>
                         <v-btn color="success" @click="addQuestion">
-                            <v-icon>add</v-icon>
+                            Dodaj kolejne pytanie
                         </v-btn>
                     </v-flex>
                 </v-layout>
@@ -27,7 +27,7 @@
             <v-card-actions>
                 <v-flex d-flex>
                     <v-btn @click="submit()" color="success">
-                        Dodaj
+                        Zapisz
                     </v-btn>
                 </v-flex>
             </v-card-actions>

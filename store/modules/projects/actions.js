@@ -2,6 +2,7 @@ import {types} from './mutations';
 import {global} from '../global/mutations';
 import util from '~/assets/js/util/util';
 import projectService from '~/assets/js/api/projects';
+import chatService from '~/assets/js/api/chat';
 
 export default {
     add({state, commit}, data) {
@@ -95,7 +96,7 @@ export default {
             },
         ).catch((error) => {
                 let errorMessage = util.prettyLog(error);
-                commit(types.ADD_ERROR, errorMessage);
+                commit(global.ADD_FAILURE, "Nie udało załadować kwestionariusza " + errorMessage, {root: true})
                 return Promise.reject(errorMessage)
             },
         );
@@ -113,4 +114,27 @@ export default {
             return Promise.reject(errorMessage)
         });
     },
+    loadChat({commit}, data) {
+        return chatService.all(data).then(
+            (response) => {
+                commit(types.SET_CHAT, response.data);
+                return Promise.resolve()
+            }
+        ).catch((error) => {
+            let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało się załatować wiadomości " + errorMessage, {root: true})
+            return Promise.reject(errorMessage)
+        })
+    },
+    sendChatMessage({commit, dispatch}, data) {
+        return chatService.send(data).then(
+            (response) => {
+                return dispatch('loadChat', data)
+            }
+        ).catch((error) => {
+            let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało się wysłać wiadomości " + errorMessage, {root: true})
+            return Promise.reject(errorMessage)
+        })
+    }
 };

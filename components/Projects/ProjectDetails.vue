@@ -7,7 +7,7 @@
                         <details-form :selectedProject="selectedProject"/>
                     </v-flex>
                     <v-flex d-flex>
-                        <chat/>
+                        <chat></chat>
                     </v-flex>
                 </v-layout>
                 <v-layout align-start justify-start row wrap>

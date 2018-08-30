@@ -5,15 +5,20 @@
                 :key="i"
                 expand-icon="mdi-menu-down"
         >
-            <div slot="header">{{comment.author}}, {{comment.creationDate}}</div>
+            <div slot="header">
+                <v-chip v-if=canDelete(comment)>Ty:</v-chip>
+                <v-chip v-else>{{comment.author.split("@")[0]}}:</v-chip>
+                {{comment.content}}
+            </div>
             <v-card>
                 <v-card-text class="grey lighten-3">
                     {{comment.content}}
-                </v-card-text>
-                <v-card-actions>
                     <v-btn v-if="canDelete(comment)" flat color="red" small @click="remove(comment.id)">
                         <v-icon small>delete</v-icon>
                     </v-btn>
+                </v-card-text>
+                <v-card-actions>
+
                 </v-card-actions>
             </v-card>
         </v-expansion-panel-content>
@@ -34,7 +39,7 @@
                 type: String,
                 required: true
             },
-            panel:[false, true, true]
+            panel: [true, true, true]
         },
         computed: {
             ...mapState('projects', ['selectedProjectDetails']),
