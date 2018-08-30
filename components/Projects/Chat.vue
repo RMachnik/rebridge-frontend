@@ -1,14 +1,19 @@
 <template>
     <v-card>
         <v-card-title>
-            Czat
+            <h3>Czat</h3>
         </v-card-title>
         <v-card-text class="scrollable">
             <v-list v-for="(message,index) in chat.messages" :message="message" :key="index">
-                <v-list-tile>
+                <v-list-tile
+                        avatar
+                >
+                    <v-list-tile-avatar>
+                        <v-chip small>{{message.author.split("@")[0]}}</v-chip>
+                    </v-list-tile-avatar>
                     <v-list-tile-content>
                         <v-list-tile-sub-title>
-                            {{message.author}}: {{message.creationDate}}
+                            {{message.creationDate}}
                         </v-list-tile-sub-title>
                         {{message.content}}
                     </v-list-tile-content>
@@ -74,6 +79,6 @@
 <style scoped>
     .scrollable {
         overflow-y: scroll;
-        height: 323px;
+        height: 330px;
     }
 </style>

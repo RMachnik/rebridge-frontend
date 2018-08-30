@@ -4,6 +4,7 @@ import auth from './auth/state'
 import user from './user/state'
 import projects from './projects/state'
 import questionnaire from './questionnaire/state'
+import events from './events/state'
 
 export default {
     global,
@@ -11,6 +12,7 @@ export default {
     auth,
     user,
     projects,
-    questionnaire
+    questionnaire,
+    events
     // @todo put others modules
 }

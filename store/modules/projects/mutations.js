@@ -36,6 +36,7 @@ export const mutations = {
         state.questions = null;
     },
     [types.SET_CHAT](state, chat) {
+        chat.messages.reverse()
         state.chat = chat;
     },
     [types.REMOVE_CHAT](state) {

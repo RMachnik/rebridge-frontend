@@ -5,8 +5,19 @@
                     :src="image"
                     height="500px"
             ></v-card-media>
-            <v-card-title primary-title>
-                <h3 class="headline mb-0">{{ inspiration.name }}</h3>
+            <v-card-title>
+                <span class="headline">{{inspiration.name}}</span>
+                <v-rating
+                        v-model="inspiration.details.rating"
+                        color="yellow darken-3"
+                        background-color="grey darken-1"
+                        empty-icon="$vuetify.icons.ratingFull"
+                        half-increments
+                        hover
+                ></v-rating>
+                <span class="grey--text text--lighten-2 caption mr-2">
+                      ({{ inspiration.details.rating }})
+                </span>
             </v-card-title>
             <v-card-actions class="justify-end">
                 <v-btn flat color="red" @click="remove">
@@ -19,7 +30,7 @@
             <v-slide-y-transition>
                 <div v-show="show">
                     <v-card-actions>
-                        <dropzone :options="options" :destroyDropzone="true"></dropzone>
+                        <dropzone id="inspiration" :options="options" :destroyDropzone="true"></dropzone>
                     </v-card-actions>
                     <v-card-text>
                         <v-spacer></v-spacer>
@@ -27,7 +38,8 @@
                             <v-flex flex-d>
                                 <v-card>
                                     <div v-if="inspiration.details.comments.length>0" class="scrollable">
-                                        <comments :comments="inspiration.details.comments" :inspirationId="inspiration.id"/>
+                                        <comments :comments="inspiration.details.comments"
+                                                  :inspirationId="inspiration.id"/>
                                     </div>
                                     <add-comment :inspiration="inspiration"></add-comment>
                                 </v-card>
@@ -46,13 +58,15 @@
     import AddComment from "./AddComment"
     import Dropzone from 'nuxt-dropzone'
     import 'nuxt-dropzone/dropzone.css'
+    import Rating from 'v-rating'
 
     export default {
         name: 'Inspiration',
         components: {
             AddComment,
             Comments,
-            Dropzone
+            Dropzone,
+            Rating
         },
         props: {
             inspiration: {
@@ -62,7 +76,8 @@
         },
         data: () => ({
             comment: '',
-            show: false
+            show: false,
+            myRating: 4.5
         }),
         computed: {
             ...mapState('auth', ['token']),

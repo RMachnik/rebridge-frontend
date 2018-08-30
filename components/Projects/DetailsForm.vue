@@ -2,7 +2,7 @@
     <v-form v-if="selectedProjectDetails">
         <v-card>
             <v-card-title>
-                O projekcie
+                <h3>Dane o projekcie</h3>
             </v-card-title>
             <v-card-text>
                 <v-layout row wrap>

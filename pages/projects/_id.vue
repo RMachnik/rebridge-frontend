@@ -19,6 +19,9 @@
             ProjectDetails,
             PageTitle,
         },
+        data: () => ({
+            rating: 4
+        }),
         computed: {
             ...mapGetters('projects', ['find']),
             selected: function () {
