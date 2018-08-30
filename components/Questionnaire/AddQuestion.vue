@@ -58,7 +58,12 @@
                     data: this.questionnaire
                 };
                 console.log(this.questionnaire)
-                this.add(data);
+                this.add(data).then(
+                    () => {
+                        this.questionnaire.name = ''
+                        this.questionnaire.questions = []
+                    }
+                )
             },
             addQuestion() {
                 this.questionnaire.questions.push('')

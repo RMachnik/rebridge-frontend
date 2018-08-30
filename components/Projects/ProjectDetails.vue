@@ -7,7 +7,16 @@
                         <details-form :selectedProject="selectedProject"/>
                     </v-flex>
                     <v-flex d-flex>
-                        <investor :selectedProject="selectedProject"/>
+                        <chat/>
+                    </v-flex>
+                </v-layout>
+                <v-layout align-start justify-start row wrap>
+                    <v-flex d-flex>
+                        <v-layout column wrap>
+                            <v-flex d-flex>
+                                <investor :selectedProject="selectedProject"/>
+                            </v-flex>
+                        </v-layout>
                     </v-flex>
                 </v-layout>
                 <v-layout align-start justify-start row wrap>
@@ -34,6 +43,7 @@
     import DetailsForm from './DetailsForm'
     import Questionnaire from './Questionnaire';
     import Investor from './Investor';
+    import Chat from './Chat';
     import Inspirations from "../Inspiration/Inspirations";
 
     export default {
@@ -43,6 +53,7 @@
             Questionnaire,
             DetailsForm,
             Investor,
+            Chat,
         },
         props: {
             selectedProject: {

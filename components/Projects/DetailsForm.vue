@@ -56,6 +56,9 @@
                                         suffix="m²"
                                 ></v-text-field>
                             </v-flex>
+                            <v-flex d-flex>
+                                <dropzone :options="options" :destroyDropzone="true"></dropzone>
+                            </v-flex>
                         </v-layout>
                     </v-flex>
                 </v-layout>
@@ -71,10 +74,13 @@
     </v-form>
 </template>
 <script>
-    import {mapActions, mapState} from 'vuex';
+    import {mapActions, mapState,mapGetters} from 'vuex';
+    import Dropzone from 'nuxt-dropzone'
+    import 'nuxt-dropzone/dropzone.css'
 
     export default {
         name: 'ProjectDetails',
+        components: {Dropzone},
         props: {
             selectedProject: {
                 type: Object,
@@ -89,10 +95,21 @@
             ...mapState('projects', ['selectedProjectDetails', 'questionnaire']),
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
+            ...mapGetters('projects', ['dropzoneOptions', 'imageUrl']),
             readonly: function () {
                 if (this.currentUser) {
                     return !this.currentUser.roles.includes('ARCHITECT');
                 }
+            },
+            options: function () {
+                let data = {
+                    projectId: this.selectedProject.id,
+                    token: this.token
+                }
+
+                let dropzoneOptions = this.dropzoneOptions(data);
+                console.log(dropzoneOptions)
+                return dropzoneOptions
             },
         },
         methods: {

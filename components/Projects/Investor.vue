@@ -3,14 +3,24 @@
         <v-flex d-flex>
             <section id="investors" v-if="!readonly">
                 <v-card>
-                    <v-card-actions>
-                        <add-investor></add-investor>
-                    </v-card-actions>
-                    <v-card-text class="scrollable">
-                        <contact-details
-                                v-for="(investor,index) in selectedProjectDetails.investors"
-                                :investor="investor" :projectId="selectedProject.id" :key="index"/>
-                    </v-card-text>
+                    <v-card-title>
+                        <h3>Inwestorzy</h3>
+                        <v-btn icon @click="show = !show">
+                            <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                        </v-btn>
+                    </v-card-title>
+                    <v-slide-y-transition>
+                        <div v-show="show">
+                            <v-card-actions>
+                                <add-investor></add-investor>
+                            </v-card-actions>
+                            <v-card-text >
+                                <contact-details
+                                        v-for="(investor,index) in selectedProjectDetails.investors"
+                                        :investor="investor" :projectId="selectedProject.id" :key="index"/>
+                            </v-card-text>
+                        </div>
+                    </v-slide-y-transition>
                 </v-card>
             </section>
         </v-flex>
@@ -25,7 +35,7 @@
     import ContactDetails from './ContactDetails';
 
     export default {
-        name: 'ProjectDetails',
+        name: 'Investor',
         components: {
             ContactDetails,
             Questionnaire,
@@ -40,6 +50,7 @@
         },
         data: () => ({
             selectedInvestor: null,
+            show: false
         }),
 
         computed: {

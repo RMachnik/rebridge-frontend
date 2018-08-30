@@ -7,6 +7,8 @@
                         {{investor.email}}
                     </v-chip>
                 </v-flex>
+                <div class="v-subheader" v-if="investor.name">{{investor.name}} {{investor.surname}}</div>
+                <div class="v-subheader" v-if="investor.phone"> {{investor.phone}}</div>
                 <v-btn
                         color="error"
                         flat
@@ -16,10 +18,6 @@
                 </v-btn>
             </v-layout>
         </v-card-title>
-        <v-card-text v-if="hasData">
-            <div v-if="investor.name">{{investor.name}} {{investor.surname}}</div>
-            <div v-if="investor.phone">{{investor.phone}}</div>
-        </v-card-text>
     </v-card>
 </template>
 

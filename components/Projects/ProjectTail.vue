@@ -22,12 +22,11 @@
                     <div v-if="project.details.surface>0">Powierzchnia: {{project.details.surface}} m<sup>2</sup>
                         <div v-if="project.details.location">
                             <div v-if="project.details.location.streetName">Adres:
-                                {{project.details.location.streetName}},
+                                {{project.details.location.streetName}} {{project.details.location.number}},
                                 {{project.details.location.city}}
                             </div>
                         </div>
                     </div>
-                    <dropzone :options="options" :destroyDropzone="true"></dropzone>
                 </v-card-text>
             </v-slide-y-transition>
         </v-card>
@@ -36,14 +35,9 @@
 
 <script>
     import {mapActions, mapGetters, mapState} from 'vuex';
-    import Dropzone from 'nuxt-dropzone'
-    import 'nuxt-dropzone/dropzone.css'
 
     export default {
         name: 'ProjectTail',
-        components: {
-            Dropzone
-        },
         props: {
             project: {
                 type: Object,
@@ -56,17 +50,7 @@
         computed: {
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
-            ...mapGetters('projects', ['dropzoneOptions', 'imageUrl']),
-            options: function () {
-                let data = {
-                    projectId: this.project.id,
-                    token: this.token
-                }
-
-                let dropzoneOptions = this.dropzoneOptions(data);
-                console.log(dropzoneOptions)
-                return dropzoneOptions
-            },
+            ...mapGetters('projects', ['imageUrl']),
             image: function () {
                 return this.imageUrl(this.project.id)
             },

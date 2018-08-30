@@ -13,7 +13,6 @@
                     <v-card-actions v-if="!isArchitect">
                         <v-btn
                                 color="success"
-                                @click.native="dialog = false"
                                 @click="save()">
                             Zapisz
                         </v-btn>
@@ -37,7 +36,6 @@
             projectId: {type: String, required: true},
         },
         data: () => ({
-            dialog: false,
             show: false
         }),
         computed: {
@@ -52,7 +50,7 @@
             ...mapActions('projects', ['loadDetails', 'delete', 'answer']),
             save() {
                 let data = {projectId: this.projectId, token: this.token, data: {answers: this.questions}};
-                this.answer(data).then(() => this.dialog = false);
+                this.answer(data);
             },
         },
     };

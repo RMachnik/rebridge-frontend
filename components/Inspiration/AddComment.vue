@@ -1,14 +1,13 @@
 <template>
     <v-layout column wrap>
         <v-flex>
-            <v-textarea
+            <v-text-field
                     solo
-                    auto-grow
                     label="Komentarz"
                     v-model="comment"
                     required
             >
-            </v-textarea>
+            </v-text-field>
         </v-flex>
         <v-spacer></v-spacer>
         <v-flex>

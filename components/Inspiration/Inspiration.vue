@@ -3,36 +3,33 @@
         <v-card>
             <v-card-media
                     :src="image"
-                    height="200px"
+                    height="500px"
             ></v-card-media>
             <v-card-title primary-title>
                 <h3 class="headline mb-0">{{ inspiration.name }}</h3>
+            </v-card-title>
+            <v-card-actions class="justify-end">
+                <v-btn flat color="red" @click="remove">
+                    <v-icon>delete</v-icon>
+                </v-btn>
                 <v-btn icon @click="show = !show">
                     <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
                 </v-btn>
-                <v-btn flat @click="remove">
-                    <v-icon>delete</v-icon>
-                </v-btn>
-            </v-card-title>
+            </v-card-actions>
             <v-slide-y-transition>
                 <div v-show="show">
                     <v-card-actions>
-                        <add-comment :inspiration="inspiration"></add-comment>
-                        <v-spacer></v-spacer>
                         <dropzone :options="options" :destroyDropzone="true"></dropzone>
                     </v-card-actions>
                     <v-card-text>
+                        <add-comment :inspiration="inspiration"></add-comment>
                         <v-spacer></v-spacer>
                         <v-layout row>
                             <v-flex flex-d>
                                 <v-card>
-                                    <v-list two-line v-if="inspiration.details.comments.length>0"
-                                            class="scrollable">
-                                        <comment v-for="(comment,index) in inspiration.details.comments"
-                                                 :comment="comment"
-                                                 :inspiration-id="inspiration.id"
-                                                 :key="index"></comment>
-                                    </v-list>
+                                    <div v-if="inspiration.details.comments.length>0" class="scrollable">
+                                        <comments :comments="inspiration.details.comments" :inspirationId="inspiration.id"/>
+                                    </div>
                                 </v-card>
                             </v-flex>
                         </v-layout>
@@ -45,7 +42,7 @@
 
 <script>
     import {mapActions, mapGetters, mapState} from 'vuex'
-    import Comment from './Comment'
+    import Comments from './Comments'
     import AddComment from "./AddComment"
     import Dropzone from 'nuxt-dropzone'
     import 'nuxt-dropzone/dropzone.css'
@@ -54,7 +51,7 @@
         name: 'Inspiration',
         components: {
             AddComment,
-            Comment,
+            Comments,
             Dropzone
         },
         props: {
