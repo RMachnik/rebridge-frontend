@@ -4,7 +4,7 @@ import util from '~/assets/js/util/util';
 
 export default {
     load({commit}, token) {
-        return eventsService.all(data).then((response) => {
+        return eventsService.all(token).then((response) => {
             commit(types.SET_EVENTS, response.data);
             return Promise.resolve()
         }).catch((error) => {

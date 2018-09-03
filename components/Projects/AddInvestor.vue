@@ -1,5 +1,4 @@
 <template>
-    <v-flex d-flex>
         <form @submit.prevent="submit" novalidate>
             <v-card>
                 <v-card-title>
@@ -17,7 +16,6 @@
                 </v-card-actions>
             </v-card>
         </form>
-    </v-flex>
 </template>
 
 <script>

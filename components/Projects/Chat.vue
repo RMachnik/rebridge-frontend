@@ -22,7 +22,6 @@
             </v-list>
         </v-card-text>
         <v-card-actions>
-            <v-layout row wrap>
                 <v-flex d-flex>
                         <textarea
                                 solo
@@ -38,7 +37,6 @@
                         Wyślij
                     </v-btn>
                 </v-flex>
-            </v-layout>
         </v-card-actions>
     </v-card>
 </template>

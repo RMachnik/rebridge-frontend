@@ -1,13 +1,6 @@
 <template>
     <div class="text-xs-center" v-if="currentUser">
-        <v-badge overlap>
-            <span slot="badge">3</span>
-            <v-avatar
-                    color="cyan red--after"
-            >
-                <v-icon dark>notifications</v-icon>
-            </v-avatar>
-        </v-badge>
+        <events></events>
         <v-menu offset-y>
             <v-avatar color="cyan" slot="activator">
                 <v-icon dark>settings</v-icon>
@@ -37,9 +30,11 @@
 
 <script>
     import {mapActions, mapState} from 'vuex'
+    import Events from "./Events";
 
     export default {
         name: 'UserMenu',
+        components: {Events},
         computed: {
             ...mapState(
                 'user', [

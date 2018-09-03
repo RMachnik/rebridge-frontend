@@ -1,27 +1,26 @@
 <template>
-    <v-form @submit.prevent="submit">
-        <v-card>
-            <v-card-title><h3>Kwestionariusz</h3>
-                <v-btn icon @click="show = !show">
-                    <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-                </v-btn>
-            </v-card-title>
+        <v-form @submit.prevent="submit">
+            <v-card>
+                <v-card-title><h3>Kwestionariusz</h3>
+                    <v-btn icon @click="show = !show">
+                        <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+                    </v-btn>
+                </v-card-title>
 
-            <v-slide-y-transition>
-                <v-card-text v-show="show">
-                    <question-item v-for="(question,index) in this.questions" :question="question" :key="index"/>
-                    <v-card-actions v-if="!isArchitect">
-                        <v-btn
-                                color="success"
-                                @click="save()">
-                            Zapisz
-                        </v-btn>
-                    </v-card-actions>
-                </v-card-text>
-            </v-slide-y-transition>
-        </v-card>
-    </v-form>
-
+                <v-slide-y-transition>
+                    <v-card-text v-show="show">
+                        <question-item v-for="(question,index) in this.questions" :question="question" :key="index"/>
+                        <v-card-actions v-if="!isArchitect">
+                            <v-btn
+                                    color="success"
+                                    @click="save()">
+                                Zapisz
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card-text>
+                </v-slide-y-transition>
+            </v-card>
+        </v-form>
 </template>
 
 <script>

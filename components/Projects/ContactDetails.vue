@@ -1,7 +1,6 @@
 <template>
     <v-card>
         <v-card-title>
-            <v-layout row wrap>
                 <v-flex>
                     <v-chip>
                         {{investor.email}}
@@ -16,7 +15,6 @@
                 >
                     <v-icon>delete</v-icon>
                 </v-btn>
-            </v-layout>
         </v-card-title>
     </v-card>
 </template>

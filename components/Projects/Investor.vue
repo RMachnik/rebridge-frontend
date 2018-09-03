@@ -1,30 +1,30 @@
 <template>
-    <v-layout column wrap>
-        <v-flex d-flex>
-            <section id="investors" v-if="!readonly">
-                <v-card>
-                    <v-card-title>
-                        <h3>Inwestorzy</h3>
-                        <v-btn icon @click="show = !show">
-                            <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-                        </v-btn>
-                    </v-card-title>
-                    <v-slide-y-transition>
-                        <div v-show="show">
-                            <v-card-actions>
-                                <add-investor></add-investor>
-                            </v-card-actions>
-                            <v-card-text >
-                                <contact-details
-                                        v-for="(investor,index) in selectedProjectDetails.investors"
-                                        :investor="investor" :projectId="selectedProject.id" :key="index"/>
-                            </v-card-text>
-                        </div>
-                    </v-slide-y-transition>
-                </v-card>
-            </section>
-        </v-flex>
-    </v-layout>
+    <v-card v-if="!readonly">
+        <v-card-title>
+            <h3>Inwestorzy</h3>
+            <v-btn icon @click="show = !show">
+                <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
+            </v-btn>
+        </v-card-title>
+        <v-slide-y-transition>
+            <div v-show="show">
+                <v-layout row wrap>
+                    <v-layout column wrap>
+                        <v-card-actions>
+                            <add-investor></add-investor>
+                        </v-card-actions>
+                    </v-layout>
+                    <v-layout column wrap>
+                        <v-card-text>
+                            <contact-details
+                                    v-for="(investor,index) in selectedProjectDetails.investors"
+                                    :investor="investor" :projectId="selectedProject.id" :key="index"/>
+                        </v-card-text>
+                    </v-layout>
+                </v-layout>
+            </div>
+        </v-slide-y-transition>
+    </v-card>
 </template>
 
 <script>

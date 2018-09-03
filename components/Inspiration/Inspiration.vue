@@ -30,7 +30,13 @@
             <v-slide-y-transition>
                 <div v-show="show">
                     <v-card-actions>
-                        <dropzone id="inspiration" :options="options" :destroyDropzone="true"></dropzone>
+                        <dropzone
+                                id="inspiration"
+                                ref="dropzone"
+                                :options="options"
+                                :destroyDropzone="true"
+                                @vdropzone-success="uploadCompleted"
+                        ></dropzone>
                     </v-card-actions>
                     <v-card-text>
                         <v-spacer></v-spacer>
@@ -99,7 +105,7 @@
             },
         },
         methods: {
-            ...mapActions('inspirations', ['delete']),
+            ...mapActions('inspirations', ['all', 'delete']),
             remove() {
                 let data = {
                     token: this.token,
@@ -107,6 +113,14 @@
                     inspirationId: this.inspiration.id
                 }
                 this.delete(data)
+            },
+            uploadCompleted(file, response) {
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                    inspirationId: this.inspiration.id
+                }
+                this.all(data)
             }
         }
     }

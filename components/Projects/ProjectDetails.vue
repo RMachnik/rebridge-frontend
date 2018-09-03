@@ -1,40 +1,26 @@
 <template>
     <div v-if="selectedProject">
-        <section id="details">
-            <v-container fluid grid-list-md>
-                <v-layout align-start justify-start row wrap>
-                    <v-flex d-flex>
-                        <details-form :selectedProject="selectedProject"/>
-                    </v-flex>
-                    <v-flex d-flex>
-                        <chat></chat>
-                    </v-flex>
-                </v-layout>
-                <v-layout align-start justify-start row wrap>
-                    <v-flex d-flex>
-                        <v-layout column wrap>
-                            <v-flex d-flex>
-                                <investor :selectedProject="selectedProject"/>
-                            </v-flex>
-                        </v-layout>
-                    </v-flex>
-                </v-layout>
-                <v-layout align-start justify-start row wrap>
-                    <v-flex d-flex>
-                        <v-layout column wrap>
-                            <v-flex d-flex>
-                                <section id="questionnaire">
-                                    <questionnaire :projectId="selectedProject.id"/>
-                                </section>
-                            </v-flex>
-                        </v-layout>
-                    </v-flex>
-                </v-layout>
-                <v-layout align-start justify-start row wrap>
-                    <inspirations :inspirations="inspirations"/>
-                </v-layout>
-            </v-container>
-        </section>
+        <v-container fluid grid-list-md>
+            <v-layout align-start justify-start row wrap>
+                <v-flex d-flex>
+                    <details-form :selectedProject="selectedProject"/>
+                </v-flex>
+                <v-flex d-flex>
+                    <chat></chat>
+                </v-flex>
+            </v-layout>
+            <v-layout align-start justify-start row wrap>
+                <v-flex d-flex>
+                    <investor :selectedProject="selectedProject"/>
+                </v-flex>
+                <v-flex d-flex>
+                    <questionnaire :projectId="selectedProject.id"/>
+                </v-flex>
+            </v-layout>
+            <v-layout align-start justify-start row wrap>
+                <inspirations :inspirations="inspirations"/>
+            </v-layout>
+        </v-container>
     </div>
 </template>
 
