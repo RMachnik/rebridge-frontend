@@ -29,6 +29,18 @@ export default {
             }
         )
     },
+    update({commit, dispatch}, data) {
+        return inspirationsService.update(data).then(
+            (response) => {
+                return dispatch('all',data)
+            }
+        ).catch(
+            (error) => {
+                commit(global.ADD_FAILURE, "Nie udało się zmienić oceny.", {root: true})
+                util.prettyLog(error)
+            }
+        )
+    },
     delete({commit, dispatch}, data) {
         return inspirationsService.delete(data).then(
             (response) => {

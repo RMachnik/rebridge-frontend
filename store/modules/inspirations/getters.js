@@ -13,7 +13,6 @@ export default {
     },
     imageUrl: (state, getters) => (inspirationId) => {
         let inspiration = getters.find(inspirationId);
-        console.log(inspiration)
         if (inspiration.details.imageId) {
             return `${BASE_URL}/images/` + inspiration.details.imageId
         }

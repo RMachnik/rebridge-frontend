@@ -1,10 +1,10 @@
 <template>
     <v-flex xs12 sm4>
         <v-card>
-            <v-card-media
+            <v-img
                     :src="image"
                     height="500px"
-            ></v-card-media>
+            ></v-img>
             <v-card-title>
                 <span class="headline">{{inspiration.name}}</span>
                 <v-rating
@@ -14,6 +14,7 @@
                         empty-icon="$vuetify.icons.ratingFull"
                         half-increments
                         hover
+                        @change="changeRating"
                 ></v-rating>
                 <span class="grey--text text--lighten-2 caption mr-2">
                       ({{ inspiration.details.rating }})
@@ -95,10 +96,7 @@
                     inspirationId: this.inspiration.id,
                     token: this.token
                 }
-
-                let dropzoneOptions = this.dropzoneOptions(data);
-                console.log(dropzoneOptions)
-                return dropzoneOptions
+                return this.dropzoneOptions(data);
             },
             image: function () {
                 return this.imageUrl(this.inspiration.id)
@@ -121,6 +119,18 @@
                     inspirationId: this.inspiration.id
                 }
                 this.all(data)
+            },
+            changeRating(){
+                console.log('!!!!!CLICKED!!!!')
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                    inspirationId: this.inspiration.id,
+                    data: {
+                        rating: this.inspiration.rating
+                    }
+                }
+                this.update(data)
             }
         }
     }

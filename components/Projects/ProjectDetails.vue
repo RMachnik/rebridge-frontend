@@ -10,7 +10,7 @@
                 </v-flex>
             </v-layout>
             <v-layout align-start justify-start row wrap>
-                <v-flex d-flex>
+                <v-flex d-flex v-if="isArchitect">
                     <investor :selectedProject="selectedProject"/>
                 </v-flex>
                 <v-flex d-flex>
@@ -52,6 +52,11 @@
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
             ...mapState('inspirations', ['inspirations']),
+            isArchitect: function () {
+                if (this.currentUser) {
+                    return this.currentUser.roles.includes('ARCHITECT');
+                }
+            }
         }
     };
 </script>

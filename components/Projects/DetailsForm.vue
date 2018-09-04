@@ -60,7 +60,7 @@
                                 ></v-text-field>
                             </v-flex>
                             <v-flex d-flex>
-                                <dropzone :options="options" :destroyDropzone="true"></dropzone>
+                                <dropzone id="projectImg" :options="options" :destroyDropzone="true"></dropzone>
                             </v-flex>
                         </v-layout>
                     </v-flex>
@@ -109,10 +109,7 @@
                     projectId: this.selectedProject.id,
                     token: this.token
                 }
-
-                let dropzoneOptions = this.dropzoneOptions(data);
-                console.log(dropzoneOptions)
-                return dropzoneOptions
+                return this.dropzoneOptions(data)
             },
         },
         methods: {

@@ -1,10 +1,10 @@
 <template>
     <v-flex xs12 sm4>
         <v-card>
-            <v-card-media class="clickable" @click="redirectToProject(project.id)"
+            <v-img class="clickable" @click="redirectToProject(project.id)"
                           :src="image"
                           height="200px"
-            ></v-card-media>
+            ></v-img>
             <v-card-title class="clickable" @click="redirectToProject(project.id)">
                 <h3>{{ project.name }}</h3>
             </v-card-title>

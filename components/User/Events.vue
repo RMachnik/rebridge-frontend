@@ -1,5 +1,4 @@
 <template>
-
     <v-badge overlap>
         <span slot="badge">{{events.length}}</span>
         <v-menu offset-y>

@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="!readonly">
+    <v-card v-if="isArchitect">
         <v-card-title>
             <h3>Inwestorzy</h3>
             <v-btn icon @click="show = !show">
@@ -57,9 +57,9 @@
             ...mapState('projects', ['selectedProjectDetails', 'questionnaire']),
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
-            readonly: function () {
+            isArchitect: function () {
                 if (this.currentUser) {
-                    return !this.currentUser.roles.includes('ARCHITECT');
+                    return this.currentUser.roles.includes('ARCHITECT');
                 }
             },
         }
