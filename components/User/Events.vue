@@ -12,7 +12,7 @@
             <v-list v-if="events.length > 0">
                 <v-list-tile v-for="(event,index) in events" :event="event" :key="index">
                     <v-list-tile-content>
-                        <v-list-tile-title>{{event.content}}</v-list-tile-title>
+                        <v-list-tile-title>{{event.message}}</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
