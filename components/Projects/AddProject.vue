@@ -1,25 +1,20 @@
 <template>
     <form @submit.prevent="submit" novalidate>
         <v-card>
-            <v-card-title>
-
-                    <v-flex xs12 sm10 md8 lg>
-                        <v-text-field label="Nazwa" v-model="formData.name" required></v-text-field>
-                    </v-flex>
-                    <v-flex xs12 sm10 md8 lg>
-                        <v-select
-                                placeholder="kwestionariusz"
-                                label="name"
-                                :options="templates"
-                                v-model="questionnaireTemplate"
-                        ></v-select>
-                    </v-flex>
-                    <v-flex>
-                        <v-btn color="success" type="submit">
-                            Dodaj
-                        </v-btn>
-                    </v-flex>
-            </v-card-title>
+            <v-card-text>
+                <v-text-field label="Nazwa projektu" v-model="formData.name" required></v-text-field>
+                <v-select
+                        placeholder="Kwestionariusz"
+                        label="name"
+                        :options="templates"
+                        v-model="questionnaireTemplate"
+                ></v-select>
+            </v-card-text>
+            <v-card-actions>
+                <v-btn color="success" type="submit">
+                    Dodaj
+                </v-btn>
+            </v-card-actions>
         </v-card>
     </form>
 

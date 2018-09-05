@@ -9,7 +9,7 @@ export default {
         return axios.post(`${BASE_URL}/projects/` + data.projectId + "/inspirations", data.data, config(data.token));
     },
     update(data) {
-        return axios.put(`${BASE_URL}/projects/` + data.projectId + "/inspirations", data.data, config(data.token));
+        return axios.put(`${BASE_URL}/projects/` + data.projectId + "/inspirations/" + data.inspirationId, data.data, config(data.token));
     },
     delete(data) {
         return axios.delete(`${BASE_URL}/projects/` + data.projectId + "/inspirations/" + data.inspirationId, config(data.token));
@@ -19,7 +19,7 @@ export default {
             url: `${BASE_URL}/projects/` + data.projectId + "/inspirations/" + data.inspirationId + "/image",
             thumbnailWidth: 150,
             maxFilesize: 0.5,
-            acceptedFiles:"image/*",
+            acceptedFiles: "image/*",
             headers: {"Authorization": "Bearer " + data.token},
             paramName: "uploadedFile",
             dictDefaultMessage: "Dodaj zdjęcie"

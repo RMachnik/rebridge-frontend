@@ -8,13 +8,13 @@
             <v-card-title>
                 <span class="headline">{{inspiration.name}}</span>
                 <v-rating
-                        v-model="inspiration.details.rating"
+                        v-model="newRating"
                         color="yellow darken-3"
                         background-color="grey darken-1"
                         empty-icon="$vuetify.icons.ratingFull"
                         half-increments
                         hover
-                        @change="changeRating"
+                        @click.native="changeRating"
                 ></v-rating>
                 <span class="grey--text text--lighten-2 caption mr-2">
                       ({{ inspiration.details.rating }})
@@ -84,7 +84,7 @@
         data: () => ({
             comment: '',
             show: false,
-            myRating: 4.5
+            newRating: 0,
         }),
         computed: {
             ...mapState('auth', ['token']),
@@ -103,7 +103,8 @@
             },
         },
         methods: {
-            ...mapActions('inspirations', ['all', 'delete']),
+            ...
+                mapActions('inspirations', ['all', 'delete', 'update']),
             remove() {
                 let data = {
                     token: this.token,
@@ -111,7 +112,8 @@
                     inspirationId: this.inspiration.id
                 }
                 this.delete(data)
-            },
+            }
+            ,
             uploadCompleted(file, response) {
                 let data = {
                     token: this.token,
@@ -119,17 +121,19 @@
                     inspirationId: this.inspiration.id
                 }
                 this.all(data)
-            },
-            changeRating(){
+            }
+            ,
+            changeRating() {
                 console.log('!!!!!CLICKED!!!!')
                 let data = {
                     token: this.token,
                     projectId: this.selectedProjectDetails.projectId,
                     inspirationId: this.inspiration.id,
                     data: {
-                        rating: this.inspiration.rating
+                        rating: this.newRating
                     }
                 }
+                console.log('Rating ' + this.newRating)
                 this.update(data)
             }
         }

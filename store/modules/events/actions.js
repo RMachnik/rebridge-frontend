@@ -12,4 +12,12 @@ export default {
             return Promise.reject(errorMessage)
         });
     },
+    markRed({commit, dispatch}, data) {
+        return eventsService.markRed(data).then((response) => {
+            return dispatch('load', data.token)
+        }).catch((error) => {
+            let errorMessage = util.prettyLog(error);
+            return Promise.reject(errorMessage)
+        });
+    },
 };
