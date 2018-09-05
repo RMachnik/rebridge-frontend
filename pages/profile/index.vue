@@ -1,0 +1,20 @@
+<template>
+    <section class="container">
+        <page-title title="Twoje dane"/>
+        <profile/>
+    </section>
+</template>
+<script>
+    import PageTitle from '~/components/Common/PageTitle'
+    import Profile from '~/components/User/Profile'
+
+    export default {
+        name: "IndexProfile",
+        components: {
+            PageTitle, Profile
+        },
+        async fetch({store}) {
+            await store.dispatch('user/loadUser', store.state.auth.token);
+        }
+    }
+</script>

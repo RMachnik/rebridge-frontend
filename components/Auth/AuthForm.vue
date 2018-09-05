@@ -18,7 +18,17 @@
                     data-vv-name="password"
                     required
             ></v-text-field>
-            <v-btn type="submit" color="success">wyślij</v-btn>
+            <v-alert
+                    :value="true"
+                    color="error"
+                    icon="warning"
+                    outline
+                    v-if="error">
+                {{error}}
+            </v-alert>
+            <v-btn type="submit" color="success">
+                wyślij
+            </v-btn>
             <v-btn color="error" @click="clear">wyczyść</v-btn>
             <v-btn color="info" @click="toggleLoginFormState">{{ currentButtonTitle }}</v-btn>
         </form>
@@ -26,69 +36,81 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VeeValidate from 'vee-validate'
-import { mapState, mapActions } from 'vuex'
-Vue.use(VeeValidate)
+    import Vue from 'vue';
+    import VeeValidate from 'vee-validate';
+    import {mapActions, mapState} from 'vuex';
+
+    Vue.use(VeeValidate);
 
     export default {
         name: 'AuthForm',
         $_veeValidate: {
-            validator: 'new'
+            validator: 'new',
         },
-        data () {
+        data() {
             return {
                 formData: {
                     email: '',
-                    password: ''
-                }
-            }
+                    password: '',
+                },
+                error: ''
+            };
         },
         computed: {
             ...mapState('auth', [
                 'isLoginForm',
                 'token'
             ]),
-            currentButtonTitle () {
-                return this.isLoginForm ? 'Zarejestruj się' : 'Zaloguj się'
-            }
+            currentButtonTitle() {
+                return this.isLoginForm ? 'Zarejestruj się' : 'Zaloguj się';
+            },
         },
         methods: {
             ...mapActions('auth', [
-                'toggleLoginFormState',
-                'register',
-                'login'
-            ]),
-            redirectToProjects () {
-                this.$router.push('/projects')
-            },
+                    'toggleLoginFormState',
+                    'register',
+                    'login',
+                ],
+                'user',
+                ['loadUser'],
+            ),
+            redirectToProjects() {
+                this.$router.push('/projects');
+            }
+            ,
             submit() {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
                         if (this.isLoginForm) {
-                            this.login(this.formData)
-                                .then(() => {
-                                    if (this.token) {
-                                        this.redirectToProjects()
-                                    }
-                                })
+                            this.logInUser()
                         } else {
-                            this.register(this.formData)
-                                .then(() => {
-                                    if (this.token) {
-                                        this.redirectToProjects()
-                                    }
-                                })
+                            this.registerUser()
                         }
                     }
-                })
+                });
+            },
+            logInUser() {
+                this.error = null
+                this.login(this.formData).then(
+                    () => this.redirectToProjects()
+                ).catch(
+                    (ex) => this.error = ex
+                )
+            },
+            registerUser() {
+                this.error = null
+                this.register(this.formData).then(
+                    () => this.redirectToProjects()
+                ).catch(
+                    (ex) => this.error = ex
+                )
             },
             clear() {
                 Object.keys(this.formData).forEach(key => {
-                    this.formData[key] = ''
-                })
-                this.$validator.reset()
-            }
-        }
-    }
+                    this.formData[key] = '';
+                });
+                this.$validator.reset();
+            },
+        },
+    };
 </script>
