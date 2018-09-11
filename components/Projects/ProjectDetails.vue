@@ -20,6 +20,9 @@
             <v-layout align-start justify-start row wrap>
                 <inspirations :inspirations="inspirations"/>
             </v-layout>
+            <v-layout align-start justify-start row wrap>
+                <documents></documents>
+            </v-layout>
         </v-container>
     </div>
 </template>
@@ -31,6 +34,7 @@
     import Investor from './Investor';
     import Chat from './Chat';
     import Inspirations from "../Inspiration/Inspirations";
+    import Documents from "../Documents/Documents";
 
     export default {
         name: 'ProjectDetails',
@@ -40,6 +44,7 @@
             DetailsForm,
             Investor,
             Chat,
+            Documents,
         },
         props: {
             selectedProject: {

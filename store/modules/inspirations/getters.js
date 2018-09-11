@@ -1,4 +1,3 @@
-import inspirationsService from '~/assets/js/api/inspirations';
 import {BASE_URL} from '~/assets/js/api/api.config';
 
 export default {
@@ -9,7 +8,15 @@ export default {
         return state.inspirations
     },
     dropzoneOptions: (state) => (data) => {
-        return inspirationsService.dropzoneOptions(data)
+        return {
+            url: `${BASE_URL}/projects/` + data.projectId + "/inspirations/" + data.inspirationId + "/image",
+            thumbnailWidth: 150,
+            maxFilesize: 0.5,
+            acceptedFiles: "image/*",
+            headers: {"Authorization": "Bearer " + data.token},
+            paramName: "uploadedFile",
+            dictDefaultMessage: "Dodaj zdjęcie"
+        }
     },
     imageUrl: (state, getters) => (inspirationId) => {
         let inspiration = getters.find(inspirationId);

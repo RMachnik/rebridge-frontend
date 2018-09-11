@@ -5,6 +5,7 @@ import user from './user/state'
 import projects from './projects/state'
 import questionnaire from './questionnaire/state'
 import events from './events/state'
+import documents from './documents/state'
 
 export default {
     global,
@@ -13,6 +14,7 @@ export default {
     user,
     projects,
     questionnaire,
-    events
+    events,
+    documents
     // @todo put others modules
 }
