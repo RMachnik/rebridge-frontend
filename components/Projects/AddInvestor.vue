@@ -1,21 +1,24 @@
 <template>
-        <form @submit.prevent="submit" novalidate>
-            <v-card>
-                <v-card-title>
+    <form @submit.prevent="submit" novalidate>
+        <v-card>
+            <v-card-title>
+                <v-flex d-flex>
                     <v-text-field
                             label="Email inwestora"
                             v-model="formData.email"
                             required
+                            solo
                     >
                     </v-text-field>
-                </v-card-title>
-                <v-card-actions>
-                    <v-btn color="success" type="submit">
-                        Dodaj
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </form>
+                </v-flex>
+            </v-card-title>
+            <v-card-actions>
+                <v-btn color="success" type="submit">
+                    Dodaj
+                </v-btn>
+            </v-card-actions>
+        </v-card>
+    </form>
 </template>
 
 <script>

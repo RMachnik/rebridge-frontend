@@ -1,8 +1,9 @@
 <template>
     <v-container fluid grid-list-md>
         <v-card>
+            <v-card-title><h3>Documents</h3></v-card-title>
             <add-document v-if="isArchitect"/>
-            <v-layout>
+            <v-layout row wrap>
                 <document v-for="(document, index) in this.documents" :key="index" :document="document"/>
             </v-layout>
         </v-card>

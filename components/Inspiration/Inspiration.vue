@@ -129,7 +129,6 @@
             }
             ,
             changeRating() {
-                console.log('!!!!!CLICKED!!!!')
                 let data = {
                     token: this.token,
                     projectId: this.selectedProjectDetails.projectId,
@@ -138,7 +137,6 @@
                         rating: this.newRating
                     }
                 }
-                console.log('Rating ' + this.newRating)
                 this.update(data)
             }
         }

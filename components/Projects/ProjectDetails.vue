@@ -21,7 +21,9 @@
                 <inspirations :inspirations="inspirations"/>
             </v-layout>
             <v-layout align-start justify-start row wrap>
-                <documents></documents>
+                <v-flex d-flex>
+                    <documents></documents>
+                </v-flex>
             </v-layout>
         </v-container>
     </div>

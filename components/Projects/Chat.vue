@@ -21,23 +21,20 @@
                 <v-divider></v-divider>
             </v-list>
         </v-card-text>
-        <v-card-actions>
-                <v-flex d-flex>
-                        <textarea
+        <v-card-title>
+            <v-flex d-flex>
+                        <v-textarea
                                 solo
-                                auto-grow
                                 v-model="newMessage"
                                 label="Wiadomość"
                                 placeholder="Wiadomość"
                         >
-                        </textarea>
-                </v-flex>
-                <v-flex>
-                    <v-btn small color="success" @click="sendMessage(newMessage)">
-                        Wyślij
-                    </v-btn>
-                </v-flex>
-        </v-card-actions>
+                        </v-textarea>
+            </v-flex>
+            <v-btn small color="success" @click="sendMessage(newMessage)">
+                Wyślij
+            </v-btn>
+        </v-card-title>
     </v-card>
 </template>
 

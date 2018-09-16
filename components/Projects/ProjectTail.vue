@@ -1,5 +1,5 @@
 <template>
-    <v-flex xs12 sm4>
+    <v-flex>
         <v-hover>
             <v-card slot-scope="{ hover }"
                     :class="`elevation-${hover ? 12 : 2}`"

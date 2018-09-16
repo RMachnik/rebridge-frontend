@@ -15,7 +15,8 @@ export default {
             acceptedFiles: "image/*",
             headers: {"Authorization": "Bearer " + data.token},
             paramName: "uploadedFile",
-            dictDefaultMessage: "Dodaj zdjęcie"
+            dictDefaultMessage: "Dodaj zdjęcie",
+            createImageThumbnails: false
         }
     },
     imageUrl: (state, getters) => (inspirationId) => {
