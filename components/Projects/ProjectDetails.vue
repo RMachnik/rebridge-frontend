@@ -25,6 +25,11 @@
                     <documents></documents>
                 </v-flex>
             </v-layout>
+            <v-layout align-start justify-start row wrap>
+                <v-flex d-flex>
+                    <catalogue></catalogue>
+                </v-flex>
+            </v-layout>
         </v-container>
     </div>
 </template>
@@ -37,10 +42,12 @@
     import Chat from './Chat';
     import Inspirations from "../Inspiration/Inspirations";
     import Documents from "../Documents/Documents";
+    import Catalogue from "../Catalogue/Catalogue";
 
     export default {
         name: 'ProjectDetails',
         components: {
+            Catalogue,
             Inspirations,
             Questionnaire,
             DetailsForm,

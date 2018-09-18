@@ -39,7 +39,7 @@
             submit() {
                 this.formData.questionnaireTemplateId = this.questionnaireTemplate.id;
                 let data = {token: this.token, data: this.formData};
-                this.add(data);
+                this.add(data).then(() => this.formData.name = '');
             }
         },
     };
