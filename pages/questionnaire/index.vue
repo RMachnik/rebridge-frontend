@@ -1,14 +1,15 @@
 <template>
     <section id="projects">
         <page-title title="Szablony"/>
-        <v-container>
-            <v-layout >
-                <v-flex flex-d>
-                    <questionnaires></questionnaires>
-                </v-flex>
-                <v-spacer></v-spacer>
-                <v-flex flex-d>
+        <v-container fluid grid-list-md>
+            <v-layout align-start justify-start row wrap>
+                <v-flex d-flex>
                     <add-question></add-question>
+                </v-flex>
+            </v-layout>
+            <v-layout align-start justify-start row wrap>
+                <v-flex d-flex>
+                    <questionnaires></questionnaires>
                 </v-flex>
             </v-layout>
         </v-container>

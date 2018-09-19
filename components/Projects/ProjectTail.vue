@@ -78,6 +78,7 @@
             ...mapActions('projects', ['loadDetails', 'delete', 'loadQuestionnaire', 'loadChat']),
             ...mapActions('documents', ['loadDocuments']),
             ...mapActions('inspirations', ['all']),
+            ...mapActions('catalogue', ['loadCatalogue']),
             redirectToProject(id) {
                 let data = {projectId: id, token: this.token};
                 this.loadDetails(data)
@@ -85,6 +86,8 @@
                     .then(() => this.all(data))
                     .then(() => this.loadChat(data))
                     .then(() => this.loadDocuments(data))
+                    .then(() => this.loadDocuments(data))
+                    .then(() => this.loadCatalogue(data))
                     .then(() => {
                         this.$router.push('/projects/' + id);
                     }).catch((error) => {

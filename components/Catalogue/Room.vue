@@ -1,18 +1,26 @@
 <template>
     <v-card>
         <v-card-title>
-            Łazienka
-            <v-btn color="primary" type="submit">
-                Nowa kategoria
-            </v-btn>
-            <v-btn flat color="red" @click="remove">
-                <v-icon>delete</v-icon>
-            </v-btn>
+            <v-toolbar flat color="white">
+                <v-toolbar-title>
+                    <h4>{{room.name}}</h4>
+                </v-toolbar-title>
+                <v-divider
+                        class="mx-2"
+                        inset
+                        vertical
+                ></v-divider>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-text-field label="Kategoria" v-model="newCategory" required></v-text-field>
+                <v-btn color="primary" @click="add">
+                    Nowa kategoria
+                </v-btn>
+            </v-toolbar>
         </v-card-title>
         <v-card-text>
-            <category></category>
-            <category></category>
-            <category></category>
+            <category v-for="(category,index) in this.room.categories" :key="index" :category="category"
+                      :room-id="room.id"></category>
         </v-card-text>
     </v-card>
 </template>
@@ -20,9 +28,39 @@
 <script>
 
     import Category from "./Category";
+    import {mapActions, mapState} from 'vuex'
 
     export default {
         components: {Category},
         component: 'Room',
+        data: () => ({
+            newCategory: ''
+        }),
+        props: {
+            room: {
+                type: Object,
+                required: true
+            }
+        },
+        computed: {
+            ...mapState('auth', ['token']),
+            ...mapState('catalogue', ['catalogue']),
+            ...mapState('projects', ['selectedProjectDetails']),
+        },
+        methods: {
+            ...mapActions('catalogue', ['addCategory']),
+            add() {
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                    catalogueId: this.catalogue.id,
+                    roomId: this.room.id,
+                    data: {
+                        name: this.newCategory
+                    }
+                }
+                this.addCategory(data).then(() => this.newCategory = '')
+            }
+        }
     }
 </script>

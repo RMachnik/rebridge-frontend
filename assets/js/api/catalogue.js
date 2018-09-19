@@ -6,34 +6,34 @@ export default {
         return axios.get(`${BASE_URL}/projects/` + data.projectId + "/catalogue", config(data.token));
     },
     addRoom(data) {
-        return axios.post(`${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId, data.data, config(data.token));
+        return axios.post(`${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + "/rooms", data.data, config(data.token));
     },
     deleteRoom(data) {
-        return axios.delete(`${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId, config(data.token));
+        return axios.delete(`${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + /rooms/ + data.roomId, config(data.token));
     },
     addCategory(data) {
         return axios.post(
-            `${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + "/categories",
+            `${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + /rooms/ + data.roomId + "/categories",
             data.data,
             config(data.token)
         );
     },
     deleteCategory(data) {
         return axios.delete(
-            `${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + "/categories/" + data.categoryId,
+            `${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + /rooms/ + data.roomId + "/categories/" + data.categoryId,
             config(data.token)
         );
     },
     addItem(data) {
         return axios.post(
-            `${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + "/categories" + data.categoryId + "/items",
+            `${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + /rooms/ + data.roomId + "/categories/" + data.categoryId + "/items",
             data.data,
             config(data.token)
         );
     },
     deleteItem(data) {
         return axios.delete(
-            `${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + "/categories/" + data.categoryId + "/items/" + data.itemId,
+            `${BASE_URL}/projects/` + data.projectId + "/catalogue/" + data.catalogueId + /rooms/ + data.roomId + "/categories/" + data.categoryId + "/items/" + data.itemId,
             config(data.token)
         );
     },

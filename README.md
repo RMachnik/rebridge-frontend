@@ -23,6 +23,7 @@ $ npm run generate
 
 # rundocker build and start container
 $ docker build -t rmachnik/rebridge-front .
+$ docker push rmachnik/rebridge-front:tagname
 $ docker run -p 3000:3000 -d rmachnik/rebridge-front
 ```
 

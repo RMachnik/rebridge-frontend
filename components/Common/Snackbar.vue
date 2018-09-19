@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card class="v-snack--absolute">
         <v-snackbar v-if="success"
                     :value="success"
                     :color="successColor"

@@ -2,8 +2,8 @@
     <div>
         <v-toolbar flat color="white">
             <v-toolbar-title>
-                Flizy - płytki
-                <v-btn flat color="red" @click="remove">
+                <h5>{{category.name}}</h5>
+                <v-btn flat color="red">
                     <v-icon>delete</v-icon>
                 </v-btn>
             </v-toolbar-title>
@@ -17,26 +17,23 @@
                 <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
                 <v-card>
                     <v-card-title>
-                        <span class="headline">{{ formTitle }}</span>
+                        <span class="headline">Dodaj element</span>
                     </v-card-title>
 
                     <v-card-text>
                         <v-container grid-list-md>
                             <v-layout wrap>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.name" label="Nazwa"></v-text-field>
+                                    <v-text-field v-model="editedItem.description" label="Nazwa"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.calories" label="Wymiary"></v-text-field>
+                                    <v-text-field v-model="editedItem.sizing" label="Wymiary"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.protein" label="Link"></v-text-field>
+                                    <v-text-field v-model="editedItem.quantity" label="Ilosc m^2"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.fat" label="Ilosc m^2"></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.carbs" label="Cena/m^2/szt"></v-text-field>
+                                    <v-text-field v-model="editedItem.prize" label="Cena/m^2/szt"></v-text-field>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -44,27 +41,27 @@
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
-                        <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
+                        <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+                        <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
         </v-toolbar>
         <v-data-table
                 :headers="headers"
-                :items="items"
+                :items="category.items"
                 hide-actions
                 class="elevation-1"
         >
             <template slot="items" slot-scope="props">
-                <td>{{ props.item.name }}</td>
-                <td class="text-xs-right">{{ props.item.sizing }}</td>
-                <td class="text-xs-right">{{ props.item.url }}</td>
-                <td class="text-xs-right">{{ props.item.quantity }}</td>
-                <td class="text-xs-right">{{ props.item.prize }}</td>
-                <td class="text-xs-right">{{ props.item.cost }}</td>
-                <td class="text-xs-right">{{ props.item.comments }}</td>
-                <td class="text-xs-right">{{ props.item.accepted }}</td>
+                <td>{{ props.item.description }}</td>
+                <td>{{ props.item.sizing }}</td>
+                <td>{{ props.item.url }}</td>
+                <td>{{ props.item.quantity }}</td>
+                <td>{{ props.item.prize }}</td>
+                <td>{{ props.item.cost }}</td>
+                <td>{{ props.item.additionalInfo }}</td>
+                <td>{{ props.item.approved }}</td>
                 <td class="justify-center layout px-0">
                     <v-icon
                             small
@@ -81,100 +78,78 @@
                     </v-icon>
                 </td>
             </template>
-            <template slot="no-data">
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
-            </template>
         </v-data-table>
     </div>
 </template>
 
 <script>
+    import {mapActions, mapState} from 'vuex'
+
     export default {
         component: 'Category',
+        props: {
+            roomId: {
+                type: String,
+                required: true
+            },
+            category: {
+                type: Object,
+                required: true
+            }
+        },
         data: () => ({
             dialog: false,
             headers: [
                 {
                     text: 'Nazwa',
                     sortable: true,
-                    value: 'name'
+                    value: 'description'
                 },
                 {text: 'Wymiary', value: 'sizing', sortable: false},
                 {text: 'Link', value: 'url', sortable: false},
                 {text: 'Ilość m^2', value: 'quantity'},
                 {text: 'Cena m^2/szt', value: 'prize'},
                 {text: 'Wartość (zł)', value: 'cost', sortable: true},
-                {text: 'Uwagi', value: 'comments', sortable: false},
-                {text: 'Akceptacja', value: 'accepted', sortable: false}
+                {text: 'Uwagi', value: 'additionalInfo', sortable: false},
+                {text: 'Akceptacja', value: 'approved', sortable: false},
+                {text: '', sortable: false}
             ],
-            items: [],
             editedIndex: -1,
             editedItem: {
-                name: '',
+                description: '',
                 sizing: '',
                 url: '',
                 quantity: 0,
                 prize: 0,
                 cost: 0,
-                comments: '',
-                accepted: false
+                additionalInfo: '',
+                approved: false
             },
             defaultItem: {
-                name: '',
+                description: '',
                 sizing: '',
                 url: '',
                 quantity: 0,
                 prize: 0,
                 cost: 0,
-                comments: '',
-                accepted: false
+                additionalInfo: '',
+                approved: false
             }
         }),
         computed: {
-            formTitle() {
-                return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-            }
-        },
-        watch: {
-            dialog(val) {
-                val || this.close()
-            }
-        },
-        created() {
-            this.initialize()
+            ...mapState('auth', ['token']),
+            ...mapState('catalogue', ['catalogue']),
+            ...mapState('projects', ['selectedProjectDetails']),
         },
         methods: {
-            initialize() {
-                this.items = [
-                    {
-                        name: 'Blanko matte KA1/AD',
-                        sizing: '30x30',
-                        url: 'http://blanko.mate.com',
-                        quantity: 1,
-                        prize: 114,
-                        cost: 114,
-                        comments: 'Piekna',
-                        accepted: false
-                    },
-                    {
-                        name: 'White ultra elegant',
-                        sizing: '30x30',
-                        url: 'http://ultra.elegant.mate.com',
-                        quantity: 1,
-                        prize: 123,
-                        cost: 123,
-                        comments: 'Piekna',
-                        accepted: false
-                    }
-                ]
-            },
+            ...mapActions('catalogue', ['addItem']),
             editItem(item) {
-                this.editedIndex = this.items.indexOf(item)
+                this.editedIndex = this.category.items.indexOf(item)
                 this.editedItem = Object.assign({}, item)
                 this.dialog = true
             },
             deleteItem(item) {
-                const index = this.items.indexOf(item)
+                const index = this.category.items.indexOf(item)
                 confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
             },
             close() {
@@ -186,12 +161,21 @@
             },
             save() {
                 if (this.editedIndex > -1) {
-                    Object.assign(this.items[this.editedIndex], this.editedItem)
+                    Object.assign(this.category.items[this.editedIndex], this.editedItem)
                 } else {
-                    this.items.push(this.editedItem)
+                    this.category.items.push(this.editedItem)
                 }
-                this.close()
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                    catalogueId: this.catalogue.id,
+                    roomId: this.roomId,
+                    categoryId: this.category.id,
+                    data: this.editedItem
+                }
+                this.addItem(data).then(() => this.close());
             }
-        }
+        },
+
     }
 </script>

@@ -9,6 +9,8 @@
                                 v-model="questionnaire.name"
                                 label="Nazwa szablonu"
                         ></v-text-field>
+                    </v-flex>
+                    <v-flex>
                         <v-btn color="success" @click="addQuestion">
                             Dodaj kolejne pytanie
                         </v-btn>
@@ -25,7 +27,7 @@
                 </v-layout>
             </v-card-text>
             <v-card-actions>
-                <v-flex d-flex>
+                <v-flex>
                     <v-btn @click="submit()" color="success">
                         Zapisz
                     </v-btn>
