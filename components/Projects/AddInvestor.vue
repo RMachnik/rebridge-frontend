@@ -1,23 +1,23 @@
 <template>
-    <form @submit.prevent="submit" novalidate>
-        <v-card>
-            <v-card-title>
-                <v-flex d-flex>
-                    <v-text-field
-                            label="Email inwestora"
-                            v-model="formData.email"
-                            required
-                            solo
+    <form @submit.prevent="addInvestor" novalidate>
+        <v-flex d-flex>
+            <v-text-field
+                    label="Email inwestora"
+                    v-model="formData.email"
+                    required
+                    solo
+                    @keydown.enter="add"
+            >
+                <v-fade-transition slot="append">
+                    <v-icon
+                            v-if="formData.email"
+                            @click="add"
                     >
-                    </v-text-field>
-                </v-flex>
-            </v-card-title>
-            <v-card-actions>
-                <v-btn color="success" type="submit">
-                    Dodaj
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+                        add_circle
+                    </v-icon>
+                </v-fade-transition>
+            </v-text-field>
+        </v-flex>
     </form>
 </template>
 
@@ -35,9 +35,9 @@
         },
         methods: {
             ...mapActions('projects', ['addInvestor']),
-            submit() {
+            add() {
                 let data = {token: this.token, projectId: this.selectedProjectDetails.projectId, data: this.formData};
-                this.addInvestor(data);
+                this.addInvestor(data).then(() => this.formData.email = null);
             },
         },
     };

@@ -8,22 +8,15 @@
         </v-card-title>
         <v-slide-y-transition>
             <div v-show="show">
-                <v-layout row wrap>
-                    <v-layout column wrap>
-                        <v-card-actions>
-                            <add-investor></add-investor>
-                        </v-card-actions>
-                    </v-layout>
-                    <v-layout column wrap>
-                        <v-card-text>
-                            <contact-details
-                                    v-for="(investor,index) in selectedProjectDetails.investors"
-                                    :investor="investor" :projectId="selectedProject.id" :key="index"/>
-                        </v-card-text>
-                    </v-layout>
-                </v-layout>
+                <v-card-text>
+                    <contact-details
+                            v-for="(investor,index) in selectedProjectDetails.investors"
+                            :investor="investor" :projectId="selectedProject.id" :key="index"/>
+                    <add-investor></add-investor>
+                </v-card-text>
             </div>
         </v-slide-y-transition>
+
     </v-card>
 </template>
 
@@ -35,7 +28,7 @@
     import ContactDetails from './ContactDetails';
 
     export default {
-        name: 'Investor',
+        name: 'Investors',
         components: {
             ContactDetails,
             Questionnaire,

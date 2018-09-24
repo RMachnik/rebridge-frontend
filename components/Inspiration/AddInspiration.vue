@@ -6,7 +6,8 @@
                     <v-layout column wrap>
                         <v-flex>
                             <v-text-field
-                                    label="Nazwa"
+                                    solo
+                                    label="Inspiracja"
                                     v-model="formData.name"
                                     required
                             >

@@ -3,7 +3,11 @@
         <v-card-title>
             <v-toolbar flat color="white">
                 <v-toolbar-title>
-                    <h4>{{room.name}}</h4>
+                    <h4>{{room.name}}
+                        <v-btn flat color="red" @click="deleteThisRoom">
+                            <v-icon small>delete</v-icon>
+                        </v-btn>
+                    </h4>
                 </v-toolbar-title>
                 <v-divider
                         class="mx-2"
@@ -12,10 +16,21 @@
                 ></v-divider>
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
-                <v-text-field label="Kategoria" v-model="newCategory" required></v-text-field>
-                <v-btn color="primary" @click="add">
-                    Nowa kategoria
-                </v-btn>
+                <v-text-field
+                        solo
+                        label="Kategoria"
+                        v-model="newCategory"
+                        @keydown.enter="add"
+                >
+                    <v-fade-transition slot="append">
+                        <v-icon
+                                v-if="newRoom"
+                                @click="add"
+                        >
+                            add_circle
+                        </v-icon>
+                    </v-fade-transition>
+                </v-text-field>
             </v-toolbar>
         </v-card-title>
         <v-card-text>
@@ -48,7 +63,16 @@
             ...mapState('projects', ['selectedProjectDetails']),
         },
         methods: {
-            ...mapActions('catalogue', ['addCategory']),
+            ...mapActions('catalogue', ['addCategory', 'deleteRoom']),
+            deleteThisRoom() {
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                    catalogueId: this.catalogue.id,
+                    roomId: this.room.id,
+                }
+                this.deleteRoom(data);
+            },
             add() {
                 let data = {
                     token: this.token,

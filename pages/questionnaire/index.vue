@@ -1,19 +1,24 @@
 <template>
-    <section id="projects">
+    <div>
         <page-title title="Szablony"/>
-        <v-container fluid grid-list-md>
-            <v-layout align-start justify-start row wrap>
-                <v-flex d-flex>
-                    <add-question></add-question>
-                </v-flex>
-            </v-layout>
-            <v-layout align-start justify-start row wrap>
-                <v-flex d-flex>
-                    <questionnaires></questionnaires>
-                </v-flex>
-            </v-layout>
-        </v-container>
-    </section>
+        <v-card id="projects">
+
+            <v-container grid-list-md>
+                <v-layout row wrap>
+                    <v-layout align-start column wrap>
+                        <v-flex d-flex>
+                            <add-question></add-question>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout align-start column wrap>
+                        <v-flex d-flex>
+                            <questionnaires style="max-height: 500px;overflow-y: scroll;width: 300px"></questionnaires>
+                        </v-flex>
+                    </v-layout>
+                </v-layout>
+            </v-container>
+        </v-card>
+    </div>
 </template>
 <script>
     import PageTitle from '~/components/Common/PageTitle';

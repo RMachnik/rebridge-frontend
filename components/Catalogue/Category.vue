@@ -2,10 +2,12 @@
     <div>
         <v-toolbar flat color="white">
             <v-toolbar-title>
-                <h5>{{category.name}}</h5>
-                <v-btn flat color="red">
-                    <v-icon>delete</v-icon>
-                </v-btn>
+                <h5>{{category.name}}
+                    <v-btn flat color="red" @click="deleteCat">
+                        <v-icon small>delete</v-icon>
+                    </v-btn>
+                </h5>
+
             </v-toolbar-title>
             <v-divider
                     class="mx-2"
@@ -72,7 +74,7 @@
                     </v-icon>
                     <v-icon
                             small
-                            @click="deleteItem(props.item)"
+                            @click="deleteRow(props.item)"
                     >
                         delete
                     </v-icon>
@@ -142,15 +144,33 @@
             ...mapState('projects', ['selectedProjectDetails']),
         },
         methods: {
-            ...mapActions('catalogue', ['addItem']),
+            ...mapActions('catalogue', ['addItem', 'deleteItem', 'deleteCategory']),
+            deleteCat() {
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                    catalogueId: this.catalogue.id,
+                    roomId: this.roomId,
+                    categoryId: this.category.id,
+                }
+                this.deleteCategory(data);
+            },
             editItem(item) {
                 this.editedIndex = this.category.items.indexOf(item)
                 this.editedItem = Object.assign({}, item)
                 this.dialog = true
             },
-            deleteItem(item) {
-                const index = this.category.items.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+            deleteRow(item) {
+                this.category.items.indexOf(item)
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                    catalogueId: this.catalogue.id,
+                    roomId: this.roomId,
+                    categoryId: this.category.id,
+                    itemId: item.id
+                }
+                this.deleteItem(data);
             },
             close() {
                 this.dialog = false

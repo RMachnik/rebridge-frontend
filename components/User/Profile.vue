@@ -125,7 +125,6 @@
                 };
                 let data = {token: this.token, data: profile};
                 this.update(data).then(() => {
-                        console.log("great success")
                         this.$router.go(-1)
                     }
                 ).catch(

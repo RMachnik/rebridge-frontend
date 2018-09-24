@@ -11,7 +11,7 @@
             </v-layout>
             <v-layout align-start justify-start row wrap>
                 <v-flex d-flex v-if="isArchitect">
-                    <investor :selectedProject="selectedProject"/>
+                    <investors :selectedProject="selectedProject"/>
                 </v-flex>
                 <v-flex d-flex>
                     <questionnaire :projectId="selectedProject.id"/>
@@ -38,7 +38,7 @@
     import {mapState} from 'vuex';
     import DetailsForm from './DetailsForm'
     import Questionnaire from './Questionnaire';
-    import Investor from './Investor';
+    import Investors from './Investors';
     import Chat from './Chat';
     import Inspirations from "../Inspiration/Inspirations";
     import Documents from "../Documents/Documents";
@@ -51,7 +51,7 @@
             Inspirations,
             Questionnaire,
             DetailsForm,
-            Investor,
+            Investors,
             Chat,
             Documents,
         },

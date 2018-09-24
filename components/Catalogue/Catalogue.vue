@@ -12,10 +12,20 @@
                 ></v-divider>
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
-                <v-text-field label="Pokój" v-model="newRoom" required></v-text-field>
-                <v-btn color="primary" @click="add">
-                    Nowy Pokój
-                </v-btn>
+                <v-text-field
+                        solo
+                        label="Pokój"
+                        v-model="newRoom"
+                        @keydown.enter="add">
+                    <v-fade-transition slot="append">
+                        <v-icon
+                                v-if="newRoom"
+                                @click="add"
+                        >
+                            add_circle
+                        </v-icon>
+                    </v-fade-transition>
+                </v-text-field>
             </v-toolbar>
         </v-card-title>
         <v-card-text>
