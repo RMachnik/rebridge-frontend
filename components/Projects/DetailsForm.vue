@@ -16,7 +16,6 @@
                                 ></v-text-field>
                             </v-flex>
                             <v-flex d-flex>
-
                                 <v-text-field
                                         v-model="selectedProjectDetails.location.number"
                                         label="Numer mieszkania"
@@ -59,9 +58,6 @@
                                         suffix="m²"
                                 ></v-text-field>
                             </v-flex>
-                            <v-flex d-flex>
-                                <dropzone id="projectImg" :options="options" :destroyDropzone="true"></dropzone>
-                            </v-flex>
                         </v-layout>
                     </v-flex>
                 </v-layout>
@@ -73,17 +69,19 @@
                     </v-btn>
                 </v-flex>
             </v-card-actions>
+            <v-flex d-flex v-if="!readonly">
+                <investors :selectedProject="this.selectedProject"/>
+            </v-flex>
         </v-card>
     </v-form>
 </template>
 <script>
-    import {mapActions, mapState,mapGetters} from 'vuex';
-    import Dropzone from 'nuxt-dropzone'
-    import 'nuxt-dropzone/dropzone.css'
+    import {mapActions, mapState} from 'vuex';
+    import Investors from '~/Components/Projects/Investors';
 
     export default {
         name: 'ProjectDetails',
-        components: {Dropzone},
+        components: {Investors},
         props: {
             selectedProject: {
                 type: Object,
@@ -98,18 +96,10 @@
             ...mapState('projects', ['selectedProjectDetails', 'questionnaire']),
             ...mapState('auth', ['token']),
             ...mapState('user', ['currentUser']),
-            ...mapGetters('projects', ['dropzoneOptions', 'imageUrl']),
             readonly: function () {
                 if (this.currentUser) {
                     return !this.currentUser.roles.includes('ARCHITECT');
                 }
-            },
-            options: function () {
-                let data = {
-                    projectId: this.selectedProject.id,
-                    token: this.token
-                }
-                return this.dropzoneOptions(data)
             },
         },
         methods: {

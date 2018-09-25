@@ -1,6 +1,4 @@
 <template>
-    <v-layout justify-center>
-        <v-flex xs12 sm10 md8 lg6>
             <v-card>
                 <v-card-text>
                     <v-text-field
@@ -87,8 +85,6 @@
                     <v-btn color="success" @click="submit">Zapisz</v-btn>
                 </v-card-actions>
             </v-card>
-        </v-flex>
-    </v-layout>
 </template>
 
 

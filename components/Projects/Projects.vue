@@ -1,8 +1,8 @@
 <template>
     <v-container fluid grid-list-md>
         <v-card>
-            <add-project v-if="isArchitect"/>
             <v-layout row wrap>
+                <empty-project-tail></empty-project-tail>
                 <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
             </v-layout>
         </v-card>
@@ -10,14 +10,13 @@
 </template>
 
 <script>
-    import AddProject from './AddProject';
-    import ProjectTail from './ProjectTail';
     import {mapState} from 'vuex';
-
+    import EmptyProjectTail from "./EmptyProjectTail";
+    import ProjectTail from './ProjectTail';
 
     export default {
         name: 'Projects',
-        components: {ProjectTail, AddProject},
+        components: {EmptyProjectTail, ProjectTail},
         computed: {
             ...mapState('projects', ['projects']),
             ...mapState('user', ['currentUser']),

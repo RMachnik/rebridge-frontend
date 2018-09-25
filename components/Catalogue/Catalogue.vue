@@ -3,7 +3,7 @@
         <v-card-title>
             <v-toolbar flat color="white">
                 <v-toolbar-title>
-                    <h3>Katalog produktów</h3>
+                    <h3>Dokumentacja materiałowa</h3>
                 </v-toolbar-title>
                 <v-divider
                         class="mx-2"

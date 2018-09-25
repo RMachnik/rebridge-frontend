@@ -22,7 +22,6 @@
 
 <script>
     import {mapState} from 'vuex';
-    import DetailsForm from './DetailsForm'
     import AddInvestor from './AddInvestor';
     import Questionnaire from './Questionnaire';
     import ContactDetails from './ContactDetails';
@@ -33,7 +32,6 @@
             ContactDetails,
             Questionnaire,
             AddInvestor,
-            DetailsForm
         },
         props: {
             selectedProject: {
@@ -58,9 +56,3 @@
         }
     };
 </script>
-<style scoped>
-    .scrollable {
-        overflow-y: scroll;
-        height: 212px;
-    }
-</style>

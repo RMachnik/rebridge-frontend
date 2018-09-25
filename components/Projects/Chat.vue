@@ -6,7 +6,16 @@
             </v-card-title>
             <v-card-text class="scrollable">
                 <v-list v-for="(message,index) in chat.messages" :message="message" :key="index">
+                    <v-list-tile v-if="message.author===currentUser.email">
+                        <v-list-tile-content right>
+                            <v-list-tile-sub-title>
+                                {{message.creationDate}}
+                            </v-list-tile-sub-title>
+                            {{message.content}}
+                        </v-list-tile-content>
+                    </v-list-tile>
                     <v-list-tile
+                            v-else
                             avatar
                     >
                         <v-list-tile-avatar>
@@ -61,6 +70,7 @@
         computed: {
             ...mapState('auth', ['token']),
             ...mapState('projects', ['chat']),
+            ...mapState('user', ['currentUser']),
         },
         methods: {
             ...mapActions('projects', ['sendChatMessage']),

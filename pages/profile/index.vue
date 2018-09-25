@@ -1,6 +1,6 @@
 <template>
-    <section class="container">
-        <page-title title="Twoje dane"/>
+    <section id="projects">
+        <page-title title="Twoje Dane"/>
         <profile/>
     </section>
 </template>
