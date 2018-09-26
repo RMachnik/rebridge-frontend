@@ -5,9 +5,10 @@
                     slot-scope="{ hover }"
                     :class="`elevation-${hover ? 12 : 2}`"
                     class="mx-auto"
-                    width="344">
-                <v-img
-                        :src="image"
+                    max-width="344"
+                    max-height="500">
+                <v-img aspect-ratio="1.0"
+                       :src="image"
                 ></v-img>
                 <v-card-title>
                     <span class="headline">{{inspiration.name}}</span>
@@ -34,15 +35,6 @@
                 </v-card-actions>
                 <v-slide-y-transition>
                     <div v-show="show">
-                        <v-card-actions>
-                            <dropzone
-                                    id="inspiration"
-                                    ref="dropzone"
-                                    :options="options"
-                                    :destroyDropzone="true"
-                                    @vdropzone-success="uploadCompleted"
-                            ></dropzone>
-                        </v-card-actions>
                         <v-card-text>
                             <v-spacer></v-spacer>
                             <v-layout row>
@@ -68,8 +60,7 @@
     import {mapActions, mapGetters, mapState} from 'vuex'
     import Comments from './Comments'
     import AddComment from "./AddComment"
-    import Dropzone from 'nuxt-dropzone'
-    import 'nuxt-dropzone/dropzone.css'
+
     import Rating from 'v-rating'
 
     export default {
@@ -77,7 +68,6 @@
         components: {
             AddComment,
             Comments,
-            Dropzone,
             Rating
         },
         props: {
@@ -94,22 +84,13 @@
         computed: {
             ...mapState('auth', ['token']),
             ...mapState('projects', ['selectedProjectDetails']),
-            ...mapGetters('inspirations', ['dropzoneOptions', 'imageUrl']),
-            options: function () {
-                let data = {
-                    projectId: this.selectedProjectDetails.projectId,
-                    inspirationId: this.inspiration.id,
-                    token: this.token
-                }
-                return this.dropzoneOptions(data);
-            },
+            ...mapGetters('inspirations', ['imageUrl']),
             image: function () {
                 return this.imageUrl(this.inspiration.id)
             },
         },
         methods: {
-            ...
-                mapActions('inspirations', ['all', 'delete', 'update']),
+            ...mapActions('inspirations', ['all', 'delete', 'update']),
             remove() {
                 let data = {
                     token: this.token,
@@ -117,17 +98,7 @@
                     inspirationId: this.inspiration.id
                 }
                 this.delete(data)
-            }
-            ,
-            uploadCompleted(file, response) {
-                let data = {
-                    token: this.token,
-                    projectId: this.selectedProjectDetails.projectId,
-                    inspirationId: this.inspiration.id
-                }
-                this.all(data)
-            }
-            ,
+            },
             changeRating() {
                 let data = {
                     token: this.token,

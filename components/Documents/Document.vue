@@ -7,7 +7,7 @@
                     class="mx-auto"
                     width="344"
             >
-                <v-img
+                <v-img aspect-ratio="1.0"
                         :src="document.url"
                 ></v-img>
                 <v-card-title>

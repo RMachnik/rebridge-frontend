@@ -2,34 +2,36 @@
     <div v-if="selectedProject">
         <v-container fluid grid-list-md>
             <v-layout align-start justify-start row wrap>
-                <v-flex d-flex>
+                <v-flex d-flex id="projectDetails">
                     <details-form :selectedProject="selectedProject"/>
                 </v-flex>
             </v-layout>
             <v-layout align-start justify-start row wrap>
-                <v-flex d-flex>
-                    <questionnaire :projectId="selectedProject.id"/>
+                <v-flex d-flex id="survey">
+                    <survey :projectId="selectedProject.id"/>
                 </v-flex>
             </v-layout>
             <v-layout align-start justify-start row wrap>
-                <inspirations :inspirations="inspirations"/>
+                <v-flex d-flex id="inspirations">
+                    <inspirations :inspirations="inspirations"/>
+                </v-flex>
             </v-layout>
             <v-layout align-start justify-start row wrap>
-                <v-flex d-flex>
+                <v-flex d-flex id="documentation">
                     <documents></documents>
                 </v-flex>
             </v-layout>
             <v-layout align-start justify-start row wrap>
-                <v-flex d-flex>
+                <v-flex d-flex id="catalogue">
                     <catalogue></catalogue>
                 </v-flex>
             </v-layout>
             <v-layout align-start justify-start row wrap>
-                <v-flex d-flex>
+                <v-flex d-flex id="chat">
                     <chat></chat>
                 </v-flex>
             </v-layout>
-
+            <project-navigation></project-navigation>
         </v-container>
     </div>
 </template>
@@ -37,8 +39,9 @@
 <script>
     import {mapState} from 'vuex';
     import DetailsForm from './DetailsForm'
-    import Questionnaire from './Questionnaire';
+    import Survey from './Survey';
     import Chat from './Chat';
+    import ProjectNavigation from './ProjectNavigation';
     import Inspirations from "../Inspiration/Inspirations";
     import Documents from "../Documents/Documents";
     import Catalogue from "../Catalogue/Catalogue";
@@ -48,10 +51,11 @@
         components: {
             Catalogue,
             Inspirations,
-            Questionnaire,
+            Survey,
             DetailsForm,
             Chat,
             Documents,
+            ProjectNavigation
         },
         props: {
             selectedProject: {

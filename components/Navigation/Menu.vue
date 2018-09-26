@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="menu">
         <v-container>
             <v-toolbar color="cyan" dark fixed app clipped-left>
                 <v-toolbar-side-icon v-if="currentUser" @click.stop="drawer = !drawer"></v-toolbar-side-icon>

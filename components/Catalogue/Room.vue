@@ -17,14 +17,13 @@
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
                 <v-text-field
-                        solo
                         label="Kategoria"
                         v-model="newCategory"
                         @keydown.enter="add"
                 >
                     <v-fade-transition slot="append">
                         <v-icon
-                                v-if="newRoom"
+                                v-if="newCategory"
                                 @click="add"
                         >
                             add_circle

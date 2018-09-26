@@ -1,11 +1,15 @@
 <template>
     <div>
-        <dropzone id="addDocument" :options="options" :destroyDropzone="true"></dropzone>
+        <dropzone id="addDocument"
+                  :options="options"
+                  :destroyDropzone="true"
+                  @vdropzone-success="uploadCompleted"
+        ></dropzone>
     </div>
 </template>
 
 <script>
-    import {mapGetters, mapState} from 'vuex';
+    import {mapActions, mapGetters, mapState} from 'vuex';
     import Dropzone from 'nuxt-dropzone'
     import 'nuxt-dropzone/dropzone.css'
 
@@ -30,5 +34,15 @@
                 return this.dropzoneOptions(data)
             },
         },
+        methods: {
+            ...mapActions('documents', ['loadDocuments']),
+            uploadCompleted(file, response) {
+                let data = {
+                    token: this.token,
+                    projectId: this.selectedProjectDetails.projectId,
+                }
+                this.loadDocuments(data)
+            }
+        }
     };
 </script>

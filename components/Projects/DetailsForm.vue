@@ -5,73 +5,64 @@
                 <h3>Dane o projekcie</h3>
             </v-card-title>
             <v-card-text>
-                <v-layout row wrap>
+                <v-layout column wrap>
                     <v-flex d-flex>
-                        <v-layout column wrap>
-                            <v-flex d-flex>
-                                <v-text-field
-                                        v-model="selectedProjectDetails.location.streetName"
-                                        label="Ulica"
-                                        :readonly="readonly"
-                                ></v-text-field>
-                            </v-flex>
-                            <v-flex d-flex>
-                                <v-text-field
-                                        v-model="selectedProjectDetails.location.number"
-                                        label="Numer mieszkania"
-                                        :readonly="readonly"
-                                ></v-text-field>
-                            </v-flex>
-                            <v-flex d-flex>
-                                <v-text-field
-                                        v-model="selectedProjectDetails.location.postalCode"
-                                        label="Kod pocztowy"
-                                        :readonly="readonly"
-                                ></v-text-field>
-                            </v-flex>
-                            <v-flex d-flex>
-                                <v-text-field
-                                        v-model="selectedProjectDetails.location.city"
-                                        label="Miasto"
-                                        :readonly="readonly"
-                                ></v-text-field>
-                            </v-flex>
-                        </v-layout>
+                        <v-text-field
+                                v-model="selectedProjectDetails.location.streetName"
+                                label="Ulica"
+                                :readonly="readonly"
+                                @change="submit"
+                        ></v-text-field>
                     </v-flex>
                     <v-flex d-flex>
-                        <v-layout column wrap>
-                            <v-flex>
-                                <v-text-field
-                                        v-model="selectedProjectDetails.budget"
-                                        type="number"
-                                        label="Budżet projektu"
-                                        :readonly="readonly"
-                                        suffix="zł"
-                                ></v-text-field>
-                            </v-flex>
-                            <v-flex d-flex>
-                                <v-text-field
-                                        v-model="selectedProjectDetails.surface"
-                                        type="number"
-                                        label="Powierzchnia"
-                                        :readonly="readonly"
-                                        suffix="m²"
-                                ></v-text-field>
-                            </v-flex>
-                        </v-layout>
+                        <v-text-field
+                                v-model="selectedProjectDetails.location.number"
+                                label="Numer mieszkania"
+                                :readonly="readonly"
+                                @change="submit"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex d-flex>
+                        <v-text-field
+                                v-model="selectedProjectDetails.location.postalCode"
+                                label="Kod pocztowy"
+                                :readonly="readonly"
+                                @change="submit"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex d-flex>
+                        <v-text-field
+                                v-model="selectedProjectDetails.location.city"
+                                label="Miasto"
+                                :readonly="readonly"
+                                @change="submit"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex>
+                        <v-text-field
+                                v-model="selectedProjectDetails.budget"
+                                type="number"
+                                label="Budżet projektu"
+                                :readonly="readonly"
+                                suffix="zł"
+                                @change="submit"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex d-flex>
+                        <v-text-field
+                                v-model="selectedProjectDetails.surface"
+                                type="number"
+                                label="Powierzchnia"
+                                :readonly="readonly"
+                                suffix="m²"
+                                @change="submit"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex d-flex v-if="!readonly">
+                        <investors :selectedProject="this.selectedProject"/>
                     </v-flex>
                 </v-layout>
             </v-card-text>
-            <v-card-actions>
-                <v-flex d-flex>
-                    <v-btn v-if="!readonly" @click="submit()" color="success">
-                        Zapisz
-                    </v-btn>
-                </v-flex>
-            </v-card-actions>
-            <v-flex d-flex v-if="!readonly">
-                <investors :selectedProject="this.selectedProject"/>
-            </v-flex>
         </v-card>
     </v-form>
 </template>
@@ -103,7 +94,7 @@
             },
         },
         methods: {
-            ...mapActions('projects', ['updateDetails']),
+            ...mapActions('projects', ['updateDetails','loadQuestionnaire']),
             submit() {
                 let location = {
                     streetName: this.selectedProjectDetails.location.streetName,
@@ -120,7 +111,7 @@
                         location: location,
                     },
                 };
-                this.updateDetails(data);
+                this.updateDetails(data).then(()=>this.loadQuestionnaire(data));
             },
         }
     };

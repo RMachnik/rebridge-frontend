@@ -1,24 +1,21 @@
 <template>
-    <form @submit.prevent="addInvestor" novalidate>
-        <v-flex d-flex>
-            <v-text-field
-                    label="Email inwestora"
-                    v-model="formData.email"
-                    required
-                    solo
-                    @keydown.enter="add"
-            >
-                <v-fade-transition slot="append">
-                    <v-icon
-                            v-if="formData.email"
-                            @click="add"
-                    >
-                        add_circle
-                    </v-icon>
-                </v-fade-transition>
-            </v-text-field>
-        </v-flex>
-    </form>
+    <v-flex>
+        <v-text-field
+                label="Email inwestora"
+                v-model="formData.email"
+                required
+                @keydown.enter="add"
+        >
+            <v-fade-transition slot="append">
+                <v-icon
+                        v-if="formData.email"
+                        @click="add"
+                >
+                    add_circle
+                </v-icon>
+            </v-fade-transition>
+        </v-text-field>
+    </v-flex>
 </template>
 
 <script>

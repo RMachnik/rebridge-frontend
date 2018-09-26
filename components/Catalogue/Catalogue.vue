@@ -13,7 +13,6 @@
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
                 <v-text-field
-                        solo
                         label="Pokój"
                         v-model="newRoom"
                         @keydown.enter="add">
