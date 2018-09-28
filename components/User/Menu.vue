@@ -1,32 +1,32 @@
 <template v-if="currentUser">
     <v-list>
-        <v-list-tile v-show="isArchitect" class="clickable">
+        <v-list-tile v-show="isArchitect">
             <v-list-tile-action>
                 <add-project-menu></add-project-menu>
             </v-list-tile-action>
         </v-list-tile>
-        <v-list-tile class="clickable" @click="redirectToProjects()">
+        <v-list-tile @click="redirectToProjects()">
             <v-list-tile-action>
                 <v-icon>dashboard</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Projekty
             </v-list-tile-title>
         </v-list-tile>
-        <v-list-tile v-show="isArchitect" class="clickable" @click="questionnaireTemplates()">
+        <v-list-tile v-show="isArchitect" @click="questionnaireTemplates()">
             <v-list-tile-action>
                 <v-icon>list</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Kwestionariusze
             </v-list-tile-title>
         </v-list-tile>
-        <v-list-tile class="clickable" @click="redirectToProfile()">
+        <v-list-tile @click="redirectToProfile()">
             <v-list-tile-action>
                 <v-icon>account_box</v-icon>
             </v-list-tile-action>
             <v-list-tile-title>Twoje dane
             </v-list-tile-title>
         </v-list-tile>
-        <v-list-tile class="clickable" @click="logoutAndRedirect">
+        <v-list-tile @click="logoutAndRedirect">
             <v-list-tile-action>
                 <v-icon color="red">power_settings_new</v-icon>
             </v-list-tile-action>
@@ -76,8 +76,3 @@
         }
     }
 </script>
-<style scoped>
-    .clickable {
-        cursor: pointer;
-    }
-</style>

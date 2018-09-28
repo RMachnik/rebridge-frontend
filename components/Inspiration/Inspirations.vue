@@ -2,10 +2,10 @@
     <v-card>
         <v-card-title>
             <h3>Inspiracje</h3>
-            <add-inspiration></add-inspiration>
         </v-card-title>
         <v-card-text>
             <v-layout row wrap>
+                <add-inspiration></add-inspiration>
                 <inspiration v-for="(inspiration,index) in inspirations" :inspiration="inspiration"
                              :key="index"></inspiration>
             </v-layout>

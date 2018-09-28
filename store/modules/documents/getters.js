@@ -4,12 +4,11 @@ export default {
     dropzoneOptions: (state) => (data) => {
         return {
             url: `${BASE_URL}/projects/` + data.projectId + "/documentation",
-            thumbnailWidth: 150,
-            maxFilesize: 0.5,
+            maxFilesize: 2.0,
             headers: {"Authorization": "Bearer " + data.token},
             paramName: "uploadedFile",
             dictDefaultMessage: "Dodaj dokumentację",
-            acceptedFiles: "image/*",
+            acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg,.pdf",
         }
     },
 }

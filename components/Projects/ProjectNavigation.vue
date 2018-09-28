@@ -5,11 +5,13 @@
             right
             clipped
             app
+            mini-variant="true"
     >
         <v-list v-for="(link,index) in links" :link="link" :key="index">
-            <v-list-tile
-            >
-                <v-list-tile-title @click="$vuetify.goTo(link.selector,options)">{{link.label}}</v-list-tile-title>
+            <v-list-tile @click="$vuetify.goTo(link.selector,options)">
+                <v-list-tile-action>
+                    <v-icon>{{link.icon}}</v-icon>
+                </v-list-tile-action>
             </v-list-tile>
         </v-list>
     </v-navigation-drawer>
@@ -24,29 +26,36 @@
                 links: [
                     {
                         selector: "#projectDetails",
-                        label: 'Dane'
+                        label: 'Dane',
+                        icon: 'info'
                     },
                     {
                         selector: "#survey",
-                        label: 'Ankieta'
+                        label: 'Ankieta',
+                        icon: 'question_answer'
                     },
                     {
                         selector: "#inspirations",
-                        label: 'Inspiracje'
+                        label: 'Inspiracje',
+                        icon: 'photo_library'
                     },
                     {
                         selector: "#documentation",
-                        label: 'Dokumentacja'
+                        label: 'Dokumentacja',
+                        icon: 'folder'
                     },
                     {
                         selector: "#catalogue",
-                        label: 'Dokumentacja materialowa'
+                        label: 'Dokumentacja materialowa',
+                        icon: 'list'
                     },
                     {
                         selector: "#chat",
-                        label: 'Czat'
+                        label: 'Czat',
+                        icon: 'chat'
                     }]
             }
-        }
+        },
+        mini: true
     }
 </script>

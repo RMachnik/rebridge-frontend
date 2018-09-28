@@ -1,12 +1,15 @@
 <template>
-    <div>
-        <dropzone
-                id="addInspiration"
-                :options="options"
-                :destroyDropzone="true"
-                @vdropzone-success="uploadCompleted"
-        ></dropzone>
-    </div>
+    <v-flex>
+        <v-card hover="true"
+                max-width="344">
+            <dropzone
+                    id="addInspiration"
+                    :options="options"
+                    :destroyDropzone="true"
+                    @vdropzone-success="uploadCompleted"
+            ></dropzone>
+        </v-card>
+    </v-flex>
 </template>
 
 <script>
@@ -15,7 +18,7 @@
     import 'nuxt-dropzone/dropzone.css'
 
     export default {
-        name: 'AddDocument',
+        name: 'AddInspiration',
         components: {Dropzone},
         computed: {
             ...mapState('auth', ['token']),

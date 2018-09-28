@@ -1,11 +1,15 @@
 <template>
-    <div>
-        <dropzone id="addDocument"
-                  :options="options"
-                  :destroyDropzone="true"
-                  @vdropzone-success="uploadCompleted"
-        ></dropzone>
-    </div>
+    <v-flex>
+        <v-card hover="true"
+                max-width="344"
+        >
+            <dropzone id="addDocument"
+                      :options="options"
+                      :destroyDropzone="true"
+                      @vdropzone-success="uploadCompleted"
+            ></dropzone>
+        </v-card>
+    </v-flex>
 </template>
 
 <script>

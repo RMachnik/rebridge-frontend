@@ -1,18 +1,22 @@
 <template>
     <v-layout row wrap>
-        <v-flex flex-d>
+        <v-flex>
             <v-text-field
                     solo
                     label="Komentarz"
                     v-model="comment"
                     required
+                    @keydown.enter="add"
             >
+                <v-fade-transition slot="append">
+                    <v-icon
+                            v-if="comment"
+                            @click="add"
+                    >
+                        add_circle
+                    </v-icon>
+                </v-fade-transition>
             </v-text-field>
-        </v-flex>
-        <v-flex flex-d>
-            <v-btn @click="add" color="success">
-                Dodaj
-            </v-btn>
         </v-flex>
     </v-layout>
 </template>
@@ -51,6 +55,3 @@
         }
     }
 </script>
-
-<style scoped>
-</style>

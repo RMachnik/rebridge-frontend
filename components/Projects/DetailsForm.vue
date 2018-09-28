@@ -68,7 +68,7 @@
 </template>
 <script>
     import {mapActions, mapState} from 'vuex';
-    import Investors from '~/Components/Projects/Investors';
+    import Investors from './Investors';
 
     export default {
         name: 'ProjectDetails',

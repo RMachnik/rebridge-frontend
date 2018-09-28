@@ -18,7 +18,7 @@
                              left
                              app
                              clipped
-                             :mini-variant.sync="mini"
+                             mini-variant="true"
         >
             <v-toolbar flat class="transparent">
                 <v-list class="pa-0">
@@ -30,15 +30,6 @@
                         <v-list-tile-content>
                             <v-list-tile-title>{{currentUser.email}}</v-list-tile-title>
                         </v-list-tile-content>
-
-                        <v-list-tile-action>
-                            <v-btn
-                                    icon
-                                    @click="mini = !mini"
-                            >
-                                <v-icon>chevron_left</v-icon>
-                            </v-btn>
-                        </v-list-tile-action>
                     </v-list-tile>
                 </v-list>
             </v-toolbar>
@@ -58,7 +49,6 @@
         data() {
             return {
                 drawer: false,
-                mini: false
             }
         },
         computed: {

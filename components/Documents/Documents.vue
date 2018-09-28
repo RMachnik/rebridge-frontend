@@ -1,13 +1,13 @@
 <template>
-    <v-container fluid grid-list-md>
-        <v-card>
-            <v-card-title><h3>Documents</h3></v-card-title>
-            <add-document v-if="isArchitect"/>
+    <v-card>
+        <v-card-title><h3>Documents</h3></v-card-title>
+        <v-card-text>
             <v-layout row wrap>
+                <add-document v-if="isArchitect"/>
                 <document v-for="(document, index) in this.documents" :key="index" :document="document"/>
             </v-layout>
-        </v-card>
-    </v-container>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
