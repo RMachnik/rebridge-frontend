@@ -1,15 +1,17 @@
 <template>
-    <div class="display-1 text-uppercase">
-        {{ title }}
+    <div>
+        <div class="subheading">
+            {{ subtitle }}
+        </div>
+        <v-divider></v-divider>
     </div>
-
 </template>
 
 <script>
     export default {
         name: 'PageTitle',
         props: {
-            title: {
+            subtitle: {
                 type: String,
                 required: true
             }

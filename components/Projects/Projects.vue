@@ -1,12 +1,8 @@
 <template>
-    <v-container fluid grid-list-md>
-        <v-card>
-            <v-layout row wrap>
-                <empty-project-tail></empty-project-tail>
-                <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
-            </v-layout>
-        </v-card>
-    </v-container>
+    <v-layout row wrap>
+        <empty-project-tail></empty-project-tail>
+        <project-tail v-for="(project, index) in this.projects" :key="index" :project="project"/>
+    </v-layout>
 </template>
 
 <script>

@@ -1,67 +1,65 @@
 <template>
-    <div>
-        <v-card>
-            <v-card-title>
-                <h3>Czat</h3>
-            </v-card-title>
-            <v-card-text class="scrollable">
-                <v-list v-for="(message,index) in chat.messages" :message="message" :key="index">
-                    <v-list-tile v-if="message.author===currentUser.email">
-                        <v-list-tile-content right>
-                            <v-list-tile-sub-title>
-                                {{message.creationDate}}
-                            </v-list-tile-sub-title>
-                            {{message.content}}
+    <v-flex>
+        <subtitle subtitle="Czat"></subtitle>
+        <div class="scrollable">
+            <v-list subheader>
+                <v-list-tile v-for="(message,index) in chat.messages" :message="message" :key="index" class="clickable">
+                    <div v-if="message.author===currentUser.email">
+                        <v-list-tile-content>
+                            <v-tooltip bottom>
+                                <span>{{message.creationDate}}</span>
+                                <v-list-tile-title slot="activator">
+                                    <span>{{message.content}}</span>
+                                </v-list-tile-title>
+                            </v-tooltip>
                         </v-list-tile-content>
-                    </v-list-tile>
-                    <v-list-tile
-                            v-else
-                            avatar
-                    >
+                    </div>
+                    <div v-else>
                         <v-list-tile-avatar>
                             <v-chip small>{{message.author.split("@")[0]}}</v-chip>
                         </v-list-tile-avatar>
                         <v-list-tile-content>
-                            <v-list-tile-sub-title>
-                                {{message.creationDate}}
-                            </v-list-tile-sub-title>
-                            {{message.content}}
+                            <v-list-tile-content class="text-xs-left">
+                                <v-tooltip bottom>
+                                    <span>{{message.creationDate}}</span>
+                                    <v-list-tile-title slot="activator">{{message.content}}</v-list-tile-title>
+                                </v-tooltip>
+                            </v-list-tile-content>
                         </v-list-tile-content>
-                    </v-list-tile>
-                    <v-divider></v-divider>
-                </v-list>
-            </v-card-text>
-            <v-card-text>
-                <v-flex>
-                    <v-text-field
-                            solo
-                            v-model="newMessage"
-                            label="Nowa wiadomość"
-                            placeholder="Nowa wiadomość"
-                            @keydown.enter="sendMessage"
+                    </div>
+                </v-list-tile>
+            </v-list>
+        </div>
+        <v-flex>
+            <v-text-field
+                    outline
+                    clearable
+                    label="Wiadomość"
+                    type="text"
+                    v-model="newMessage"
+                    @keydown.enter="sendMessage"
+            >
+                <v-fade-transition slot="append">
+                    <v-icon
+                            v-if="newMessage"
+                            @click="sendMessage"
                     >
-                        <v-fade-transition slot="append">
-                            <v-icon
-                                    v-if="newMessage"
-                                    @click="sendMessage"
-                            >
-                                add_circle
-                            </v-icon>
-                        </v-fade-transition>
-                    </v-text-field>
-                </v-flex>
-            </v-card-text>
-        </v-card>
-    </div>
+                        add_circle
+                    </v-icon>
+                </v-fade-transition>
+            </v-text-field>
+        </v-flex>
+    </v-flex>
 </template>
 
 <script>
 
     import {mapActions, mapState} from 'vuex'
+    import Subtitle from "../Common/Subtitle"
 
     export default {
         name: 'Chat',
-        components: {},
+        components: {Subtitle},
         props: {},
         data: () => ({
             newMessage: '',
@@ -90,8 +88,8 @@
     };
 </script>
 <style scoped>
-    .scrollable {
-        overflow-y: scroll;
-        max-height: 250px;
+    .clickable:hover {
+        background: rgba(0, 0, 0, 0.04);
+        cursor: pointer;
     }
 </style>

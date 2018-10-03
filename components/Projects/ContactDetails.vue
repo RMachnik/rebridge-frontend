@@ -1,17 +1,10 @@
 <template>
     <v-flex>
-        <v-chip>
+        <v-chip @dblclick="remove" close="true" @input="remove">
             {{investor.email}}
         </v-chip>
         <div class="v-subheader" v-if="investor.name">{{investor.name}} {{investor.surname}}</div>
         <div class="v-subheader" v-if="investor.phone"> {{investor.phone}}</div>
-        <v-btn
-                color="error"
-                flat
-                @click="remove()"
-        >
-            <v-icon>delete</v-icon>
-        </v-btn>
     </v-flex>
 </template>
 

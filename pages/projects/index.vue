@@ -1,6 +1,5 @@
 <template>
     <section id="projects">
-        <page-title title="Twoje Projekty"/>
         <projects/>
     </section>
 </template>

@@ -1,23 +1,24 @@
 <template>
-    <v-card>
-        <v-card-title><h3>Documents</h3></v-card-title>
-        <v-card-text>
+    <v-layout>
+        <v-flex>
+            <subtitle subtitle="Dokumentacja"></subtitle>
+            <add-document v-if="isArchitect"/>
             <v-layout row wrap>
-                <add-document v-if="isArchitect"/>
                 <document v-for="(document, index) in this.documents" :key="index" :document="document"/>
             </v-layout>
-        </v-card-text>
-    </v-card>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
     import {mapState} from 'vuex';
     import Document from './Document'
     import AddDocument from "./AddDocument";
+    import Subtitle from "../Common/Subtitle"
 
     export default {
         name: 'Documents',
-        components: {AddDocument, Document},
+        components: {Subtitle, AddDocument, Document},
         computed: {
             ...mapState('documents', ['documents']),
             ...mapState('user', ['currentUser']),

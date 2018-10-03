@@ -1,38 +1,39 @@
 <template>
     <div v-if="selectedProject">
-        <v-container fluid grid-list-md>
-            <v-layout align-start justify-start row wrap>
-                <v-flex d-flex id="projectDetails">
+        <v-container>
+            <v-layout row>
+                <v-flex id="projectDetails">
                     <details-form :selectedProject="selectedProject"/>
                 </v-flex>
             </v-layout>
-            <v-layout align-start justify-start row wrap>
-                <v-flex d-flex id="survey">
+            <v-layout row>
+                <v-flex id="survey">
                     <survey :projectId="selectedProject.id"/>
                 </v-flex>
             </v-layout>
-            <v-layout align-start justify-start row wrap>
-                <v-flex d-flex id="inspirations">
+            <v-layout row>
+                <v-flex id="inspirations">
                     <inspirations :inspirations="inspirations"/>
                 </v-flex>
             </v-layout>
-            <v-layout align-start justify-start row wrap>
-                <v-flex d-flex id="documentation">
+            <v-layout row>
+                <v-flex id="documentation">
                     <documents></documents>
                 </v-flex>
             </v-layout>
-            <v-layout align-start justify-start row wrap>
-                <v-flex d-flex id="catalogue">
+            <v-layout row>
+                <v-flex id="catalogue">
                     <catalogue></catalogue>
                 </v-flex>
             </v-layout>
-            <v-layout align-start justify-start row wrap>
-                <v-flex d-flex id="chat">
+            <v-layout row>
+                <v-flex id="chat">
                     <chat></chat>
                 </v-flex>
             </v-layout>
-            <project-navigation></project-navigation>
         </v-container>
+        <project-navigation></project-navigation>
+
     </div>
 </template>
 

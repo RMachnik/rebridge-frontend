@@ -4,6 +4,7 @@
                 label="Email inwestora"
                 v-model="formData.email"
                 required
+                type="email"
                 @keydown.enter="add"
         >
             <v-fade-transition slot="append">

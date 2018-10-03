@@ -1,12 +1,9 @@
 <template>
-    <v-badge overlap>
-        <span slot="badge">{{events.length}}</span>
+    <v-badge overlap color="primary">
+        <span slot="badge">{{this.notRed}}</span>
         <v-menu offset-y>
-            <v-avatar
-                    color="cyan red--after"
-                    slot="activator"
-            >
-                <v-icon dark>notifications</v-icon>
+            <v-avatar slot="activator">
+                <v-icon>notifications</v-icon>
             </v-avatar>
             <v-list v-if="events.length > 0">
                 <v-list-tile v-for="(event,index) in events" :event="event" :key="index">
@@ -33,6 +30,9 @@
             ...mapState('auth', ['token']),
             isArchitect: function () {
                 return this.currentUser.roles.includes('ARCHITECT');
+            },
+            notRed: function () {
+                return this.events.filter(event => !event.seen).length
             }
         },
         methods: {
@@ -48,6 +48,7 @@
                 }
                 this.markRed(data)
             }
+
         }
     }
 </script>

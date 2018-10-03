@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <v-toolbar flat color="white">
+    <v-flex>
+        <v-toolbar flat color="transparent">
             <v-toolbar-title>
                 <h5>{{category.name}}
                     <v-btn flat color="red" @click="deleteCat">
@@ -16,26 +16,29 @@
             ></v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
-                <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
+                <v-btn slot="activator" class="mb-2">
+                    <v-icon>add</v-icon>
+                </v-btn>
                 <v-card>
                     <v-card-title>
                         <span class="headline">Dodaj element</span>
                     </v-card-title>
-
                     <v-card-text>
-                        <v-container grid-list-md>
-                            <v-layout wrap>
-                                <v-flex xs12 sm6 md4>
+                        <v-container>
+                            <v-layout column>
+                                <v-flex>
                                     <v-text-field v-model="editedItem.description" label="Nazwa"></v-text-field>
                                 </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.sizing" label="Wymiary"></v-text-field>
+                                <v-flex>
+                                    <v-text-field v-model="editedItem.sizing" label="Wymiary" suffix="m²xm²"></v-text-field>
                                 </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.quantity" label="Ilosc m^2"></v-text-field>
+                                <v-flex>
+                                    <v-text-field v-model="editedItem.quantity" label="Ilosc"
+                                                  suffix="m²"></v-text-field>
                                 </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.prize" label="Cena/m^2/szt"></v-text-field>
+                                <v-flex>
+                                    <v-text-field v-model="editedItem.prize" label="Cena"
+                                                  suffix="sztuka/m²"></v-text-field>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -53,7 +56,7 @@
                 :headers="headers"
                 :items="category.items"
                 hide-actions
-                class="elevation-1"
+                color="transparent"
         >
             <template slot="items" slot-scope="props">
                 <td>{{ props.item.description }}</td>
@@ -81,7 +84,7 @@
                 </td>
             </template>
         </v-data-table>
-    </div>
+    </v-flex>
 </template>
 
 <script>

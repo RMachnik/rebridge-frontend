@@ -1,14 +1,11 @@
 <template>
     <v-flex>
-        <v-card hover="true"
-                max-width="344">
             <dropzone
                     id="addInspiration"
                     :options="options"
                     :destroyDropzone="true"
                     @vdropzone-success="uploadCompleted"
             ></dropzone>
-        </v-card>
     </v-flex>
 </template>
 
@@ -16,7 +13,6 @@
     import {mapActions, mapGetters, mapState} from 'vuex';
     import Dropzone from 'nuxt-dropzone'
     import 'nuxt-dropzone/dropzone.css'
-
     export default {
         name: 'AddInspiration',
         components: {Dropzone},
@@ -45,7 +41,7 @@
                     projectId: this.selectedProjectDetails.projectId,
                 }
                 this.all(data)
-            }
+            },
         }
     };
 </script>

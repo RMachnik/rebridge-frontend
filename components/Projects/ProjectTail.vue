@@ -3,37 +3,18 @@
         <v-card
                 hover="true"
                 width="344"
+                class="mx-auto"
         >
+            <v-card-title class="clickable" @click="redirectToProject(project.id)">
+                <h3>{{ project.name }}</h3>
+                <v-btn red flat @click="remove(project)" v-if="isArchitect">
+                    <v-icon red color="red" small>delete</v-icon>
+                </v-btn>
+            </v-card-title>
             <v-img class="clickable" @click="redirectToProject(project.id)"
                    :src="image"
                    aspect-ratio="1.6"
             ></v-img>
-            <v-card-title class="clickable" @click="redirectToProject(project.id)">
-                <h3>{{ project.name }}</h3>
-            </v-card-title>
-            <v-card-actions class="justify-end">
-                <v-btn red flat @click="remove(project)" v-if="isArchitect">
-                    <v-icon red color="red">delete</v-icon>
-                </v-btn>
-                <v-btn icon v-if="hasDetails" @click="show = !show">
-                    <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-                </v-btn>
-            </v-card-actions>
-            <v-slide-y-transition>
-                <v-card-text v-show="show">
-                        <span class="font-weight-light grey--text title mb-2">
-                        <div v-if="project.details.budget>0">Budżet: {{project.details.budget}} PLN</div>
-                        <div v-if="project.details.surface>0">Powierzchnia: {{project.details.surface}} m<sup>2</sup>
-                            <div v-if="project.details.location">
-                                <div v-if="project.details.location.streetName">Adres:
-                                    {{project.details.location.streetName}} {{project.details.location.number}},
-                                    {{project.details.location.city}}
-                                </div>
-                            </div>
-                        </div>
-                        </span>
-                </v-card-text>
-            </v-slide-y-transition>
         </v-card>
     </v-flex>
 </template>

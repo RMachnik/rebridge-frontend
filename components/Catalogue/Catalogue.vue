@@ -1,19 +1,10 @@
 <template>
-    <v-card>
-        <v-card-title>
-            <v-toolbar flat color="white">
-                <v-toolbar-title>
-                    <h3>Dokumentacja materiałowa</h3>
-                </v-toolbar-title>
-                <v-divider
-                        class="mx-2"
-                        inset
-                        vertical
-                ></v-divider>
-                <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
+    <v-layout>
+        <v-flex>
+            <subtitle subtitle="Zestawienie materiałowe"></subtitle>
+            <v-toolbar flat color="transparent">
                 <v-text-field
-                        label="Pokój"
+                        label="Pomieszczenie"
                         v-model="newRoom"
                         @keydown.enter="add">
                     <v-fade-transition slot="append">
@@ -26,19 +17,20 @@
                     </v-fade-transition>
                 </v-text-field>
             </v-toolbar>
-        </v-card-title>
-        <v-card-text>
-            <room v-for="(room,index) in this.catalogue.rooms" :key="index" :room="room"></room>
-        </v-card-text>
-    </v-card>
+            <v-flex>
+                <room v-for="(room,index) in this.catalogue.rooms" :key="index" :room="room"></room>
+            </v-flex>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
     import Room from "./Room";
+    import Subtitle from "../Common/Subtitle"
     import {mapActions, mapState} from 'vuex'
 
     export default {
-        components: {Room},
+        components: {Subtitle, Room},
         component: 'Catalogue',
         data: () => ({
             newRoom: ''

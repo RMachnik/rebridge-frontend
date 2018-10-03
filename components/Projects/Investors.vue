@@ -1,9 +1,11 @@
 <template>
     <div v-if="isArchitect">
         <add-investor></add-investor>
+        <v-layout row wrap>
         <contact-details
                 v-for="(investor,index) in this.selectedProjectDetails.investors"
                 :investor="investor" :projectId="selectedProject.id" :key="index"/>
+        </v-layout>
     </div>
 </template>
 

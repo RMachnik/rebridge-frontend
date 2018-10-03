@@ -19,10 +19,12 @@
     "nuxt": "^1.0.0",
     "nuxt-dropzone": "^0.2.7",
     "nuxt-material-design-icons": "^1.0.4",
+    "startbootstrap-agency": "^5.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "v-rating": "^1.0.1",
     "vee-validate": "^2.1.0-beta.6",
+    "vue-pdf": "^3.3.1",
     "vue-select": "^2.4.0",
     "vue2-dropzone": "^3.2.2",
     "vuetify": "^1.2.1"

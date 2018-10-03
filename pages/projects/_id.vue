@@ -1,12 +1,12 @@
 <template>
-    <section v-if="selected">
-        <section id="header">
+    <v-container style="width:1000px;">
+        <div v-if="selected">
             <page-title :title="selected.name"/>
-        </section>
-        <section id="details">
-            <project-details :selectedProject="selected"/>
-        </section>
-    </section>
+            <section id="details">
+                <project-details :selectedProject="selected"/>
+            </section>
+        </div>
+    </v-container>
 </template>
 
 <script>
@@ -19,8 +19,7 @@
             ProjectDetails,
             PageTitle,
         },
-        data: () => ({
-        }),
+        data: () => ({}),
         computed: {
             ...mapGetters('projects', ['find']),
             selected: function () {

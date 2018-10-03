@@ -1,40 +1,45 @@
 <template>
-    <v-card id="survey">
-        <v-card-title><h3>Ankieta</h3></v-card-title>
-        <v-list v-for="(question,index) in this.questions" :question="question" :key="index" two-line>
-            <v-list-tile>
-                <v-list-tile-content>
-                    <v-list-tile-title class="text--primary">{{question.id}}. {{question.question}}</v-list-tile-title>
-                    <v-list-tile-sub-title>
-                        <div v-if="isArchitect">
-                            <div v-if="question.answer">
-                                {{question.answer}}
+    <v-layout v-if="this.questions.length>0">
+        <v-flex>
+            <subtitle subtitle="Ankieta"></subtitle>
+            <v-list v-for="(question,index) in this.questions" :question="question" :key="index" two-line>
+                <v-list-tile>
+                    <v-list-tile-content>
+                        <v-list-tile-title>{{question.id}}. {{question.question}}
+                        </v-list-tile-title>
+                        <v-list-tile-sub-title>
+                            <div v-if="isArchitect">
+                                <div v-if="question.answer">
+                                    {{question.answer}}
+                                </div>
+                                <div v-else>
+                                    ...
+                                </div>
                             </div>
                             <div v-else>
-                                ...
+                                <v-text-field
+                                        auto-grow
+                                        label="odpowiedź"
+                                        v-model="question.answer"
+                                        :readonly="isArchitect"
+                                        @change="save"
+                                ></v-text-field>
                             </div>
-                        </div>
-                        <div v-else>
-                            <v-text-field
-                                    auto-grow
-                                    label="odpowiedź"
-                                    v-model="question.answer"
-                                    :readonly="isArchitect"
-                                    @change="save"
-                            ></v-text-field>
-                        </div>
-                    </v-list-tile-sub-title>
-                </v-list-tile-content>
-            </v-list-tile>
-        </v-list>
-    </v-card>
+                        </v-list-tile-sub-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
     import {mapActions, mapState} from 'vuex';
+    import Subtitle from "../Common/Subtitle";
 
     export default {
         name: 'Survey',
+        components: {Subtitle},
         props: {
             projectId: {type: String, required: true},
         },

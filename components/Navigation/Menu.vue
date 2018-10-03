@@ -1,14 +1,13 @@
 <template>
     <div id="menu">
         <v-container>
-            <v-toolbar color="cyan" dark fixed app clipped-left>
+            <v-toolbar dark fixed app clipped-left>
                 <v-toolbar-side-icon v-if="currentUser" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
                 <v-toolbar-title>
                     <v-btn flat @click="home">
                         Rebridge
                     </v-btn>
                 </v-toolbar-title>
-                <v-spacer></v-spacer>
                 <events></events>
             </v-toolbar>
         </v-container>

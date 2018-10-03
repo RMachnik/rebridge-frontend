@@ -10,12 +10,13 @@ export default {
     dropzoneOptions: (state) => (data) => {
         return {
             url: `${BASE_URL}/projects/` + data.projectId + "/inspirations/",
-            maxFilesize: 0.5,
+            maxFilesize: 2.0,
             acceptedFiles: "image/*",
             headers: {"Authorization": "Bearer " + data.token},
             paramName: "uploadedFile",
             dictDefaultMessage: "Dodaj inspirację",
-            createImageThumbnails: false
+            createImageThumbnails: false,
+            previewTemplate: '<div class="uploaded-image"><span data-dz-name></span> <strong class="dz-size" data-dz-size></strong><div class="dz-error-message" data-dz-errormessage></div><div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div></div>',
         }
     },
     imageUrl: (state, getters) => (inspirationId) => {
