@@ -19,8 +19,10 @@ export default {
     },
     imageUrl: (state, getters) => (projectId) => {
         let project = getters.find(projectId);
-        if (project.details.imageId) {
-            return `${BASE_URL}/images/` + project.details.imageId
+        if (project.details) {
+            if (project.details.imageId) {
+                return `${BASE_URL}/images/` + project.details.imageId
+            }
         }
         return "https://cdn.vuetifyjs.com/images/cards/desert.jpg";
     }

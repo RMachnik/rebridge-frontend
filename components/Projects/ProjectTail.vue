@@ -1,7 +1,7 @@
 <template>
     <v-flex>
         <v-card
-                hover="true"
+                :hover=hover
                 width="344"
                 class="mx-auto"
         >
@@ -31,7 +31,8 @@
             },
         },
         data: () => ({
-            show: false
+            show: false,
+            hover:true
         }),
         computed: {
             ...mapState('auth', ['token']),
@@ -45,12 +46,6 @@
                     return this.currentUser.roles.includes('ARCHITECT');
                 }
             },
-            hasDetails: function () {
-                return (this.project.details.budget > 0 ||
-                    this.project.details.surface > 0 ||
-                    this.project.details.location.streetName ||
-                    this.project.details.location.city)
-            }
         },
         methods: {
             ...mapActions('projects', ['loadDetails', 'delete', 'loadQuestionnaire', 'loadChat']),

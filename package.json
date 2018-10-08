@@ -14,16 +14,20 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",
+    "ajv-keywords": "^3.2.0",
     "axios": "^0.18.0",
     "js-cookie": "^2.2.0",
+    "node-sass": "^4.9.3",
     "nuxt": "^1.0.0",
     "nuxt-dropzone": "^0.2.7",
     "nuxt-material-design-icons": "^1.0.4",
+    "sass-loader": "^7.1.0",
     "startbootstrap-agency": "^5.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "v-rating": "^1.0.1",
     "vee-validate": "^2.1.0-beta.6",
+    "vue-beautiful-chat": "^2.0.0",
     "vue-pdf": "^3.3.1",
     "vue-select": "^2.4.0",
     "vue2-dropzone": "^3.2.2",
@@ -31,9 +35,11 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
+    "css-loader": "^1.0.0",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.0.0",
+    "vue-style-loader": "^4.1.2"
   }
 }

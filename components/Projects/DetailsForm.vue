@@ -1,7 +1,7 @@
 <template>
     <v-form v-if="selectedProjectDetails">
         <v-layout column wrap>
-            <subtitle subtitle="Dane o projekcie"></subtitle>
+            <v-divider></v-divider>
             <v-flex>
                 <v-text-field
                         v-model="selectedProjectDetails.location.streetName"
@@ -67,7 +67,7 @@
 
     export default {
         name: 'ProjectDetails',
-        components: {Subtitle,Investors},
+        components: {Subtitle, Investors},
         props: {
             selectedProject: {
                 type: Object,

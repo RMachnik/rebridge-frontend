@@ -6,6 +6,10 @@ export default {
         return axios.post(`${BASE_URL}/projects`, data.data,
             config(data.token));
     },
+    updateProject(data) {
+        return axios.put(`${BASE_URL}/projects/` + data.projectId, data.data,
+            config(data.token));
+    },
     delete(data) {
         return axios.delete(`${BASE_URL}/projects/` + data.project.id,
             config(data.token));

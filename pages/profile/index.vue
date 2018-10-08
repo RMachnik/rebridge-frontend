@@ -1,8 +1,10 @@
 <template>
-    <section id="projects">
-        <page-title title="Twoje Dane"/>
-        <profile/>
-    </section>
+    <v-container style="width:1000px;">
+        <section id="projects">
+            <page-title title="Twoje Dane"/>
+            <profile/>
+        </section>
+    </v-container>
 </template>
 <script>
     import PageTitle from '~/components/Common/PageTitle'

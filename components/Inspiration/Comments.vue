@@ -1,28 +1,26 @@
 <template>
-    <v-expansion-panel v-model="panel" expand>
-        <v-expansion-panel-content
-                v-for="(comment,i) in comments"
-                :key="i"
-                expand-icon="mdi-menu-down"
-        >
-            <div slot="header">
-                <v-chip v-if=canDelete(comment)>Ty:</v-chip>
-                <v-chip v-else>{{comment.author.split("@")[0]}}:</v-chip>
-                {{comment.content}}
-            </div>
-            <v-card>
-                <v-card-text class="grey lighten-3">
-                    {{comment.content}}
-                    <v-btn v-if="canDelete(comment)" flat color="red" small @click="remove(comment.id)">
-                        <v-icon small>delete</v-icon>
-                    </v-btn>
-                </v-card-text>
-                <v-card-actions>
-
-                </v-card-actions>
-            </v-card>
-        </v-expansion-panel-content>
-    </v-expansion-panel>
+    <v-list two-lines>
+        <template v-for="(item,index) in comments">
+            <v-list-tile hover="true"
+                         :key="item.content"
+                         avatar
+            >
+                <v-list-tile-avatar v-if="item.author!=currentUser.email">
+                    <v-chip small>{{item.author.split("@")[0]}}</v-chip>
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                    <v-list-tile-sub-title>{{item.content}}</v-list-tile-sub-title>
+                </v-list-tile-content>
+                <v-list-tile-avatar v-if="item.author===currentUser.email">
+                    <v-chip small>{{item.author.split("@")[0]}}</v-chip>
+                </v-list-tile-avatar>
+            </v-list-tile>
+            <v-divider
+                    v-if="index + 1 < comments.length"
+                    :key="index"
+            ></v-divider>
+        </template>
+    </v-list>
 </template>
 
 <script>

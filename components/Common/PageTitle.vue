@@ -2,7 +2,6 @@
     <div class="display-1 text-uppercase">
         {{ title }}
     </div>
-
 </template>
 
 <script>

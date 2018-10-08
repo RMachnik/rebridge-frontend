@@ -1,7 +1,6 @@
 <template>
     <v-container style="width:1000px;">
         <div v-if="selected">
-            <page-title :title="selected.name"/>
             <section id="details">
                 <project-details :selectedProject="selected"/>
             </section>
@@ -10,14 +9,15 @@
 </template>
 
 <script>
-    import ProjectDetails from '~/components/Projects/ProjectDetails';
-    import PageTitle from '~/components/Common/PageTitle';
     import {mapGetters} from 'vuex';
+    import ProjectDetails from '~/components/Projects/ProjectDetails';
+    import EditablePageTitle from "~/components/Common/EditablePageTitle";
+
 
     export default {
         components: {
-            ProjectDetails,
-            PageTitle,
+            EditablePageTitle,
+            ProjectDetails
         },
         data: () => ({}),
         computed: {

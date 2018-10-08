@@ -1,7 +1,9 @@
 <template>
-    <section id="projects">
-        <projects/>
-    </section>
+    <v-container style="width:1000px;">
+        <div id="projects">
+            <projects/>
+        </div>
+    </v-container>
 </template>
 <script>
     import PageTitle from '~/components/Common/PageTitle';
@@ -11,7 +13,7 @@
         name: 'IndexProjects',
         components: {
             PageTitle,
-            Projects,
+            Projects
         },
         watchQuery: ['page'],
         async fetch({store}) {

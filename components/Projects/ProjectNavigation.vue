@@ -5,7 +5,7 @@
             right
             clipped
             app
-            mini-variant="true"
+            :mini-variant=miniVariant
     >
         <v-list v-for="(link,index) in links" :link="link" :key="index">
             <v-list-tile @click="$vuetify.goTo(link.selector,options)">
@@ -22,6 +22,7 @@
         data() {
             return {
                 drawer: true,
+                miniVariant: true,
                 options: {offset: -70},
                 links: [
                     {

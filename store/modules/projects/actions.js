@@ -17,6 +17,16 @@ export default {
             return Promise.reject(errorMessage)
         });
     },
+    updateProject({state, commit}, data) {
+        return projectService.updateProject(data).then(
+            () => {
+                return Promise.resolve()
+            }).catch((error) => {
+            let errorMessage = util.prettyLog(error);
+            commit(global.ADD_FAILURE, "Nie udało się zmienić nazwy" + errorMessage, {root: true})
+            return Promise.reject(errorMessage)
+        });
+    },
     delete({commit}, data) {
         return projectService.delete(data).then(
             () => {

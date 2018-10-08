@@ -16,7 +16,7 @@ export default {
             paramName: "uploadedFile",
             dictDefaultMessage: "Dodaj inspirację",
             createImageThumbnails: false,
-            previewTemplate: '<div class="uploaded-image"><span data-dz-name></span> <strong class="dz-size" data-dz-size></strong><div class="dz-error-message" data-dz-errormessage></div><div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div></div>',
+            previewTemplate: '<div class="uploaded-image">Dodaj inspirację<div class="dz-error-message" data-dz-errormessage></div><div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div></div>',
         }
     },
     imageUrl: (state, getters) => (inspirationId) => {

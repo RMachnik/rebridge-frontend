@@ -1,8 +1,8 @@
 <template>
-    <v-layout>
+    <v-layout v-if="isArchitect">
         <v-flex>
             <subtitle subtitle="Dokumentacja"></subtitle>
-            <add-document v-if="isArchitect"/>
+            <add-document />
             <v-layout row wrap>
                 <document v-for="(document, index) in this.documents" :key="index" :document="document"/>
             </v-layout>

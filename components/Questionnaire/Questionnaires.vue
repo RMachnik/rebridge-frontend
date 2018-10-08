@@ -1,6 +1,7 @@
 <template>
-    <v-expansion-panel>
-        <v-expansion-panel-title><h4>Twoje szablony</h4></v-expansion-panel-title>
+    <v-flex>
+        <v-expansion-panel>
+            <v-expansion-panel-title><h4>Twoje szablony</h4></v-expansion-panel-title>
             <v-expansion-panel-content
                     v-for="(template,i) in templates"
                     :key="i"
@@ -22,7 +23,8 @@
                     </v-card-actions>
                 </v-card>
             </v-expansion-panel-content>
-    </v-expansion-panel>
+        </v-expansion-panel>
+    </v-flex>
 </template>
 <script>
     import {mapActions, mapState} from 'vuex';

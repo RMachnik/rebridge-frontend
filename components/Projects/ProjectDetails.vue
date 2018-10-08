@@ -2,6 +2,11 @@
     <div v-if="selectedProject">
         <v-container>
             <v-layout row>
+                <v-flex>
+                    <editable-page-title :title="selectedProject.name"/>
+                </v-flex>
+            </v-layout>
+            <v-layout row>
                 <v-flex id="projectDetails">
                     <details-form :selectedProject="selectedProject"/>
                 </v-flex>
@@ -33,7 +38,7 @@
             </v-layout>
         </v-container>
         <project-navigation></project-navigation>
-
+        <my-chat></my-chat>
     </div>
 </template>
 
@@ -46,10 +51,14 @@
     import Inspirations from "../Inspiration/Inspirations";
     import Documents from "../Documents/Documents";
     import Catalogue from "../Catalogue/Catalogue";
+    import MyChat from "./MyChat";
+    import EditablePageTitle from "../Common/EditablePageTitle";
 
     export default {
         name: 'ProjectDetails',
         components: {
+            EditablePageTitle,
+            MyChat,
             Catalogue,
             Inspirations,
             Survey,

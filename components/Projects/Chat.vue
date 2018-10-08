@@ -1,35 +1,28 @@
 <template>
     <v-flex>
         <subtitle subtitle="Czat"></subtitle>
-        <div class="scrollable">
-            <v-list subheader>
-                <v-list-tile v-for="(message,index) in chat.messages" :message="message" :key="index" class="clickable">
-                    <div v-if="message.author===currentUser.email">
-                        <v-list-tile-content>
-                            <v-tooltip bottom>
-                                <span>{{message.creationDate}}</span>
-                                <v-list-tile-title slot="activator">
-                                    <span>{{message.content}}</span>
-                                </v-list-tile-title>
-                            </v-tooltip>
-                        </v-list-tile-content>
-                    </div>
-                    <div v-else>
-                        <v-list-tile-avatar>
-                            <v-chip small>{{message.author.split("@")[0]}}</v-chip>
-                        </v-list-tile-avatar>
-                        <v-list-tile-content>
-                            <v-list-tile-content class="text-xs-left">
-                                <v-tooltip bottom>
-                                    <span>{{message.creationDate}}</span>
-                                    <v-list-tile-title slot="activator">{{message.content}}</v-list-tile-title>
-                                </v-tooltip>
-                            </v-list-tile-content>
-                        </v-list-tile-content>
-                    </div>
+        <v-list two-lines>
+            <template v-for="(item,index) in chat.messages">
+                <v-list-tile hover="true"
+                             :key="item.content"
+                             avatar
+                >
+                    <v-list-tile-avatar v-if="item.author!=currentUser.email">
+                        <v-chip small>{{item.author.split("@")[0]}}</v-chip>
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                        <v-list-tile-sub-title>{{item.content}}</v-list-tile-sub-title>
+                    </v-list-tile-content>
+                    <v-list-tile-avatar v-if="item.author===currentUser.email">
+                        <v-chip small>{{item.author.split("@")[0]}}</v-chip>
+                    </v-list-tile-avatar>
                 </v-list-tile>
-            </v-list>
-        </div>
+                <v-divider
+                        v-if="index + 1 < chat.messages.length"
+                        :key="index"
+                ></v-divider>
+            </template>
+        </v-list>
         <v-flex>
             <v-text-field
                     outline

@@ -17,7 +17,7 @@
                              left
                              app
                              clipped
-                             mini-variant="true"
+                             :mini-variant=miniVariant
         >
             <v-toolbar flat class="transparent">
                 <v-list class="pa-0">
@@ -48,6 +48,7 @@
         data() {
             return {
                 drawer: false,
+                miniVariant: true,
             }
         },
         computed: {

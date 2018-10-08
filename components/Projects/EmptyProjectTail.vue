@@ -1,6 +1,7 @@
 <template>
     <v-flex>
-        <v-card hover="true"
+        <v-card
+                :hover=hover
                 max-width="344"
         >
             <v-img
@@ -15,5 +16,8 @@
 
     export default {
         name: 'EmptyProjectTail',
+        data: () => ({
+            hover: true,
+        })
     };
 </script>
