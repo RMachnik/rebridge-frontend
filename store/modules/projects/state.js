@@ -9,7 +9,6 @@ export default {
         selectedProjectDetails: null,
         questions: [],
         chat: null,
-        error: null,
     },
     mutations,
     actions,
