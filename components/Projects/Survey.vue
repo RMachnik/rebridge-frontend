@@ -2,12 +2,10 @@
     <v-layout v-if="this.questions.length>0">
         <v-flex>
             <subtitle subtitle="Ankieta"></subtitle>
-            <v-list v-for="(question,index) in this.questions" :question="question" :key="index" two-line>
-                <v-list-tile>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{question.id}}. {{question.question}}
-                        </v-list-tile-title>
-                        <v-list-tile-sub-title>
+            <div v-for="(question,index) in this.questions" :question="question" :key="index" three-line>
+                    <div>
+                        {{question.id}}. {{question.question}}
+                        <div>
                             <div v-if="isArchitect">
                                 <div v-if="question.answer">
                                     {{question.answer}}
@@ -18,17 +16,16 @@
                             </div>
                             <div v-else>
                                 <v-text-field
-                                        auto-grow
+                                        box
                                         label="odpowiedź"
                                         v-model="question.answer"
                                         :readonly="isArchitect"
                                         @change="save"
                                 ></v-text-field>
                             </div>
-                        </v-list-tile-sub-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-            </v-list>
+                        </div>
+                    </div>
+            </div>
         </v-flex>
     </v-layout>
 </template>

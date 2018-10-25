@@ -1,11 +1,11 @@
 <template>
     <v-layout column wrap>
         <v-flex>
-            <div class="display-1 text-uppercase">
+            <div class="display-1">
                 <div v-show="editable == false">
                     <label @dblclick="editable = true"> {{title}} </label>
                 </div>
-                <v-text-field class="display-1 text-uppercase" v-show="editable == true" v-model="title"
+                <v-text-field class="display-1" v-show="editable == true" v-model="title"
                               v-on:blur="edit=false; update()"
                               @keyup.enter="edit=false; update()">
                 </v-text-field>
@@ -41,7 +41,7 @@
                     projectId: this.selectedProjectDetails.projectId,
                     data: {name: this.title}
                 }
-                this.updateProject(data)
+                this.updateProject(data).then(()=>this.editable=false)
             }
         }
     }

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="subheading">
+        <h3>
             {{ subtitle }}
-        </div>
+        </h3>
         <v-divider></v-divider>
     </div>
 </template>
@@ -20,8 +20,7 @@
 </script>
 
 <style scoped>
-    h2 {
-        margin: 0 0 24px;
+    h3 {
         text-align: left;
     }
 </style>

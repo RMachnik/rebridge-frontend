@@ -1,11 +1,13 @@
 <template>
-    <v-layout v-if="isArchitect">
+    <v-layout>
         <v-flex>
             <subtitle subtitle="Dokumentacja"></subtitle>
-            <add-document />
-            <v-layout row wrap>
-                <document v-for="(document, index) in this.documents" :key="index" :document="document"/>
-            </v-layout>
+            <add-document v-if="isArchitect"/>
+            <v-container grid-list-sm fluid>
+                <v-layout row wrap>
+                    <document v-for="(document, index) in this.documents" :key="index" :document="document"/>
+                </v-layout>
+            </v-container>
         </v-flex>
     </v-layout>
 </template>

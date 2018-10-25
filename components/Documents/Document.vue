@@ -1,21 +1,47 @@
 <template>
-    <v-flex style="padding:10px">
-        <v-dialog v-model="show" width="600px">
+    <v-flex xs4>
+        <v-hover>
             <v-card
-                    hover="true"
-                    slot="activator"
-                    class="mx-auto"
-                    width="344"
+                    flat
+                    tile
+                    class="d-flex"
+                    slot-scope="{ hover }"
+                    :hover="true"
+                    height="100%"
+                    max-width="100%"
+
             >
-                <v-card-title>
-                    <span class="font-weight-light grey--text title mb-2">{{document.name}}</span>
-                </v-card-title>
-                <display-as-pdf v-if="document.name.includes('.pdf')" :document="document"/>
+                <display-as-pdf
+                        v-if="document.name.includes('.pdf')"
+                        @click.native="show = true"
+                        :document="document">
+                    <v-expand-transition>
+                        <div
+                                v-if="hover"
+                                class="font-weight-light white--text title mb-2"
+                        >
+                            {{document.name}}
+                        </div>
+                    </v-expand-transition>
+                </display-as-pdf>
                 <v-img
+                        aspect-ratio="1"
                         v-else
+                        @click="show = true"
                         :src="document.url"
-                ></v-img>
+                >
+                    <v-expand-transition>
+                        <div
+                                v-if="hover"
+                                class="font-weight-light white--text title mb-2"
+                        >
+                            {{document.name}}
+                        </div>
+                    </v-expand-transition>
+                </v-img>
             </v-card>
+        </v-hover>
+        <v-dialog v-model="show" width="600px">
             <v-card>
                 <v-card-title>
                     <span class="font-weight-light grey--text title mb-2">{{document.name}}</span>

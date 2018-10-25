@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-beautiful-chat
+        <beautiful-chat
                 :participants="participants"
                 :titleImageUrl="titleImageUrl"
                 :onMessageWasSent="onMessageWasSent"
@@ -17,8 +17,13 @@
     </div>
 </template>
 <script>
+    import beautifulChat from 'vue-beautiful-chat'
+
     export default {
         name: 'MyChat',
+        components:{
+            beautifulChat
+        },
         data() {
             return {
                 participants: [

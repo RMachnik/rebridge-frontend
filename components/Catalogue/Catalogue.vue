@@ -30,8 +30,8 @@
     import {mapActions, mapState} from 'vuex'
 
     export default {
-        components: {Subtitle, Room},
         component: 'Catalogue',
+        components: {Subtitle, Room},
         data: () => ({
             newRoom: ''
         }),

@@ -3,10 +3,12 @@
         <v-flex>
             <subtitle subtitle="Inspiracje"></subtitle>
             <add-inspiration></add-inspiration>
-            <v-layout row wrap>
-                <inspiration v-for="(inspiration,index) in inspirations" :inspiration="inspiration"
-                             :key="index"></inspiration>
-            </v-layout>
+            <v-container grid-list-sm fluid>
+                <v-layout row wrap>
+                    <inspiration v-for="(inspiration,index) in inspirations" :inspiration="inspiration"
+                                 :key="index"></inspiration>
+                </v-layout>
+            </v-container>
         </v-flex>
     </v-layout>
 </template>

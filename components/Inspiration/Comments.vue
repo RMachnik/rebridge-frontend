@@ -6,7 +6,7 @@
                          avatar
             >
                 <v-list-tile-avatar v-if="item.author!=currentUser.email">
-                    <v-chip small>{{item.author.split("@")[0]}}</v-chip>
+                    <v-chip small color="green">{{item.author.split("@")[0]}}</v-chip>
                 </v-list-tile-avatar>
                 <v-list-tile-content>
                     <v-list-tile-sub-title>{{item.content}}</v-list-tile-sub-title>

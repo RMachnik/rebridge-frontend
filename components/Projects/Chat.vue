@@ -3,12 +3,12 @@
         <subtitle subtitle="Czat"></subtitle>
         <v-list two-lines>
             <template v-for="(item,index) in chat.messages">
-                <v-list-tile hover="true"
+                <v-list-tile :hover=hover
                              :key="item.content"
                              avatar
                 >
                     <v-list-tile-avatar v-if="item.author!=currentUser.email">
-                        <v-chip small>{{item.author.split("@")[0]}}</v-chip>
+                        <v-chip small color="green">{{item.author.split("@")[0]}}</v-chip>
                     </v-list-tile-avatar>
                     <v-list-tile-content>
                         <v-list-tile-sub-title>{{item.content}}</v-list-tile-sub-title>
@@ -56,6 +56,7 @@
         props: {},
         data: () => ({
             newMessage: '',
+            hover:true,
         }),
 
         computed: {
@@ -80,9 +81,3 @@
         }
     };
 </script>
-<style scoped>
-    .clickable:hover {
-        background: rgba(0, 0, 0, 0.04);
-        cursor: pointer;
-    }
-</style>

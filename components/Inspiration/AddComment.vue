@@ -2,7 +2,7 @@
     <v-layout row wrap>
         <v-flex>
             <v-text-field
-                    solo
+                    outline
                     label="Komentarz"
                     v-model="comment"
                     required
