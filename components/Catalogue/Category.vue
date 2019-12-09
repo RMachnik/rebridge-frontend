@@ -64,7 +64,7 @@
                 <td>{{ props.item.url }}</td>
                 <td>{{ props.item.quantity }}</td>
                 <td>{{ props.item.prize }}</td>
-                <td>{{ props.item.cost }}</td>
+                <td>{{ props.item.quantity * props.item.prize }}</td>
                 <td>{{ props.item.additionalInfo }}</td>
                 <td>{{ props.item.approved }}</td>
                 <td class="justify-center layout px-0">

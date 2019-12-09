@@ -1,5 +1,6 @@
 <template>
     <div>
+        <no-ssr placeholder="Loading...">
         <beautiful-chat
                 :participants="participants"
                 :titleImageUrl="titleImageUrl"
@@ -14,11 +15,14 @@
                 :showTypingIndicator="showTypingIndicator"
                 :colors="colors"
                 :alwaysScrollToBottom="alwaysScrollToBottom"/>
+        </no-ssr>
     </div>
 </template>
 <script>
-    import beautifulChat from 'vue-beautiful-chat'
-
+    import Vue from 'vue';
+    import beautifulChat from 'vue-beautiful-chat';
+    Vue.component('vue-beautiful-chat', beautifulChat);
+    Vue.use(beautifulChat);
     export default {
         name: 'MyChat',
         components:{
